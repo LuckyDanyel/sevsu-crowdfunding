@@ -1,0 +1,89 @@
+<script lang="ts">
+    import { computed, toRefs, unref, PropType } from 'vue';
+    export default {
+        emits: ['update:modelValue'],
+        props: {
+            modelValue: {
+                type: Array as PropType<number[]>,
+                required: true,
+            },
+            value: {
+                type: Number,
+                required: true,
+            },
+            isHover: {
+                type: Boolean,
+                default: false,
+            }
+        },
+        setup(props, { emit }) {
+            const { value, modelValue } = toRefs(props);
+
+            const isChecked = computed(() => unref(modelValue).indexOf(unref(value)) !== -1);
+
+            const selectedValue = () => {
+                if(unref(isChecked)) {
+                    const valuesWithoutCurrent = unref(modelValue).filter((valueItem) => valueItem !== unref(value));
+                    emit('update:modelValue', valuesWithoutCurrent)
+                    return;
+                }
+                emit('update:modelValue', [...unref(modelValue), unref(value)])
+            }
+
+            return {
+                isChecked,
+                selectedValue,
+            }
+        },
+    }
+</script>
+
+<template>
+    <div class="check-box-common">
+        <label
+            @change.stop="selectedValue"
+            class="check-box-common__label"
+        >
+            <div 
+                class="check-box-common__checkbox" 
+                :class="[
+                    isChecked ? 'check-box-common_checked' : '',
+                    isHover ? 'check-box-common_hover' : '',
+                ]"
+                ></div>
+            <input class="check-box-common__input" type="checkbox">
+            <slot></slot>
+        </label>
+    </div>
+</template>
+
+<style lang="scss">
+    .check-box-common {
+        position: relative;
+        &__checkbox {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            border: 1px solid #D8D8D8;
+            background-color: white;
+            margin-right: 10px;
+        }
+        &_checked {
+            background-image: url('./images/box.svg');
+            background-position: center;
+            border-color: var(--color-main-type-1);
+        }
+        &_hover {
+            border-color: var(--color-main-type-1);
+            background-color: var(--color-main-type-3);
+        }
+        &__label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        &__input {
+            display: none;
+        }
+    }
+</style>
