@@ -71,11 +71,11 @@
         &_checked {
             background-image: url('./images/box.svg');
             background-position: center;
-            border-color: var(--color-main-type-1);
+            border-color: var(--color-ui-element-1);
         }
         &_hover {
             border-color: var(--color-main-type-1);
-            background-color: var(--color-main-type-3);
+            background-color: var(--color-button-bg-hover);
         }
         &__label {
             display: flex;

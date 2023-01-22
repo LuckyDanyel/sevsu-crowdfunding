@@ -2,11 +2,11 @@ import { unref } from 'vue';
 
 import { defineStore } from "pinia";
 import { User } from '@/types';
+import { getUser } from '@/api';
 import UserData from './data/UserData';
 
 export interface StateUser {
     user: User,
-    token: string;
 }
 
 export const useAuthUser = defineStore({
@@ -21,15 +21,23 @@ export const useAuthUser = defineStore({
                 },
                 name: '',
                 email: '',
-                icon: '',
+                icon: 'https://sun9-81.userapi.com/impg/c858124/v858124241/18e353/tFXR9oY5K4M.jpg?size=1080x1080&quality=96&sign=e0e8916b63f5b81a04a79a850f950db2&type=album',
             },
-            token: '',
         }
     },
     actions: {
-        async getUserByToken(): Promise<User> {
-            const token = useCookie('token');
-            this.user = UserData;
+        async getUserByToken(token: string): Promise<void> {
+            const adapt = {
+                'ROLE_ADMIN': 'ADMIN',
+            };
+            if(unref(token)) {
+                const data = await getUser(token);
+                this.user.name = data.username,
+                this.user.email = data.email;
+                if(data?.authorities) {
+                    this.user.role.key = adapt[data?.authorities[0]?.authority];
+                }
+            }
         }
     },
     getters: {

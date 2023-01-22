@@ -88,14 +88,14 @@ import BasicIcon from '@/components/basic/icon/BasicIcon.vue';
             justify-content: center;
             cursor: pointer;
             &:hover {
-                background-color: var(--color-main-type-3);
+                background-color: var(--color-button-bg-hover);
             }
         }
         &__profile-role {
             color: var(--color-gray-type-2);
         }
         &__arrow {
-            border: solid var(--color-main-type-4);
+            border: solid var(--color-main-type-1);
             border-width: 0 1px 1px 0;
             display: inline-block;
             transform: rotate(45deg);

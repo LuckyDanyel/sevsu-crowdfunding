@@ -27,20 +27,24 @@ import BasicText from '@/components/basic/BasicText.vue';
         cursor: pointer;
         width: 100%;
         border-radius: 40px;
-        background-color: var(--color-main-type-1);
-        border: 1px solid var(--color-main-type-1);
+        background-color: var(--color-button-bg);
+        border: 1px solid var(--color-button-bg);
         display: flex;
         align-items: center;
         justify-content: center;
         height: 40px;
         &:hover {
-            opacity: 0.9;
+            color: var(--color-button-bg-hover);
         }
         &:active {
-            background-color: var(--color-main-type-4);
+            background-color: var(--color-button-bg-active);
+
+            .basic-button__text {
+                color: var(--color-button-text-active);
+            }
         }
         &__text {
-            color: white;
+            color: var(--color-button-text);
         }
         &_reverse {
             background-color: white;
@@ -49,7 +53,11 @@ import BasicText from '@/components/basic/BasicText.vue';
                 color: var(--color-gray-type-2);
             }
             &:active {
-                background-color: var(--color-main-type-3);
+                background-color: var(--color-button-bg-hover);
+
+                .basic-button__text {
+                    color: var(--color-gray-type-2);
+                }
             }
         }
     }

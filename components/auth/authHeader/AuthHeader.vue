@@ -9,10 +9,10 @@ import AuthHeaderLogic from './components/AuthHeaderLogic.vue';
 
 const authUserSotre = useAuthUser();
 
-const userLogout = async () => {
+async function userLogout() {
     const token = useCookie('token');
-    token.value = '';
-    await navigateTo('/projects');
+    token.value = null;
+    await navigateTo('/');
 }
 
 </script>
@@ -45,7 +45,7 @@ const userLogout = async () => {
     .auth-header {
         &__text-enter {
             cursor: pointer;
-            color: var(--color-main-type-4);
+            color: var(--color-main-type-1);
         }
     }
 </style>

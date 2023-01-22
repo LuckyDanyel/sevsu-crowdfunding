@@ -4,9 +4,19 @@
     margin: 0;
     box-sizing: border-box;
     list-style-type: none;
-    --color-main-type-1: #81D1DF;
-    --color-main-type-3: #ECFCFF;
-    --color-main-type-4: #57919B;
+    --color-main-type-1: #0F70B7;
+
+    --color-button-text: var(--color-main-type-1);
+    --color-button-text-active: white;
+
+    --color-ui-element-1: #86CAFF;
+
+    --color-button-bg-hover: #F0F9FF;
+    --color-button-bg-active: var(--color-main-type-1);
+    --color-button-bg: #D5EBFC;
+    
+    --color-table-heading: #125586;
+
     --color-gray-type-1: #D0D0D0;
     --color-gray-type-2: #828282;
     --width-main-container: 1250px;

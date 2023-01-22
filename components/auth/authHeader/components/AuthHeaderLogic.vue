@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { PropType, ref } from 'vue';
 import { useAuthUser } from '@/store/authUser';
+import { registrUser, loginUser } from '@/api';
 import AuthHeaderLogin from './AuthHeaderLogin.vue';
 import AuthHeaderRegistr from './AuthHeaderRegistr.vue';
 import { TloginData, TregistrData } from '../types'
@@ -15,12 +16,16 @@ import { TloginData, TregistrData } from '../types'
         }
     })
 
-    const login = (loginData: TloginData) => {
-        authUserSotre.getUserByToken();
+    const login = async (loginData: TloginData) => {
+        const { accessToken } = await loginUser(loginData);
+        const token = useCookie('token');
+        token.value = accessToken;
+        authUserSotre.getUserByToken(unref(token));
     }
 
-    const registr = (registrData: TregistrData) => {
-
+    const registr = async (registrData: TregistrData) => {
+        const data = await registrUser(registrData);
+        console.log(data);
     }
 
 </script>
@@ -39,6 +44,3 @@ import { TloginData, TregistrData } from '../types'
         ></auth-header-registr>
     </div>
 </template>
-
-<style lang="scss" scoped>
-</style>

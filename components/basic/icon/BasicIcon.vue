@@ -45,7 +45,7 @@
         &__logo {
             &_big {
                 width: 90px;
-                height: 80px;
+                height: 85px;
                 background-image: url('./images/logo-big.svg');
             }
             &_small {
