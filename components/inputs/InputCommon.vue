@@ -1,6 +1,7 @@
 <script lang="ts">
 import { ref, computed, toRefs, unref, PropType } from 'vue';
-import BasicIcon from '@/components/basic/icon/BasicIcon.vue';
+import { BasicIcon } from 'UI';
+
     export default {
         components: {
             BasicIcon,
@@ -67,8 +68,8 @@ import BasicIcon from '@/components/basic/icon/BasicIcon.vue';
             v-if="typeInput"
             @click="() => hidePassword = !hidePassword"
         >
-            <basic-icon size='medium' type-icon='hide' v-if="hidePassword"></basic-icon>
-            <basic-icon size='medium' type-icon='hide-full' v-else></basic-icon>
+            <basic-icon type-icon='hide' v-if="hidePassword" />
+            <basic-icon type-icon='hide-full' v-else />
         </div>
     </div>
 

@@ -1,8 +1,12 @@
 <script lang="ts">
-    import Links from './links/Links';
     import { useRoute } from 'vue-router';
-
+    import { BasicIcon, BasicText } from 'UI';
+    import Links from './links/Links';
     export default {
+        components: {
+            BasicIcon,
+            BasicText,
+        },
         setup() {
             const route = useRoute();
             const currentNamePage = route.name;
@@ -22,13 +26,16 @@
                 <a
                     v-for="link in Links" 
                     :key="link.id"
-                    :href="`/${link.namePage}`"
+                    :href="`/${link.link}`"
                     :class="(currentNamePage === link.namePage) ? 'header__item_active' : ''"
                     class="header__item"
                 >
                     <basic-text size="medium-large" font="semi-bold"> {{ link.text }} </basic-text>
                 </a>
             </nav>
+            <div class="header__logo">
+                <basic-icon type-logo='small'></basic-icon>
+            </div>
             <slot name="right"></slot>
         </div>
     </header>

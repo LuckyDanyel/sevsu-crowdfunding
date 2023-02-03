@@ -1,4 +1,4 @@
-import { useAuthUser } from '@/store/authUser';
+import { useAuthUser } from '@src/store';
 import { unref } from 'vue';
 
 

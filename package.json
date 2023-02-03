@@ -11,9 +11,14 @@
     "nuxt": "^3.0.0"
   },
   "dependencies": {
+    "@kyvg/vue3-notification": "^2.8.0",
     "@pinia/nuxt": "^0.4.6",
     "click-outside-vue3": "^4.0.1",
+    "nuxt-icons": "^3.1.0",
     "pinia": "^2.0.29",
-    "sass": "^1.57.1"
+    "sass": "^1.57.1",
+    "swiper": "^8.4.6",
+    "velocity-animate": "^1.5.2",
+    "vue3-carousel": "^0.2.9"
   }
 }

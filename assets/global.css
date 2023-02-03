@@ -1,0 +1,55 @@
+* {
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style-type: none;
+    --color-main-type-1: #0F70B7;
+
+    --color-button-text: var(--color-main-type-1);
+    --color-button-text-active: white;
+    --color-table-heading: #125586;
+
+    --color-ui-element-1: #60AAE0;
+    --color-ui-element-2: #F0F9FF;
+    --color-ui-element-3: var(--color-table-heading);
+    --color-ui-element-4: #EBF4FD;
+
+    --color-button-bg-hover: var(--color-ui-element-2);
+    --color-button-bg-active: var(--color-main-type-1);
+    --color-button-bg: #D5EBFC;
+
+    --color-gray-type-1: #D0D0D0;
+    --color-gray-type-2: #828282;
+    --color-gray-type-3: #B7B7B7;
+    --color-gray-type-4: #EBEBEB;
+    --width-main-container: 1250px;
+
+    --color-bg-error: #FFDEE1;
+    --color-text-error: #B5343F;
+    --color-border-error: var(--color-text-error);
+
+    --color-red: #FF6B78;
+    --color-green-1: #A8DB5D;
+    --color-green-2: #22BB55;
+    --color-orange: #EE7700;
+}
+body {
+    background-color: #F4F5F5;
+}
+@font-face {
+    font-family: 'OpenSansBold';
+    src: url(./fonts/OpenSans-Bold.ttf);
+}
+@font-face {
+    font-family: 'OpenSansRegular';
+    src: url(./fonts/OpenSans-Regular.ttf);
+}
+@font-face {
+    font-family: 'OpenSansSemiBold';
+    src: url('./fonts/OpenSans-SemiBold.ttf');
+}
+@font-face {
+    font-family: 'OpenSansExtraBold';
+    src: url('./fonts/OpenSans-ExtraBold.ttf');
+}

@@ -1,46 +1,15 @@
 {
-  // https://nuxt.com/docs/guide/concepts/typescript
+  // https://v3.nuxtjs.org/concepts/typescript
   "extends": "./.nuxt/tsconfig.json",
-  "types": [
-    "@pinia/nuxt"
-  ],
   "compilerOptions": {
-    "target": "es5",
-    "module": "esnext",
     "strict": true,
-    "noImplicitAny": true,
-    "noImplicitThis": true,
-    "noImplicitReturns": true,
-    "jsx": "preserve",
-    "importHelpers": true,
-    "moduleResolution": "node",
     "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "sourceMap": true,
-    "baseUrl": ".",
     "types": [
-      "webpack-env",
-      "@nuxt/types"
-    ],
-    "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable",
-      "scripthost"
+      "nuxt-windicss",
+      "@vueuse/nuxt",
+      "@intlify/nuxt3",
+      "@pinia/nuxt",
+      "unplugin-icons/types/vue"
     ]
-  },
-  "paths": {
-    "@/*": ["./*"],
-
-  },
-  "include": [
-    "./**/*.ts",
-    "./**/*.vue",
-    "tests/**/*.ts",
-  ],
-  "exclude": [
-    "node_modules"
-  ]
-
+  }
 }

@@ -1,10 +1,12 @@
 <script lang="ts">
-import AuthHeader from '@/components/auth/authHeader/AuthHeader.vue';
+import HeaderCommon from '@/components/header/HeaderCommon.vue';
+import BasicNotification from '@/components/notifications/basicNotification/BasicNotification.vue';
 
 export default {
     name: 'main-layout',
     components: {
-        AuthHeader,
+        HeaderCommon,
+        BasicNotification,
     }
 }
 </script>
@@ -13,7 +15,12 @@ export default {
 
 <template>
     <main class="main">
-        <auth-header></auth-header>
+        <basic-notification />
+        <header-common>
+            <template #right>
+                <slot name="header-right"></slot>
+            </template>
+        </header-common>
         <div class="main__content">
             <slot></slot>
         </div>
@@ -26,7 +33,8 @@ export default {
             max-width: var(--width-main-container);
             width: 100%;
             margin: 0 auto;
-            margin-top: 30px;
+            margin-top: 20px;
+            padding-bottom: 16px;
         }
     }
 </style>

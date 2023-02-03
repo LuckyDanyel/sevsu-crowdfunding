@@ -45,12 +45,13 @@
             class="check-box-common__label"
         >
             <div 
-                class="check-box-common__checkbox" 
-                :class="[
-                    isChecked ? 'check-box-common_checked' : '',
-                    isHover ? 'check-box-common_hover' : '',
-                ]"
-                ></div>
+                class="check-box-common__checkbox"
+                :class=" isHover ? 'check-box-common__checkbox_hover' : '' "
+            >
+                <div class="check-box-common__checkbox-icon">
+                    <nuxt-icon name="18/box" v-if="isChecked"></nuxt-icon>
+                </div>
+            </div>
             <input class="check-box-common__input" type="checkbox">
             <slot></slot>
         </label>
@@ -61,21 +62,35 @@
     .check-box-common {
         position: relative;
         &__checkbox {
+            position: relative;
             width: 16px;
             height: 16px;
             border-radius: 4px;
             border: 1px solid #D8D8D8;
             background-color: white;
             margin-right: 10px;
-        }
-        &_checked {
-            background-image: url('./images/box.svg');
-            background-position: center;
-            border-color: var(--color-ui-element-1);
-        }
-        &_hover {
-            border-color: var(--color-main-type-1);
-            background-color: var(--color-button-bg-hover);
+            &-icon {
+                position: absolute;
+                top: -2px;
+                left: -1px;
+            }
+            .nuxt-icon--fill * {
+                fill: var(--color-main-type-1) !important;
+            }
+            .nuxt-icon--fill {
+                width: 16px;
+                height: 16px;
+                display: inline-block;
+                svg {
+                    display: inline-block;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            &_hover {
+                border-color: var(--color-main-type-1);
+                background-color: var(--color-button-bg-hover);
+            }
         }
         &__label {
             display: flex;

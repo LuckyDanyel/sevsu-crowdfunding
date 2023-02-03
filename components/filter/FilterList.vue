@@ -1,15 +1,14 @@
 <script lang="ts">
     import { PropType, computed, toRefs, unref } from 'vue';
+    import { BasicText, ItemBackground } from 'UI';
     import CheckBoxList from '@/components/inputs/CheckboxList.vue';
-    import BasicText from '@/components/basic/BasicText.vue';
-    import BasicItem from '@/components/basic/BasicItem.vue';
 
     export default {
         emits: ['update:modelValue'],
         components: {
             CheckBoxList,
             BasicText,
-            BasicItem,
+            ItemBackground,
         },
         props: {
             listFilters: {
@@ -41,7 +40,7 @@
             <basic-text font="semi-bold" size="medium-large"> <slot name="header"></slot> </basic-text> 
         </h3>
         <ul>
-            <basic-item 
+            <item-background 
                 class="filter-common__item" 
                 v-for="filterItem in listFilters"
                 :key="filterItem.id"
@@ -59,7 +58,7 @@
                         > {{ filterItem.label }} </basic-text> 
                     </check-box-list>
                 </template>
-            </basic-item>
+            </item-background>
         </ul>
     </div>
 </template>

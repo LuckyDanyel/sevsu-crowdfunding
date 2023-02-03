@@ -1,17 +1,25 @@
-<script lang="ts" setup>
-    import ProjectsFilters from './components/ProjectsFilters.vue';
-    import ProjectCard from './components/ProjectCard.vue';
+<script lang="ts">
+    import AuthHeader from '@modules/authHeader/AuthHeader.vue';
+    import Projects from './modules/components/Projects.vue';
 
-    definePageMeta({
-        middleware: ['authorization'],
+    export default defineNuxtComponent({
+        components: {
+            AuthHeader,
+            Projects,
+        },
+        async setup() {
+          
+        }
     })
 
 </script>
 <template>
     <NuxtLayout name="main-layout">
-        <div class="page-projects">
-            <projects-filters></projects-filters>
-            <project-card></project-card>
-        </div>
+        <template #header-right>
+            <auth-header></auth-header>
+        </template>
+        <projects></projects>
     </NuxtLayout>
 </template>
+
+<style lang="scss"></style>
