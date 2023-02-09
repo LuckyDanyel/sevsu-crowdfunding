@@ -1,15 +1,15 @@
-import { getCommentsByProject } from "@/api/project";
-import { IProjectCommentUser } from "../types";
+import { getCommentsByProject } from "@/src/api/project";
+import { UserModelComment } from "@/src/models/user";
 
 export default function(idProject: number) {
-    const comments = ref<IProjectCommentUser[]>([]);
+    const comments = ref<UserModelComment[]>([]);
     const loadingComments = ref(false);
 
     const getCommentsByFirstClick = async () => {
         try {
             loadingComments.value = true;
             const commentsResponse = await getCommentsByProject(idProject);
-            comments.value = commentsResponse;
+            comments.value = commentsResponse.map((comment) => new UserModelComment(comment));
         } catch (error) {
             
         } finally {

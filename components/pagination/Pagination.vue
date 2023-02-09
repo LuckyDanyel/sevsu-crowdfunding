@@ -70,7 +70,7 @@
             <div class="pagination__hide" :style="`max-width: ${limitation * withItem}px`">
                     <div class="pagination__container" :style="`transform: translateX(-${calulateMoving}px)`">
                         <basic-text 
-                            size='large' 
+                            size='medium-large' 
                             class="pagination__item"
                             :class="number === modelValue ? 'pagination_active' : '' "
                             v-for="number in amount"
@@ -130,8 +130,8 @@
             overflow: hidden;
         }
         &__item-arrow {
-            height: 40px;
-            width: 40px;
+            height: 32px;
+            width: 32px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -144,8 +144,8 @@
             }
         }
         &__item {
-            height: 40px;
-            min-width: 40px;
+            height: 32px;
+            min-width: 32px;
             border-radius: 100%;
             display: flex;
             align-items: center;

@@ -6,18 +6,20 @@ export default class ProjectModelAbstract {
     categories: IBasicProject['categories'] = [];
     likes: IBasicProject['likes'] = 0;
     takenLikes: IBasicProject['takenLikes'] = 0;
-    views: IBasicProject['views'] = 0;
     shortText: IBasicProject['shortText'] = '';
+    startProject: IBasicProject['startProject'] = '';
+    endProject: IBasicProject['endProject'] = '';
     constructor(projectCard?: IBasicProject) {
         if(projectCard) {
-            const { id, title, categories, takenLikes, likes, views, shortText } = projectCard;
+            const { id, title, categories, takenLikes, likes, shortText, startProject = '', endProject = '' } = projectCard;
             this.id = id;
             this.title = title;
             this.categories = categories;
             this.likes = likes;
             this.takenLikes = takenLikes;
-            this.views = views;
             this.shortText = shortText;
+            this.startProject = startProject;
+            this.endProject = endProject;
         }
     }
 

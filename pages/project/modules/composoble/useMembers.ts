@@ -1,17 +1,17 @@
 import { unref } from 'vue';
-import { IProjectMember } from '../types';
-import { getMembersByProject } from "@/api/project";
+import { UserModelMember } from '@/src/models/user';
+import { getMembersByProject } from '@/src/api/project';
 
 export default function (idProject: number) {
     const loadingMembers = ref(false);
-    const members = ref<IProjectMember[]>([]);
+    const members = ref<UserModelMember[]>([]);
 
 
     const getMembersByFirstClick = async () => {
         try {
             loadingMembers.value = true;
             const membersResponse = await getMembersByProject(idProject);
-            members.value = membersResponse;
+            members.value = membersResponse.map((member) => new UserModelMember(member));
         } catch (error) {
             
         } finally {

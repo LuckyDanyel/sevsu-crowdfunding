@@ -6,6 +6,7 @@ export interface IBasicProject {
     categories: TCategory[];
     likes: number;
     takenLikes: number;
-    views: number;
     shortText: string;
+    startProject: string;
+    endProject: string;
 }

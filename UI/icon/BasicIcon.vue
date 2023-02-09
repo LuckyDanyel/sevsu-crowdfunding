@@ -1,7 +1,7 @@
 <script lang="ts" setup>
     import { PropType } from 'vue';
     type IconT = 'profile' | 'projects' | 'exit' | 'panel' | 'arrow' 
-        | 'email' | 'lock' | 'hide' | 'hide-full' | 'heart' | 'message' | 'views' | 'calendar' | 'time' | 'cube';
+        | 'email' | 'lock' | 'hide' | 'hide-full' | 'heart' | 'message' | 'views' | 'calendar' | 'time' | 'cube' | 'edit' | 'delete';
 
     defineProps({
         typeIcon: {

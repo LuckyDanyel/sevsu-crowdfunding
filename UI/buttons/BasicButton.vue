@@ -9,6 +9,14 @@ import { BasicText } from 'UI';
         isActive: {
             type: Boolean,
             default: true,
+        },
+        bgColor: {
+            type: String,
+            default: '',
+        },
+        textColor: {
+            type: String,
+            default: '',
         }
     })
 
@@ -19,11 +27,13 @@ import { BasicText } from 'UI';
             reverse ? 'basic-button_reverse' : '',
             isActive ? 'basic-button_active' : '',
         ]" 
+        :style="`background-color: ${bgColor};`"
     >
         <div>
             <basic-text 
                 :font="reverse ? 'regular' : 'semi-bold' "
                 class="basic-button__text"
+                :style="`color: ${textColor};`"
             >
                 <slot></slot>
             </basic-text>

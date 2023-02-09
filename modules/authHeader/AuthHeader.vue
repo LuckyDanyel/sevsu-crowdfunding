@@ -2,23 +2,17 @@
 import { storeToRefs } from 'pinia';
 import { BasicText, BasicModal } from 'UI';
 import { useAuthUser } from '@src/store';
-import UserMenu from '@/components/user/userMenu/UserMenu.vue';
+import UserMenu from '@/components/user/userMenu/UserMenuWrapper.vue';
 import AuthHeaderLogic from './components/AuthHeaderLogic.vue';
 
-const { setDefaultState } = useAuthUser();
-const { isLogged, user } = storeToRefs(useAuthUser());
+const { isLogged } = storeToRefs(useAuthUser());
 
 </script> 
 
 <template>
     <div class="auth-header">
-        <user-menu
-            v-if="isLogged" 
-            :user="user"
-            @logout="setDefaultState"
-            @projects="() => navigateTo('/user/projects')"
-        />
-        <basic-modal v-else>
+        <user-menu />
+        <basic-modal v-if="!isLogged">
             <template #button>
                 <basic-text
                     size="medium-large" 

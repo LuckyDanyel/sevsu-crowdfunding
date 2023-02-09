@@ -1,33 +1,52 @@
-<script lang="ts" setup>
-    import { PropType, unref } from 'vue';
-    import LocationProject from '@/components/location/LocationProject.vue';
+<script lang="ts" >
+    import { unref } from 'vue';
+    import { LocationProject } from 'UI';
     import Carusel from '@/components/carusel/Carusel.vue';
-    import ProjectInfo from '~~/components/project/ProjectInfo.vue';
-    import ProjectModel from '@/components/project/model/ProjectModel';
-    import { IProject } from '@/components/project/types';
-    import useLogicAuthUser from '@/composoble/useLogicAuthUser';
+    import ProjectInfo from '@/components/project/ProjectInfo.vue';
+    import { ProjectModelInfo } from '@src/models/project';
+    import { getProject } from '@/src/api/project';
+    import useLogicAuthUser from '@src/use/useLogicAuthUser';
     import ProjectButtonSupported from './ProjectButtonSupported.vue';
     import ProjectBlockDown from './ProjectBlockDown.vue';
 
-    const { project } = defineProps({
-        project: {
-            type: Object as PropType<IProject>,
-            required: true,
+
+    export default defineNuxtComponent({
+        components: {
+            LocationProject,
+            Carusel,
+            ProjectInfo,
+            ProjectButtonSupported,
+            ProjectBlockDown,
         },
+        props: {
+            id: {
+                type: Number,
+                required: true,
+            },
+        },
+        async setup(props) {
+            const { id } = props;
+            const { 
+                isLogged, 
+                getUserLikesProject, 
+                loadingUserUpdates, 
+                likesProjectByUser,
+            } = useLogicAuthUser();
+            const projectResponse = await getProject(id);
+            const projectModel = new ProjectModelInfo(projectResponse);
+            const isUserSupportedProject = computed(() => unref(likesProjectByUser).indexOf(projectModel.id) !== -1);
+
+
+            return {
+                isLogged, 
+                getUserLikesProject,
+                projectModel,
+                loadingUserUpdates, 
+                likesProjectByUser,
+                isUserSupportedProject,
+            }
+        }
     })
-    const { 
-        isLogged, 
-        getUserLikesProject, 
-        loadingUserUpdates, 
-        likesProjectByUser,
-    } = useLogicAuthUser();
-
-
-    const projectModel = new ProjectModel(project);
-
-
-    const isUserSupportedProject = computed(() => unref(likesProjectByUser).indexOf(projectModel.id) !== -1);
-
 
 </script>
 

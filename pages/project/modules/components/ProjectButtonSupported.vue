@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-    import BasicButton from '@/components/basic/BasicButton.vue';
-    import BasicLoader from '@/components/basic/BasicLoader.vue';
+    import { BasicLoader, BasicButton } from 'UI';
 
     defineProps({
         isLogged: {

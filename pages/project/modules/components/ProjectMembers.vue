@@ -1,26 +1,20 @@
 <script lang="ts" setup>
 import { PropType } from 'vue';
-import TableTitle from '@/components/table/components/TabelTitle.vue'
-import TableCell from '@/components/table/components/TableCell.vue';
-import TableRow from '@/components/table/components/TableRow.vue';
-import BasicUser from '@/components/basic/BasicUser.vue';
-import BasicProcent from '@/components/basic/BasicProcent.vue';
+import { TableCell, TableTitle, TableRow, BasicProgress } from 'UI';
+import UserDisplay from '@/components/user/userDisplay/UserDisplay.vue';
 import Pagination from '@/components/pagination/Pagination.vue';
-import usePagination from '@/composoble/usePagination';
-import { IProjectMember } from '../types';
-import ProjectModelMember from '../model/ProjectModelMember';
+import usePagination from '@/src/use/usePagination';
+import { UserModelMember } from '@/src/models/user';
 
     const props = defineProps({
         members: {
-            type: Array as PropType<IProjectMember[]>,
+            type: Array as PropType<UserModelMember[]>,
             default: () => [],
         }
     })
     const currentPage = ref(1);
     const { members } = toRefs(props);
-    const membersModel = computed(() => unref(members).map((member) => new ProjectModelMember(member)));
-    const { itemsByPagination, lengthByLimitation  } = usePagination<ProjectModelMember>({ items: membersModel, limitation: 9, numberPage: currentPage })
-
+    const { itemsByPagination, lengthByLimitation  } = usePagination<UserModelMember>({ items: members, limitation: 9, numberPage: currentPage })
 
     const sizeColumns = [300, 180, 172, 330]
 
@@ -40,18 +34,18 @@ import ProjectModelMember from '../model/ProjectModelMember';
                 :key="member.id"
             >
             <table-cell :minWidth="sizeColumns[0]">
-                <basic-user
+                <user-display
                     size='small'
                     :name="member.name"
                     :role-name="member.role.name"
                     :icon="member.icon"
-                ></basic-user>
+                ></user-display>
             </table-cell>
             <table-cell :width="sizeColumns[1]">  {{ member.createProjects }} </table-cell>
             <table-cell :width="sizeColumns[2]"> {{ member.endProjects }} </table-cell>
             <table-cell :width="sizeColumns[3]">
                 <div class="project-members__procent">
-                    <basic-procent></basic-procent>
+                    <basic-progress></basic-progress>
                 </div>
             </table-cell>
         </table-row>

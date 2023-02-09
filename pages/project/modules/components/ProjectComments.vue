@@ -3,11 +3,11 @@
     import UserDisplay from '@/components/user/userDisplay/UserDisplay.vue';
     import { BasicText, BasicButton } from 'UI';
     import InputArea from '@/components/inputs/InputArea.vue';
-    import ProjectModelCommentUser from '../model/ProjectModelCommentUser';
+    import UserModelComment from '@src/models/user/userModelComment';
 
     const props = defineProps({
         comments: {
-            type: Array as PropType<ProjectModelCommentUser[]>,
+            type: Array as PropType<UserModelComment[]>,
             default: () => [],
         }
     })
@@ -20,6 +20,8 @@
 
     const commentsPagination = computed(() => unref(comments));
 
+    console.log(unref(commentsPagination));
+
    
 
 </script>
@@ -29,18 +31,18 @@
         <div class="project-comments__container">
             <div 
                 class="project-comments__user"
-                v-for="comment in commentsPagination"
-                :key="comment.id"
+                v-for="userCommnet in commentsPagination"
+                :key="userCommnet.commnet.id"
             >
                 <user-display
-                    :name="comment.user.name"
-                    :icon="comment.user.icon"
+                    :name="userCommnet.user.name"
+                    :icon="userCommnet.user.icon"
                 />
                 <basic-text size='medium-large' class="project-comments__text"> 
-                    {{ comment.text }}
+                    {{ userCommnet.commnet.text }}
                 </basic-text>
                 <basic-text font='semi-bold' class="project-comments__date">
-                    {{ comment.messageDate }}
+                    {{ userCommnet.commnet.messageDate }}
                 </basic-text>
             </div>
             <div class="project-comments__more-comments">

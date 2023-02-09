@@ -1,6 +1,6 @@
-import { IProjectMember } from './types';
+import { IUserMember } from '@/src/models/user/userModelMember/types';
 
-export const members: IProjectMember[] = [
+export const members: IUserMember[] = [
     {
         id: 0,
         name: 'Терещенков Даниил',

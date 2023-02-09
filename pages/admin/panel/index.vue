@@ -1,10 +1,9 @@
 <script lang="ts" setup>
 import UserMenu from '/components/user/userMenu/UserMenuWrapper.vue';
 import useLogoutUser from '@src/use/useLogoutUser';
-import UserProjects from './module/components/UserProjects.vue';
 
     definePageMeta({
-        middleware: ['authorization']
+        middleware: ['authorization', 'admin']
     })
     useLogoutUser();
 </script>

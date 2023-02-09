@@ -1,9 +1,9 @@
-import TabelTitle from './TabelTitle.vue';
+import TableTitle from './TableTitle.vue';
 import TableCell from './TableCell.vue';
 import TableRow from './TableRow.vue';
 
 export {
-    TabelTitle,
+    TableTitle,
     TableCell,
     TableRow,
 }

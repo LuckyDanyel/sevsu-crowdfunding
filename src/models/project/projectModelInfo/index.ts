@@ -14,9 +14,7 @@ export default class ProjectModelInfo extends ProjectModelAbstract {
     constructor(projectsData?: IProjectInfo) {
         super(projectsData);
         if(projectsData) {
-            const { startProject, endProject, author, description, images } = projectsData;
-            this.startProject = startProject;
-            this.endProject = endProject;
+            const { author, description, images } = projectsData;
             this.description = description;
             this.author = new UserModelAuthor(author);
             this.images = images;

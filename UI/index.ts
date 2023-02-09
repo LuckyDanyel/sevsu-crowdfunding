@@ -8,6 +8,7 @@ import BasicIcon from './icon/BasicIcon.vue';
 export * from './table';
 export * from './text';
 export * from './locations';
+export * from './tooltips';
 
 export {
     BasicButton,

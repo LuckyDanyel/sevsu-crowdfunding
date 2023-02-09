@@ -1,5 +1,5 @@
 import { storeToRefs } from "pinia";
-import { useAuthUser } from "@/store/authUser";
+import { useAuthUser } from "@src/store";
 
 export default function() { // Данный use лучше использовать одни раз на странице, так как тут стоит watch
     const loadingUserUpdates = ref(false);

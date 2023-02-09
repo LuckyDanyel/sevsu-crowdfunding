@@ -1,16 +1,6 @@
-<script lang="ts">
+<script lang="ts" setup>
     import AuthHeader from '@modules/authHeader/AuthHeader.vue';
     import Projects from './modules/components/Projects.vue';
-
-    export default defineNuxtComponent({
-        components: {
-            AuthHeader,
-            Projects,
-        },
-        async setup() {
-          
-        }
-    })
 
 </script>
 <template>

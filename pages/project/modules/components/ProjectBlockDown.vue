@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-    import ProjectDescription from '~~/components/project/ProjectDescription.vue';
-    import { BasicText } from 'UI';
+    import ProjectDescription from '@/components/project/ProjectDescription.vue';
+    import { TextTabs } from 'UI';
     import ProjectMembers from './ProjectMembers.vue';
     import ProjectComments from './ProjectComments.vue';
     import useMembers from '../composoble/useMembers';
@@ -51,34 +51,25 @@
 <template>
     <div class="project-down">
         <div class="project-down__tabs">
-            <basic-text
-                class="project-down__item"
-                :class="viewComponent === 'description' ? 'project-down__item_active' : '' "
-                font='semi-bold' 
-                size='large'
+            <text-tabs
+                :is-active="viewComponent === 'description'"
                 @click="() => viewComponent = 'description'"
             > 
                 Описание 
-            </basic-text>
+            </text-tabs>
             <div v-if="isLogged" class="project-down__logged-content">
-                <basic-text 
-                    class="project-down__item"
-                    :class="viewComponent === 'members' ? 'project-down__item_active' : '' "
-                    font='semi-bold' 
-                    size='large'
+                <text-tabs 
+                    :is-active="viewComponent === 'members'"
                     @click="hanlderMembers"
                 > 
                     Участники 
-                </basic-text>
-                <basic-text 
-                    class="project-down__item"
-                    :class="viewComponent === 'comments' ? 'project-down__item_active' : '' "
-                    font='semi-bold' 
-                    size='large'
+                </text-tabs>
+                <text-tabs
+                    :is-active="viewComponent === 'comments'"
                     @click="handlerCommnents"
                 > 
                     Комментарии 
-                </basic-text>
+                </text-tabs>
             </div>
         </div>
         <div class="project-down__content">
@@ -86,16 +77,16 @@
                 :description="description"
                 v-if="viewComponent === 'description'"
             ></project-description>
+            <project-members
+                :members="members"
+                v-if="viewComponent === 'members'"
+            ></project-members>
 
             <project-comments
                 :comments="comments"
                 v-if="viewComponent === 'comments'"
             ></project-comments>
-    
-            <project-members
-                :members="members"
-                v-if="viewComponent === 'members'"
-            ></project-members>
+
         </div>
     </div>
 </template>
@@ -108,15 +99,6 @@
         &__tabs {
             display: flex;
             justify-content: center;
-        }
-        &__item {
-           padding: 4px 8px;
-           color:  var(--color-main-type-1);
-           cursor: pointer;
-           &_active {
-                color:  var(--color-table-heading);
-                border-bottom: 2px solid var(--color-table-heading);
-           }
         }
         &__content {
             display: flex;

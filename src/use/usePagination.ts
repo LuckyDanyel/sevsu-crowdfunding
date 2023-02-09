@@ -1,7 +1,7 @@
 import { Ref, ComputedRef, unref, computed, toRefs } from 'vue';
 
 interface IPaginationValues<T> {
-    items: ComputedRef<T[]>;
+    items: ComputedRef<T[]> | Ref<T[]>;
     numberPage: Ref<number>;
     limitation: number;
 }

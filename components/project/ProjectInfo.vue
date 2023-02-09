@@ -7,7 +7,7 @@ import {
     BasicButton, 
     BasicLoader 
 } from 'UI';
-import UserDisplay from '@/components/user/userDisplay.vue';
+import UserDisplay from '@/components/user/userDisplay/UserDisplay.vue';
 import { ProjectModelInfo } from '@models/project';
 
     defineProps({
