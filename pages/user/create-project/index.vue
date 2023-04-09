@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import useLogoutUser from '@src/use/useLogoutUser';
 import UserMenu from '/components/user/userMenu/UserMenuWrapper.vue';
+import CreateProject from './module/components/CreateProject.vue';
     definePageMeta({
         middleware: ['authorization']
     })
@@ -8,12 +9,12 @@ import UserMenu from '/components/user/userMenu/UserMenuWrapper.vue';
 </script>
 
 <template>
-    <NuxtLayout name="main-layout">
+    <NuxtLayout name="white-layout">
         <template #header-right>
             <user-menu></user-menu>
         </template>
         <div class="user-create-project">
-            <h1> create project </h1>
+            <create-project></create-project>
         </div>
     </NuxtLayout>
 </template>

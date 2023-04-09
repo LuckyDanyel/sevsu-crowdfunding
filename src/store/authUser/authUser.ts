@@ -1,16 +1,19 @@
-import { unref } from 'vue';
 import { defineStore } from "pinia";
+import { basicUrl, tokenType } from "~~/src/api/constants";
 import { UserModelAbstract } from '@models/user';
-import { getUser } from './api/index';
+import { User } from '@/src/types';
+import { ApiUser } from "@/src/api/user";
 
 export interface StateUser {
     user: UserModelAbstract,
-    likesProjectByUser: number[],
+    likesProjectByUser: string[],
     token: string;
+    refreshToken: string;
+    loadingUserLikes: boolean,
 }
 
-const defaultUser = () => ({
-    id: 0,
+const defaultUser = (): User => ({
+    id: '',
     role: {
         id: 0,
         name: '',
@@ -18,7 +21,6 @@ const defaultUser = () => ({
     },
     name: '',
     email: '',
-    icon: 'https://sun9-81.userapi.com/impg/c858124/v858124241/18e353/tFXR9oY5K4M.jpg?size=1080x1080&quality=96&sign=e0e8916b63f5b81a04a79a850f950db2&type=album',
 })
 
 export const useAuthUser = defineStore({
@@ -27,40 +29,48 @@ export const useAuthUser = defineStore({
         return {
             user: new UserModelAbstract(defaultUser()),
             likesProjectByUser: [],
+            loadingUserLikes: false,
             token: '',
+            refreshToken: '',
         }
     },
     actions: {
-        async getUserByToken(token: string | undefined | null): Promise<void> {
-            const adapt = {
-                'ROLE_ADMIN': 'ADMIN',
-            };
-            if(token) {
-                const data = await getUser(token);
-                const { username, email } = data;
-                this.token = token;
-                this.user = new UserModelAbstract({ name: username, email, role: { id: 0, key: adapt[data?.authorities[0]?.authority], name: 'Администратор'}, icon:  defaultUser().icon } as any);
+        setUser(optionsUser: { user: ApiUser, access: string, refresh: string }) {
+            const { user, access, refresh } = optionsUser;
+            const { email, is_admin, name, id } = user; 
+            this.user = new UserModelAbstract({ name, email, role: { id: 0, key: is_admin ? 'ADMIN' : 'USER' , name: is_admin ? 'Администратор' : 'Пользователь'} } as any);
+            this.token = access;
+            this.refreshToken = refresh;
+        },
+        setLoadingLikes(loading: boolean) {
+            this.loadingUserLikes = loading;
+        },
+        async getUserLikesProject(): Promise<void> {
+            const url = `${basicUrl}api/v1/project_management/liked-by-user/`
+            try {
+                const reponse = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `${tokenType} ${this.token}`,
+                    }
+                })
+                const likes = await reponse.json();
+                console.log(likes);
+                this.likesProjectByUser = likes;
+            } catch (error) {
+                
             }
         },
-        async getUserLikesProject(): Promise<number[]> {
-            return new Promise((res, rej) => {
-                setTimeout(() => {
-                    this.likesProjectByUser = [1];
-                    res(this.likesProjectByUser);
-                }, 500);
-            })
-        },
         setDefaultState() {
-            const token = useCookie('token');
-            token.value = null;
             this.user = new UserModelAbstract(defaultUser());
             this.token = '';
+            this.refreshToken = '';
             this.likesProjectByUser = [];
         }
     },
     getters: {
         isLogged(): boolean {
-            return !!this.user.email;
+            return !!this.token;
         },
     }
 })

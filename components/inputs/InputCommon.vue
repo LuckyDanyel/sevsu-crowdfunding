@@ -1,8 +1,12 @@
 <script lang="ts">
 import { ref, computed, toRefs, unref, PropType } from 'vue';
+import { mask } from 'vue-the-mask'
 import { BasicIcon } from 'UI';
 
     export default {
+        directives: {
+            mask,
+        },
         components: {
             BasicIcon,
         },
@@ -19,6 +23,14 @@ import { BasicIcon } from 'UI';
             typeInput: {
                 type: String as PropType<'' | 'hide'>,
                 default: '',
+            },
+            ruleMask: {
+                type: [String, Object],
+                default: '',
+            },
+            height: {
+                type: Number,
+                default: 0,
             }
         },
         setup(props, { emit }) {
@@ -50,6 +62,7 @@ import { BasicIcon } from 'UI';
         @click="() => active = true" 
         v-click-outside="() => active = false"
         :class="active ? 'input-common_active' : ''"
+        :style="height ? `height: ${height}px;` : ''"
     >
         <div class="input-common__icon">
             <slot name="icon"></slot>
@@ -61,14 +74,22 @@ import { BasicIcon } from 'UI';
                 :type="hidePassword ? 'password' : 'text'" 
                 :placeholder="placeholder"
                 v-model="inputValue"
+                v-mask="ruleMask"
+                v-if="ruleMask"
+            >
+            <input 
+                :type="hidePassword ? 'password' : 'text'" 
+                :placeholder="placeholder"
+                v-model="inputValue"
+                v-else
             >
         </label>
         <div 
             class="input-common__hide" 
-            v-if="typeInput"
             @click="() => hidePassword = !hidePassword"
+            v-if="typeInput"
         >
-            <basic-icon type-icon='hide' v-if="hidePassword" />
+            <basic-icon type-icon='hide' color='default-full-color' v-if="hidePassword" />
             <basic-icon type-icon='hide-full' v-else />
         </div>
     </div>

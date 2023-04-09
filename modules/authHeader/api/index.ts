@@ -1,12 +1,13 @@
-import { TloginData, TregistrData } from '../types';
 import { basicUrl } from '@src/api/constants';
+import { IReponseTokens } from '@/src/types';
+import { TloginData, TregistrData } from '../types';
 
-export const loginUser = async function(userLogin: TloginData): Promise<any>{
+export const loginUser = async function(userLogin: TloginData): Promise<IReponseTokens>{
 
-    const url = `${basicUrl}/api/auth/signin`;
+    const url = `${basicUrl}api/v1/accounts/token/`;
 
     const request = {
-        username: userLogin.email,
+        email: userLogin.email,
         password: userLogin.password,
     }
     try {
@@ -19,7 +20,8 @@ export const loginUser = async function(userLogin: TloginData): Promise<any>{
         });
         const parseData = await data.json();
         const { status, error } = parseData;
-        if(status > 301) {
+        console.log(data);
+        if(data.status > 400) {
             throw error;
         }
         return parseData;
@@ -30,13 +32,12 @@ export const loginUser = async function(userLogin: TloginData): Promise<any>{
 
 export const registrUser = async function(userRegistr: TregistrData): Promise<any> {
 
-    const url = `${basicUrl}/api/auth/signup`;
+    const url = `${basicUrl}api/v1/accounts/create_user/`;
 
     const request = {
-        username: userRegistr.email,
+        name: `${userRegistr.name} ${userRegistr.secondName}`,
         email: userRegistr.email,
         password: userRegistr.password,
-        role: ['admin']
     }
 
     try {
@@ -48,8 +49,9 @@ export const registrUser = async function(userRegistr: TregistrData): Promise<an
             body: JSON.stringify(request),
         });
         const parseData = await data.json();
+        console.log(parseData);
         const { status, error } = parseData;
-        if(status > 301) {
+        if(status > 400) {
             throw error;
         }
         return parseData;

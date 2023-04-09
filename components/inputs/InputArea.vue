@@ -14,13 +14,21 @@
             height: {
                 type: Number,
                 default: 40,
+            },
+            isReadOnly: {
+                type: Boolean,
+                default: false,
+            },
+            maxLength: {
+                type: Number,
+                default: 0,
             }
         },
         setup(props, { emit }) {
             const { modelValue } = toRefs(props);
             const { height } = props;
             const refFakeInput = ref<HTMLElement>()
-            const heightElement = ref(height + 3);
+            const heightElement = ref(height);
             const text = computed({
                 get: () => unref(modelValue),
                 set: (value) => {
@@ -49,13 +57,15 @@
         <textarea 
             class="input-area"
             v-model="text"
+            :maxlength="maxLength"
             :placeholder="placeholder" 
             :style="`height: ${heightElement}px`"
-        ></textarea>
+            :readonly="isReadOnly"
+        > </textarea>
         <div 
             ref="refFakeInput"
             class="input-area input-area__fake" 
-            :style="`min-height: ${height + 3}px`"
+            :style="`min-height: ${height}px`"
         >
 
             {{ text }}

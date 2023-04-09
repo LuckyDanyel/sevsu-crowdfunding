@@ -4,6 +4,8 @@ import BasicModal from './modals/BasicModal.vue';
 import BasicLoader from './loaders/BasicLoader.vue';
 import ItemBackground from './items/ItemBackground.vue';
 import BasicIcon from './icon/BasicIcon.vue';
+import DropDown from './dropdown/DropDown.vue';
+import Toogle from './elements/Toogle.vue';
 
 export * from './table';
 export * from './text';
@@ -17,4 +19,6 @@ export {
     BasicLoader,
     ItemBackground,
     BasicIcon,
+    DropDown,
+    Toogle,
 }

@@ -2,7 +2,7 @@ import { unref } from 'vue';
 import { UserModelMember } from '@/src/models/user';
 import { getMembersByProject } from '@/src/api/project';
 
-export default function (idProject: number) {
+export default function (idProject: string) {
     const loadingMembers = ref(false);
     const members = ref<UserModelMember[]>([]);
 

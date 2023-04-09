@@ -17,7 +17,7 @@
             default: '24',
         },
         color: {
-            type: String as PropType<'default' | 'green' | 'red' | 'black' | 'color' | 'full-color' | 'full-red'>,
+            type: String as PropType<'default' | 'default-full-color' | 'green' | 'red' | 'black' | 'color' | 'full-color' | 'full-red'>,
             default: 'default'
         }
     })
@@ -49,6 +49,11 @@
 <style lang="scss">
     #basic-icon-id {
         display: inline-block;
+        .basic-icon_default-full-color {
+            * {
+                fill: var(--color-gray-type-2) !important;
+            }
+        }
         .basic-icon_default {
             * {
                 fill: none !important;

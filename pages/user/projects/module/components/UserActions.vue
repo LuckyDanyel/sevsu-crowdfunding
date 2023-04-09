@@ -3,7 +3,7 @@
 
     const { idProject } = defineProps({
         idProject: {
-            type: Number,
+            type: String,
             required: true,
         }
     })

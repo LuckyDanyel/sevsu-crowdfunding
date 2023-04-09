@@ -14,9 +14,9 @@ import { UserModelMember } from '@/src/models/user';
     })
     const currentPage = ref(1);
     const { members } = toRefs(props);
-    const { itemsByPagination, lengthByLimitation  } = usePagination<UserModelMember>({ items: members, limitation: 9, numberPage: currentPage })
+    const { itemsByPagination, lengthByLimitation } = usePagination<UserModelMember>({ items: members, limitation: 9, numberPage: currentPage });
 
-    const sizeColumns = [300, 180, 172, 330]
+    const sizeColumns = [300, 180, 172, 330];
 
 </script>
 

@@ -6,25 +6,32 @@ import { TregistrData } from '../types'
 export default function() {
 
     const { notify } = useNotification();
-    const registrFinished = ref(false);
+    const loadingRegistr = ref(false);
 
 
     const registr = async (registrData: TregistrData) => {
         try {
-            registrFinished.value = false;
+            loadingRegistr.value = false;
             const data = await registrUser(registrData);
-            registrFinished.value = true;
+            notify({
+                title: 'Подтвреждение Email',
+                text: 'На ваш email был отправлен код!',
+                type: 'warn',
+                duration: 3000,
+            });
         } catch (error: any) {
             notify({
                 title: 'Ошибка регистрации',
                 text: error,
                 type: 'error',
             });
+        } finally {
+            loadingRegistr.value = true;
         }
     }
 
     return {
-        registrFinished,
+        loadingRegistr,
         registr,
     }
 }

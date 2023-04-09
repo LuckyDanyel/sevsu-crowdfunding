@@ -2,15 +2,14 @@
     import { unref } from 'vue';
     import { LocationProject } from 'UI';
     import Carusel from '@/components/carusel/Carusel.vue';
-    import ProjectInfo from '@/components/project/ProjectInfo.vue';
+    import ProjectInfo from '@/components/project/view/ProjectInfo.vue';
     import { ProjectModelInfo } from '@src/models/project';
     import { getProject } from '@/src/api/project';
     import useLogicAuthUser from '@src/use/useLogicAuthUser';
     import ProjectButtonSupported from './ProjectButtonSupported.vue';
     import ProjectBlockDown from './ProjectBlockDown.vue';
 
-
-    export default defineNuxtComponent({
+    export default {
         components: {
             LocationProject,
             Carusel,
@@ -20,7 +19,7 @@
         },
         props: {
             id: {
-                type: Number,
+                type: String,
                 required: true,
             },
         },
@@ -31,10 +30,26 @@
                 getUserLikesProject, 
                 loadingUserUpdates, 
                 likesProjectByUser,
+                loadingUserLikes,
             } = useLogicAuthUser();
-            const projectResponse = await getProject(id);
-            const projectModel = new ProjectModelInfo(projectResponse);
+            let projectModel: ProjectModelInfo | null = null;
+            let keyProjectUpdate = ref('');
+            if(process.server) {
+                await getUserLikesProject();
+            }
+            if(process.client) {
+                const projectResponse = await getProject(id);
+                projectModel = new ProjectModelInfo(projectResponse);
+            }
             const isUserSupportedProject = computed(() => unref(likesProjectByUser).indexOf(projectModel.id) !== -1);
+
+            const addLikeProject = () => {
+                if(projectModel) {
+                    projectModel.addLike();
+                    keyProjectUpdate.value = projectModel.uniqueKey;
+                    console.log(projectModel.uniqueKey);
+                }
+            }
 
 
             return {
@@ -44,33 +59,41 @@
                 loadingUserUpdates, 
                 likesProjectByUser,
                 isUserSupportedProject,
+                addLikeProject,
+                loadingUserLikes,
+                keyProjectUpdate,
             }
         }
-    })
+    }
 
 </script>
 
 <template>
-    <div class="project-wrapper">
+    <div class="project-wrapper" v-if="projectModel">
         <location-project>
             <template #left>
                 <client-only>
                     <carusel
                         :images="projectModel.images"
-                    ></carusel>
+                        :items-show="projectModel.images.length > 7 ? 7.5 : projectModel.images.length"
+                    >
+                    </carusel>
                 </client-only>
             </template>
             <template #right>
                 <project-info
+                    :key="keyProjectUpdate"
                     :is-user-supported-project="isUserSupportedProject"
-                    :loading-likes="loadingUserUpdates"
+                    :loading-likes="loadingUserLikes"
                     :project="projectModel"
                 >
                     <template #button>
                         <project-button-supported
-                            :loading-likes="loadingUserUpdates"
+                            :id-project="projectModel.id"
+                            :loading-likes="loadingUserLikes"
                             :is-logged="isLogged"
                             :is-user-supported-project="isUserSupportedProject"
+                            @addLike="addLikeProject"
                         ></project-button-supported>
                     </template>
                 </project-info>
@@ -85,3 +108,7 @@
         </location-project>
     </div>
 </template>
+
+
+<style lang="scss">
+</style>

@@ -1,7 +1,7 @@
 export default [
     {
         id: 1,
-        image: 'https://sun9-20.userapi.com/impg/oZAX6cZPRckf3tPXVJIT8Br6VdW7W1SZsmE-7g/6ykNwGfnnVQ.jpg?size=600x400&quality=96&sign=964960b92b22ae28b09ce047c9d54756&type=album',
+        images: ['https://sun9-20.userapi.com/impg/oZAX6cZPRckf3tPXVJIT8Br6VdW7W1SZsmE-7g/6ykNwGfnnVQ.jpg?size=600x400&quality=96&sign=964960b92b22ae28b09ce047c9d54756&type=album'],
         title: 'Работа Бесплатно без SMS',
         categories: [
             {
@@ -21,7 +21,7 @@ export default [
     },
     {
         id: 1,
-        image: 'https://sun9-20.userapi.com/impg/oZAX6cZPRckf3tPXVJIT8Br6VdW7W1SZsmE-7g/6ykNwGfnnVQ.jpg?size=600x400&quality=96&sign=964960b92b22ae28b09ce047c9d54756&type=album',
+        images: ['https://sun9-20.userapi.com/impg/oZAX6cZPRckf3tPXVJIT8Br6VdW7W1SZsmE-7g/6ykNwGfnnVQ.jpg?size=600x400&quality=96&sign=964960b92b22ae28b09ce047c9d54756&type=album'],
         title: 'Работа Бесплатно без SMS',
         categories: [
             {
@@ -41,7 +41,7 @@ export default [
     },
     {
         id: 1,
-        image: 'https://sun9-20.userapi.com/impg/oZAX6cZPRckf3tPXVJIT8Br6VdW7W1SZsmE-7g/6ykNwGfnnVQ.jpg?size=600x400&quality=96&sign=964960b92b22ae28b09ce047c9d54756&type=album',
+        images: ['https://sun9-20.userapi.com/impg/oZAX6cZPRckf3tPXVJIT8Br6VdW7W1SZsmE-7g/6ykNwGfnnVQ.jpg?size=600x400&quality=96&sign=964960b92b22ae28b09ce047c9d54756&type=album'],
         title: 'Работа Бесплатно без SMS',
         categories: [
             {
@@ -61,7 +61,7 @@ export default [
     },
     {
         id: 1,
-        image: 'https://sun9-20.userapi.com/impg/oZAX6cZPRckf3tPXVJIT8Br6VdW7W1SZsmE-7g/6ykNwGfnnVQ.jpg?size=600x400&quality=96&sign=964960b92b22ae28b09ce047c9d54756&type=album',
+        images: ['https://sun9-20.userapi.com/impg/oZAX6cZPRckf3tPXVJIT8Br6VdW7W1SZsmE-7g/6ykNwGfnnVQ.jpg?size=600x400&quality=96&sign=964960b92b22ae28b09ce047c9d54756&type=album'],
         title: 'Работа Бесплатно без SMS',
         categories: [
             {
@@ -81,7 +81,7 @@ export default [
     },
     {
         id: 1,
-        image: 'https://sun9-20.userapi.com/impg/oZAX6cZPRckf3tPXVJIT8Br6VdW7W1SZsmE-7g/6ykNwGfnnVQ.jpg?size=600x400&quality=96&sign=964960b92b22ae28b09ce047c9d54756&type=album',
+        images: ['https://sun9-20.userapi.com/impg/oZAX6cZPRckf3tPXVJIT8Br6VdW7W1SZsmE-7g/6ykNwGfnnVQ.jpg?size=600x400&quality=96&sign=964960b92b22ae28b09ce047c9d54756&type=album'],
         title: 'Работа Бесплатно без SMS',
         categories: [
             {
@@ -101,7 +101,7 @@ export default [
     },
     {
         id: 1,
-        image: 'https://sun9-20.userapi.com/impg/oZAX6cZPRckf3tPXVJIT8Br6VdW7W1SZsmE-7g/6ykNwGfnnVQ.jpg?size=600x400&quality=96&sign=964960b92b22ae28b09ce047c9d54756&type=album',
+        images: ['https://sun9-20.userapi.com/impg/oZAX6cZPRckf3tPXVJIT8Br6VdW7W1SZsmE-7g/6ykNwGfnnVQ.jpg?size=600x400&quality=96&sign=964960b92b22ae28b09ce047c9d54756&type=album'],
         title: 'Работа Бесплатно без SMS',
         categories: [
             {
@@ -121,7 +121,7 @@ export default [
     },
     {
         id: 1,
-        image: 'https://sun9-20.userapi.com/impg/oZAX6cZPRckf3tPXVJIT8Br6VdW7W1SZsmE-7g/6ykNwGfnnVQ.jpg?size=600x400&quality=96&sign=964960b92b22ae28b09ce047c9d54756&type=album',
+        images: ['https://sun9-20.userapi.com/impg/oZAX6cZPRckf3tPXVJIT8Br6VdW7W1SZsmE-7g/6ykNwGfnnVQ.jpg?size=600x400&quality=96&sign=964960b92b22ae28b09ce047c9d54756&type=album'],
         title: 'Работа Бесплатно без SMS',
         categories: [
             {
@@ -141,7 +141,7 @@ export default [
     },
     {
         id: 1,
-        image: 'https://sun9-20.userapi.com/impg/oZAX6cZPRckf3tPXVJIT8Br6VdW7W1SZsmE-7g/6ykNwGfnnVQ.jpg?size=600x400&quality=96&sign=964960b92b22ae28b09ce047c9d54756&type=album',
+        images: ['https://sun9-20.userapi.com/impg/oZAX6cZPRckf3tPXVJIT8Br6VdW7W1SZsmE-7g/6ykNwGfnnVQ.jpg?size=600x400&quality=96&sign=964960b92b22ae28b09ce047c9d54756&type=album'],
         title: 'Работа Бесплатно без SMS',
         categories: [
             {
@@ -161,7 +161,7 @@ export default [
     },
     {
         id: 1,
-        image: 'https://sun9-20.userapi.com/impg/oZAX6cZPRckf3tPXVJIT8Br6VdW7W1SZsmE-7g/6ykNwGfnnVQ.jpg?size=600x400&quality=96&sign=964960b92b22ae28b09ce047c9d54756&type=album',
+        images: ['https://sun9-20.userapi.com/impg/oZAX6cZPRckf3tPXVJIT8Br6VdW7W1SZsmE-7g/6ykNwGfnnVQ.jpg?size=600x400&quality=96&sign=964960b92b22ae28b09ce047c9d54756&type=album'],
         title: 'Работа Бесплатно без SMS',
         categories: [
             {
@@ -181,7 +181,7 @@ export default [
     },
     {
         id: 1,
-        image: 'https://sun9-20.userapi.com/impg/oZAX6cZPRckf3tPXVJIT8Br6VdW7W1SZsmE-7g/6ykNwGfnnVQ.jpg?size=600x400&quality=96&sign=964960b92b22ae28b09ce047c9d54756&type=album',
+        images: ['https://sun9-20.userapi.com/impg/oZAX6cZPRckf3tPXVJIT8Br6VdW7W1SZsmE-7g/6ykNwGfnnVQ.jpg?size=600x400&quality=96&sign=964960b92b22ae28b09ce047c9d54756&type=album'],
         title: 'Работа Бесплатно без SMS',
         categories: [
             {
@@ -201,7 +201,7 @@ export default [
     },
     {
         id: 1,
-        image: 'https://sun9-20.userapi.com/impg/oZAX6cZPRckf3tPXVJIT8Br6VdW7W1SZsmE-7g/6ykNwGfnnVQ.jpg?size=600x400&quality=96&sign=964960b92b22ae28b09ce047c9d54756&type=album',
+        images: ['https://sun9-20.userapi.com/impg/oZAX6cZPRckf3tPXVJIT8Br6VdW7W1SZsmE-7g/6ykNwGfnnVQ.jpg?size=600x400&quality=96&sign=964960b92b22ae28b09ce047c9d54756&type=album'],
         title: 'Работа Бесплатно без SMS',
         categories: [
             {
@@ -221,7 +221,7 @@ export default [
     },
     {
         id: 1,
-        image: 'https://sun9-20.userapi.com/impg/oZAX6cZPRckf3tPXVJIT8Br6VdW7W1SZsmE-7g/6ykNwGfnnVQ.jpg?size=600x400&quality=96&sign=964960b92b22ae28b09ce047c9d54756&type=album',
+        images: ['https://sun9-20.userapi.com/impg/oZAX6cZPRckf3tPXVJIT8Br6VdW7W1SZsmE-7g/6ykNwGfnnVQ.jpg?size=600x400&quality=96&sign=964960b92b22ae28b09ce047c9d54756&type=album'],
         title: 'Работа Бесплатно без SMS',
         categories: [
             {
@@ -241,7 +241,7 @@ export default [
     },
     {
         id: 1,
-        image: 'https://sun9-20.userapi.com/impg/oZAX6cZPRckf3tPXVJIT8Br6VdW7W1SZsmE-7g/6ykNwGfnnVQ.jpg?size=600x400&quality=96&sign=964960b92b22ae28b09ce047c9d54756&type=album',
+        images: ['https://sun9-20.userapi.com/impg/oZAX6cZPRckf3tPXVJIT8Br6VdW7W1SZsmE-7g/6ykNwGfnnVQ.jpg?size=600x400&quality=96&sign=964960b92b22ae28b09ce047c9d54756&type=album'],
         title: 'Работа Бесплатно без SMS',
         categories: [
             {
@@ -261,7 +261,7 @@ export default [
     },
     {
         id: 1,
-        image: 'https://sun9-20.userapi.com/impg/oZAX6cZPRckf3tPXVJIT8Br6VdW7W1SZsmE-7g/6ykNwGfnnVQ.jpg?size=600x400&quality=96&sign=964960b92b22ae28b09ce047c9d54756&type=album',
+        images: ['https://sun9-20.userapi.com/impg/oZAX6cZPRckf3tPXVJIT8Br6VdW7W1SZsmE-7g/6ykNwGfnnVQ.jpg?size=600x400&quality=96&sign=964960b92b22ae28b09ce047c9d54756&type=album'],
         title: 'Работа Бесплатно без SMS',
         categories: [
             {
@@ -281,7 +281,7 @@ export default [
     },
     {
         id: 1,
-        image: 'https://sun9-20.userapi.com/impg/oZAX6cZPRckf3tPXVJIT8Br6VdW7W1SZsmE-7g/6ykNwGfnnVQ.jpg?size=600x400&quality=96&sign=964960b92b22ae28b09ce047c9d54756&type=album',
+        images: ['https://sun9-20.userapi.com/impg/oZAX6cZPRckf3tPXVJIT8Br6VdW7W1SZsmE-7g/6ykNwGfnnVQ.jpg?size=600x400&quality=96&sign=964960b92b22ae28b09ce047c9d54756&type=album'],
         title: 'Работа Бесплатно без SMS',
         categories: [
             {

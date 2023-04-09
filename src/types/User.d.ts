@@ -1,11 +1,17 @@
+
 export interface User {
-    id: number;
+    id: string;
     role: {
         id: number,
         name: string,
-        key: string,
-    }
+        key: 'ADMIN' | 'USER' | '',
+    };
+    is_admin: boolean;
     name: string;
     email: string;
-    icon: string;
 }
+
+export interface IReponseTokens {
+    access: string;
+    refresh: string;
+};

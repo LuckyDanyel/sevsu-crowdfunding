@@ -4,6 +4,13 @@ import { useAuthUser } from '@src/store';
 import UserMenu from './UserMenu.vue';
 
 const { setDefaultState } = useAuthUser();
+const logoutUser = () => {
+    useCookie('token_accsess').value = null;
+    useCookie('token_refresh').value = null;
+    setDefaultState();
+}
+
+
 const { isLogged, user } = storeToRefs(useAuthUser());
 
 const goToProject = async () => {
@@ -21,7 +28,7 @@ const goToAdminPanel = () => {
         <user-menu
             v-if="isLogged" 
             :user="user"
-            @logout="setDefaultState"
+            @logout="logoutUser"
             @projects="goToProject"
             @panel="goToAdminPanel"
         />

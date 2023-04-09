@@ -1,1 +1,0 @@
-export type TProjectStatus = 'approve' | 'cancel' | 'waiting';

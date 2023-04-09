@@ -5,10 +5,10 @@
     import UserProjectStatus from './UserProjectStatus.vue';
     import UserProjectTitle from './UserProjectTitle.vue';
     import UserActions from './UserActions.vue';
-    import ProjectModelUser from "../model/ProjectUser";
+    import { ProjectModelCard } from '@/src/models/project';
     import useUserProjects from '../use/useUserProjects';
 
-    export default defineNuxtComponent({
+    export default {
         components: {
             TableCell,
             TableRow,
@@ -24,7 +24,7 @@
             const numberPage = ref(1);
             const columnSizes = [220, 100, 136, 100, 160, 150, 110, 100];
             const { projectsModelUser } = await useUserProjects();
-            const { lengthByLimitation, itemsByPagination } = usePagination<ProjectModelUser>({ items: projectsModelUser, limitation: 13, numberPage })
+            const { lengthByLimitation, itemsByPagination } = usePagination<ProjectModelCard>({ items: projectsModelUser, limitation: 13, numberPage })
 
             return {
                 columnSizes,
@@ -33,12 +33,11 @@
                 numberPage,
             }
         }
-    })
+    }
 
 </script>
 
 <template>
-
     <div class="user-projects">
         <div class="user-projects__table">
             <table-row>

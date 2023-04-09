@@ -22,7 +22,7 @@ import { ProjectModelInfo } from '@models/project';
         isUserSupportedProject: {
             type: Boolean,
             default: false,
-        }
+        },
     })
 </script>
 
@@ -56,12 +56,12 @@ import { ProjectModelInfo } from '@models/project';
             <div class="project-info__icon-item project-info__item">
                 <basic-icon type-icon='calendar' size='24' color="color" class="project-info_margin"></basic-icon>
                 <basic-text size='medium-large' class="project-info_color-gray project-info_margin"> Дата запуска проекта: </basic-text>
-                <basic-text size='medium-large'> 28 декабря </basic-text>
+                <basic-text size='medium-large'> {{ project.dayStartProjectText }} </basic-text>
             </div>
             <div class="project-info__icon-item project-info__item">
                 <basic-icon type-icon='calendar' size='24' color="color" class="project-info_margin"></basic-icon>
                 <basic-text size='medium-large' class="project-info_color-gray project-info_margin"> Дата окончания проекта: </basic-text>
-                <basic-text size='medium-large'> 28 декабря </basic-text>
+                <basic-text size='medium-large'> {{ project.dayEndProjectText }} </basic-text>
             </div>
             <div class="project-info__icon-item project-info__item">
                 <basic-loader v-if="loadingLikes"></basic-loader>
@@ -76,7 +76,7 @@ import { ProjectModelInfo } from '@models/project';
             <div class="project-info__icon-item project-info__item">
                 <basic-icon type-icon='time' size='24' color="color" class="project-info_margin"></basic-icon>
                 <basic-text size='medium-large' class="project-info_color-gray project-info_margin"> До сбора осталось: </basic-text>
-                <basic-text size='medium-large'> 20 дней </basic-text>
+                <basic-text size='medium-large'> {{ project.daysToEndProject }} </basic-text>
             </div>
         </div>
         <slot name="button"></slot>

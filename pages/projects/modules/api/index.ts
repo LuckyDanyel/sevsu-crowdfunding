@@ -1,11 +1,16 @@
 import { basicUrl } from '@src/api/constants';
 import { IProjectCard } from '@models/project/projectModelCard/types';
-import Data from './data';
 
-export const getProjects = (idUser?: string): Promise<IProjectCard[]> => {
-    const api = `${basicUrl}/api/projects`;
+export const getProjects = async (idUser?: string): Promise<IProjectCard[]> => {
+    const url = `${basicUrl}api/v1/project_management/list_project/`;
 
-    return new Promise((res, rej) => {
-        res(Data);
-    })
+    try {
+        const projects = await fetch(url, {
+            method: 'GET',
+        })
+        console.log(projects);
+        return projects.json();
+    } catch (error) {
+        throw error;
+    }
 }

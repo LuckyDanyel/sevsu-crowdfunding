@@ -1,19 +1,26 @@
 <script lang="ts">
 import { ref, unref } from 'vue';
-import { BasicButton, BasicIcon, BasicText } from 'UI';
+import { BasicButton, BasicIcon, BasicText, BasicLoader } from 'UI';
 import InputCommon from '@/components/inputs/InputCommon.vue';
 import AuthHeaderItem from './AuthHeaderItem.vue';
 import AuthBlock from './AuthBlock.vue';
 import { TloginData } from '../types';
 
     export default {
+        props: {
+            loading: {
+                type: Boolean,
+                default: false,
+            }
+        },
         components: {
             AuthHeaderItem,
             AuthBlock,
             BasicButton,
             InputCommon,
             BasicIcon,
-            BasicText,            
+            BasicText,
+            BasicLoader,            
         },
         setup(porps, { emit }) {
             const inputEmail = ref('');
@@ -53,7 +60,12 @@ import { TloginData } from '../types';
                         <template #icon> <basic-icon type-icon='lock' /> </template>
                     </input-common>
                 </auth-header-item>
-                <basic-button @click="login"> Войти </basic-button>
+                <basic-button :is-active="false" v-if="loading"> 
+                    <basic-loader
+                        :loading="loading"
+                    ></basic-loader>
+                </basic-button>
+                <basic-button v-if="!loading" @click="login"> Войти </basic-button>
             </template>
             <template #content-down>
                 <auth-header-item>

@@ -1,12 +1,15 @@
 import { TCategory } from "@src/types"
+export type TProjectStatus = 'approve' | 'cancel' | 'waiting';
 
 export interface IBasicProject {
-    id: number;
+    id: string;
+    images: string[];
     title: string;
     categories: TCategory[];
-    likes: number;
-    takenLikes: number;
-    shortText: string;
-    startProject: string;
-    endProject: string;
+    goal_likes: number;
+    taken_likes: number;
+    short_description: string;
+    start_project: string;
+    end_project: string;
+    status: TProjectStatus;
 }

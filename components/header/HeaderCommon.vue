@@ -44,6 +44,8 @@
 <style lang="scss" scoped>
     .header {
         background-color: white;
+        position: relative;
+        z-index: 999;
         &__container {
             height: 60px;
             display: flex;
@@ -57,6 +59,7 @@
         }
         &__item {
             margin-right: 12px;
+            color: black;
             &_active {
                 padding-bottom: 2px;
                 border-bottom: 2px solid black;

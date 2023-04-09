@@ -3,7 +3,7 @@
     import Project from './modules/components/Project.vue';
 
     const { query } = useRoute();
-    const projectId = Number(query.id);
+    const projectId = String(query.id);
     if(!projectId) {
         navigateTo('/');
     }

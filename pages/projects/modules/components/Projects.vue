@@ -5,18 +5,20 @@
     import ProjectsFilters from './ProjectsFilters.vue';
     import { useFiltersProjects } from '../store/filtersProjects';
 
-    export default defineNuxtComponent({
+    export default {
         components: {
             ProjectsFiltersUp,
             ProjectsWrapperCards,
             ProjectsFilters,
         },
         async setup() {
-            const data = await getProjects();
-            const { setFilterProjects } = useFiltersProjects();
-            setFilterProjects({ projects: data });
+            if(process.server) {
+                const data = await getProjects();
+                const { setFilterProjects } = useFiltersProjects();
+                setFilterProjects({ projects: data });
+            }
         }
-    })
+    }
 
 </script>
 <template>

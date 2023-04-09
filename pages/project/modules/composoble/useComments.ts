@@ -1,7 +1,7 @@
 import { getCommentsByProject } from "@/src/api/project";
 import { UserModelComment } from "@/src/models/user";
 
-export default function(idProject: number) {
+export default function(idProject: string) {
     const comments = ref<UserModelComment[]>([]);
     const loadingComments = ref(false);
 

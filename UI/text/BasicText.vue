@@ -61,7 +61,6 @@
         &_extra {
             font-family: 'OpenSansExtraBold', sans-serif;
         }
-        color: black;
     }
 </style>
 

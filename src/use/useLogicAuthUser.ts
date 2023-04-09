@@ -3,18 +3,18 @@ import { useAuthUser } from "@src/store";
 
 export default function() { // Данный use лучше использовать одни раз на странице, так как тут стоит watch
     const loadingUserUpdates = ref(false);
-    const { getUserLikesProject } = useAuthUser();
-    const { isLogged, likesProjectByUser } = storeToRefs(useAuthUser());
+    const { getUserLikesProject, setLoadingLikes } = useAuthUser();
+    const { isLogged, likesProjectByUser, loadingUserLikes } = storeToRefs(useAuthUser());
 
     watch(isLogged, async (value) => {
         if(value) {
             try {
-                loadingUserUpdates.value = true;
+                setLoadingLikes(true);
                 await getUserLikesProject();
             } catch (error) {
                 
             } finally {
-                loadingUserUpdates.value = false;
+                setLoadingLikes(false);
             }
         }
     });
@@ -23,6 +23,7 @@ export default function() { // Данный use лучше использова�
         isLogged,
         likesProjectByUser,
         loadingUserUpdates,
+        loadingUserLikes,
         getUserLikesProject,
     }
 }

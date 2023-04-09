@@ -3,6 +3,5 @@ import { IUserAuthor } from "@src/models/user/userModelAuthor/types";
 
 export interface IProjectInfo extends IBasicProject {
     description: string;
-    images: string[];
     author: IUserAuthor;
 }

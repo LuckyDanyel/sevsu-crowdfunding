@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import ProjectDescription from '@/components/project/ProjectDescription.vue';
+    import ProjectDescription from '@/components/project/view/ProjectDescription.vue';
     import { TextTabs } from 'UI';
     import ProjectMembers from './ProjectMembers.vue';
     import ProjectComments from './ProjectComments.vue';
@@ -16,8 +16,8 @@
             default: false,
         },
         idProject: {
-            type: Number,
-            default: 0,
+            type: String,
+            default: '',
         }
     })
 
