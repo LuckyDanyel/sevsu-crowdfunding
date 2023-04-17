@@ -1,15 +1,8 @@
 import { IReponseTokens } from '@/src/types';
 import { basicUrl, tokenType } from '@src/api/constants';
+import { IUser } from '@/src/models/user/userModelAbstract/types';
 
-export type ApiUser = {
-    name: string,
-    email: string,
-    is_admin: boolean;
-    id: string;
-}
-
-
-export const getLikesProjectUser = async function(token: string): Promise<ApiUser> {
+export const getLikesProjectUser = async function(token: string): Promise<IUser> {
     const url = `${basicUrl}/api/user/likes`;
 
     const data = await fetch(url, {

@@ -1,10 +1,8 @@
 import { IUser } from '@src/models/user/userModelAbstract/types';
 
 export interface IUserComment {
-    comment: {
-        id: number;
-        text: string;
-        messageDate: string;
-    },
+    id: string;
+    text: string;
+    created_at: string;
     user: IUser,
 }

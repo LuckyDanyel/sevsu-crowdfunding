@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import UserMenu from '/components/user/userMenu/UserMenuWrapper.vue';
 import useLogoutUser from '@src/use/useLogoutUser';
+import Admin from './modules/pages/admin/Admin.vue';
 
     definePageMeta({
         middleware: ['authorization', 'admin']
@@ -9,10 +10,10 @@ import useLogoutUser from '@src/use/useLogoutUser';
 </script>
 
 <template>
-    <NuxtLayout name="white-layout-center">
+    <NuxtLayout name="white-layout">
         <template #header-right>
            <user-menu></user-menu>
         </template>
-        <user-projects />
+        <admin></admin>
     </NuxtLayout>
 </template>

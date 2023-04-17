@@ -43,7 +43,7 @@ export default {
         display: flex;
         overflow: auto;
         padding-top: 20px;
-        z-index: 1;
+        z-index: 9999999;
     }
     .dialog__content {
         margin: auto;

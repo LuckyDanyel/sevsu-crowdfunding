@@ -14,7 +14,7 @@ const logoutUser = () => {
 const { isLogged, user } = storeToRefs(useAuthUser());
 
 const goToProject = async () => {
-    await navigateTo({ path: '/user/projects' });
+    window.location.href = '/user/projects';
 }
 
 const goToAdminPanel = () => {

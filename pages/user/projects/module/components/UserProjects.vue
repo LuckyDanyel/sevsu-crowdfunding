@@ -2,8 +2,8 @@
     import { TableCell, TableRow, TableTitle, BasicButton, BasicProgress } from 'UI';
     import Pagination from '@/components/pagination/Pagination.vue';
     import usePagination from '@/src/use/usePagination';
-    import UserProjectStatus from './UserProjectStatus.vue';
-    import UserProjectTitle from './UserProjectTitle.vue';
+    import ProjectStatus from '@/components/project/view/ProjectStatus.vue';
+    import ProjectTitle from '@/components/project/view/ProjectTitle.vue';
     import UserActions from './UserActions.vue';
     import { ProjectModelCard } from '@/src/models/project';
     import useUserProjects from '../use/useUserProjects';
@@ -16,8 +16,8 @@
             Pagination,
             BasicButton,
             BasicProgress,
-            UserProjectStatus,
-            UserProjectTitle,
+            ProjectTitle,
+            ProjectStatus,
             UserActions,
         },
         async setup() {
@@ -55,7 +55,7 @@
                     v-for="(projectUser, index) in itemsByPagination"
                 >
                     <table-cell :min-width="columnSizes[0]">
-                        <user-project-title :icon="projectUser.image"> {{ projectUser.title }} </user-project-title>
+                        <project-title :icon="projectUser.image"> {{ projectUser.title }} </project-title>
                     </table-cell>
                     <table-cell :width="columnSizes[1]"> {{ projectUser.startProject }} </table-cell>
                     <table-cell :min-width="columnSizes[2]"> {{ projectUser.endProject }} </table-cell>
@@ -65,10 +65,13 @@
                         <basic-progress class="user-projects__progress" :procent="projectUser.procentByLikes"></basic-progress>
                     </table-cell>
                     <table-cell :width="columnSizes[6]"> 
-                        <user-project-status :status="projectUser.status"></user-project-status>
+                        <project-status :status="projectUser.status"></project-status>
                     </table-cell>
                     <table-cell :width="columnSizes[7]">
-                        <user-actions :id-project="projectUser.id" v-if="projectUser.status !== 'waiting'"></user-actions>
+                        <user-actions
+                            :id-project="projectUser.id"
+                            :status="projectUser.status"
+                        ></user-actions>
                     </table-cell>
                 </table-row>
             </div>

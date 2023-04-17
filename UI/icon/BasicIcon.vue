@@ -1,7 +1,8 @@
 <script lang="ts" setup>
     import { PropType } from 'vue';
     type IconT = 'profile' | 'projects' | 'exit' | 'panel' | 'arrow' 
-        | 'email' | 'lock' | 'hide' | 'hide-full' | 'heart' | 'message' | 'views' | 'calendar' | 'time' | 'cube' | 'edit' | 'delete';
+        | 'email' | 'lock' | 'hide' | 'hide-full' | 'heart' | 'message' | 'views' 
+        | 'calendar' | 'time' | 'cube' | 'edit' | 'delete' | 'profiles' | 'lupa' | 'arrow-open';
 
     defineProps({
         typeIcon: {
@@ -9,7 +10,7 @@
             default: '',
         },
         typeLogo: {
-            type: String as PropType<'big' | 'small'>,
+            type: String as PropType<'big' | 'small' | 'extra-small'>,
             default: '',
         },
         size: {
@@ -17,9 +18,9 @@
             default: '24',
         },
         color: {
-            type: String as PropType<'default' | 'default-full-color' | 'green' | 'red' | 'black' | 'color' | 'full-color' | 'full-red'>,
+            type: String as PropType<'default' | 'default-full-color' | 'green' | 'red' | 'black' | 'white' | 'color' | 'full-color' | 'full-red'>,
             default: 'default'
-        }
+        },
     })
 
 </script>
@@ -68,7 +69,13 @@
         .basic-icon_green {
             * {
                 fill: none !important;
-                stroke: red;
+                stroke: var(--color-green-1);
+            }
+        }
+        .basic-icon_white {
+            * {
+                fill: none !important;
+                stroke: white;
             }
         }
         .basic-icon_color {
@@ -107,6 +114,19 @@
                     display: block;
                     width: 40px;
                     height: 40px;
+                    * {
+                        fill: white !important;
+                    }
+                    circle {
+                        fill: var(--color-main-type-1) !important;
+                    }
+                }
+            }
+            &-extra-small {
+                svg {
+                    display: block;
+                    width: 20px;
+                    height: 20px;
                     * {
                         fill: white !important;
                     }

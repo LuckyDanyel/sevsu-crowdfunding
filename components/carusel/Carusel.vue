@@ -155,6 +155,10 @@ import { Carousel, Slide, Navigation } from 'vue3-carousel'
             padding-right: 11px;
             box-sizing: border-box;
             cursor: pointer;
+
+            &:last-child {
+                padding-right: 0;
+            }
         }
         &__item-small {
             width: 100%;

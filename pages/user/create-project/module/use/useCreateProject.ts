@@ -6,20 +6,22 @@ import { useAuthUser } from '@src/store';
 import { cteateProjectApi, uploadImagesYandex } from '../api/index';
 
 
-export default function(images: Ref<IFiles[]>, project: Ref<Partial<IProjectInfo>>) {
+export default function(images: Ref<IFiles[]>, project: Ref<Partial<IProjectInfo>> | Ref<null>) {
     const loadingProject = ref(false);
 
     const { token } = storeToRefs(useAuthUser());
 
     const createProject = async () => {
         try {
-            loadingProject.value = true;
-            const projectFull: IProjectInfo = {
-                ...unref(project),
-                images: unref(images).map((image) => image.extension),
-            } as IProjectInfo
-            const uploadLinks = await cteateProjectApi(projectFull, unref(token));
-            const response = await uploadImagesYandex(unref(images), uploadLinks)
+            if(unref(project)) {
+                loadingProject.value = true;
+                const projectFull: IProjectInfo = {
+                    ...unref(project),
+                    images: unref(images).map((image) => image.extension),
+                } as IProjectInfo
+                const uploadLinks = await cteateProjectApi(projectFull, unref(token));
+                const response = await uploadImagesYandex(unref(images), uploadLinks)
+            }
         } catch (error) {
             
         }

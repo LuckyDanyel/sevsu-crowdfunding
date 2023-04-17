@@ -10,6 +10,8 @@
     --color-button-text-active: white;
     --color-table-heading: #125586;
 
+    --color-bg-elements: #125586;
+
     --color-ui-element-1: #60AAE0;
     --color-ui-element-2: #F0F9FF;
     --color-ui-element-3: var(--color-table-heading);

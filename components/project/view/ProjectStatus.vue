@@ -1,7 +1,7 @@
 <script lang="ts" setup>
     import { PropType } from 'vue';
     import { BasicText } from 'UI';
-    import { TProjectStatus } from '../types';
+    import { TProjectStatus } from '@/src/models/project/projectModelAbstract/types';
 
     const { status } = defineProps({
         status: {

@@ -1,8 +1,7 @@
 import { defineStore } from "pinia";
 import { basicUrl, tokenType } from "~~/src/api/constants";
 import { UserModelAbstract } from '@models/user';
-import { User } from '@/src/types';
-import { ApiUser } from "@/src/api/user";
+import { IUser } from "@/src/models/user/userModelAbstract/types";
 
 export interface StateUser {
     user: UserModelAbstract,
@@ -12,15 +11,12 @@ export interface StateUser {
     loadingUserLikes: boolean,
 }
 
-const defaultUser = (): User => ({
+const defaultUser = (): IUser => ({
     id: '',
-    role: {
-        id: 0,
-        name: '',
-        key: '',
-    },
+    is_admin: false,
     name: '',
     email: '',
+    icon: '',
 })
 
 export const useAuthUser = defineStore({
@@ -35,10 +31,11 @@ export const useAuthUser = defineStore({
         }
     },
     actions: {
-        setUser(optionsUser: { user: ApiUser, access: string, refresh: string }) {
+        setUser(optionsUser: { user: IUser, access: string, refresh: string }) {
             const { user, access, refresh } = optionsUser;
             const { email, is_admin, name, id } = user; 
-            this.user = new UserModelAbstract({ name, email, role: { id: 0, key: is_admin ? 'ADMIN' : 'USER' , name: is_admin ? 'Администратор' : 'Пользователь'} } as any);
+            this.user = new UserModelAbstract(user);
+            console.log(this.user, is_admin);
             this.token = access;
             this.refreshToken = refresh;
         },
@@ -54,9 +51,10 @@ export const useAuthUser = defineStore({
                         'Authorization': `${tokenType} ${this.token}`,
                     }
                 })
-                const likes = await reponse.json();
-                console.log(likes);
-                this.likesProjectByUser = likes;
+                if(reponse.status < 400) {
+                    const likes = await reponse.json();
+                    this.likesProjectByUser = likes;
+                }
             } catch (error) {
                 
             }

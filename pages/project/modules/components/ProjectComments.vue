@@ -4,24 +4,35 @@
     import { BasicText, BasicButton } from 'UI';
     import InputArea from '@/components/inputs/InputArea.vue';
     import UserModelComment from '@src/models/user/userModelComment';
+    import { addCommentProject } from '../api/index';
+    import useComments from '../composoble/useComments';
 
     const props = defineProps({
-        comments: {
-            type: Array as PropType<UserModelComment[]>,
-            default: () => [],
-        }
+        idProject: {
+            type: String,
+            default: '',
+        },
     })
-    
-    const { comments } = toRefs(props);
 
+    const { idProject } = props;
+
+    const { getComments, loadingComments, comments, addComment } = useComments(idProject);
+    await getComments();
     const message = ref('');
 
     const numberPage = ref(1);
 
-    const commentsPagination = computed(() => unref(comments));
+    const limitation = 10;
 
-    console.log(unref(commentsPagination));
+    const commentsPagination = computed(() => {
+        return unref(comments).filter((comment, index) => index < unref(numberPage) * limitation);
+    });
 
+    const addCommentProject = () => {
+        addComment(unref(message));
+    }
+
+    const isNextComment = computed(() => !!unref(comments)[unref(numberPage) * limitation])
    
 
 </script>
@@ -32,20 +43,20 @@
             <div 
                 class="project-comments__user"
                 v-for="userCommnet in commentsPagination"
-                :key="userCommnet.commnet.id"
+                :key="userCommnet.id"
             >
                 <user-display
                     :name="userCommnet.user.name"
                     :icon="userCommnet.user.icon"
                 />
                 <basic-text size='medium-large' class="project-comments__text"> 
-                    {{ userCommnet.commnet.text }}
+                    {{ userCommnet.text }}
                 </basic-text>
                 <basic-text font='semi-bold' class="project-comments__date">
-                    {{ userCommnet.commnet.messageDate }}
+                    {{ userCommnet.dateCommentText }}
                 </basic-text>
             </div>
-            <div class="project-comments__more-comments">
+            <div class="project-comments__more-comments" v-if="isNextComment" @click="() => numberPage = numberPage + 1">
                 <basic-button> Показать больше </basic-button>
             </div>
         </div>
@@ -55,7 +66,7 @@
                 class="project-comments__message"
                 placeholder="Написать комментарий"
             ></input-area>
-            <basic-button class="project-comments__add"> Добавить </basic-button>
+            <basic-button class="project-comments__add" @click="addCommentProject"> Добавить </basic-button>
         </div>
     </div>
 </template>

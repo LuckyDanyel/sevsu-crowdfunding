@@ -1,0 +1,1 @@
+export type TPageView = 'users' | 'applications' | 'project';

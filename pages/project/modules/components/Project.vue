@@ -23,7 +23,7 @@
                 required: true,
             },
         },
-        async setup(props) {
+        async setup(props, { emit }) {
             const { id } = props;
             const { 
                 isLogged, 
@@ -32,24 +32,20 @@
                 likesProjectByUser,
                 loadingUserLikes,
             } = useLogicAuthUser();
-            let projectModel: ProjectModelInfo | null = null;
             let keyProjectUpdate = ref('');
-            if(process.server) {
-                await getUserLikesProject();
-            }
-            if(process.client) {
-                const projectResponse = await getProject(id);
-                projectModel = new ProjectModelInfo(projectResponse);
-            }
-            const isUserSupportedProject = computed(() => unref(likesProjectByUser).indexOf(projectModel.id) !== -1);
+            const projectModel = ref<ProjectModelInfo | null>();
 
-            const addLikeProject = () => {
-                if(projectModel) {
-                    projectModel.addLike();
-                    keyProjectUpdate.value = projectModel.uniqueKey;
-                    console.log(projectModel.uniqueKey);
-                }
-            }
+            onMounted( async () => {
+                const [projectResponse] = await Promise.all([getProject(id), getUserLikesProject()])
+                projectModel.value = new ProjectModelInfo(projectResponse);
+                emit('projectLoaded')
+            })
+
+            const isUserSupportedProject = computed(() => unref(likesProjectByUser).indexOf(unref(projectModel)?.id || '') !== -1);
+
+            const goAuthorProject = (author: ProjectModelInfo['author']) => {
+                window.location.href = `/projects?userId=${author.id}`
+            };
 
 
             return {
@@ -59,9 +55,9 @@
                 loadingUserUpdates, 
                 likesProjectByUser,
                 isUserSupportedProject,
-                addLikeProject,
                 loadingUserLikes,
                 keyProjectUpdate,
+                goAuthorProject,
             }
         }
     }
@@ -69,46 +65,44 @@
 </script>
 
 <template>
-    <div class="project-wrapper" v-if="projectModel">
-        <location-project>
-            <template #left>
-                <client-only>
-                    <carusel
-                        :images="projectModel.images"
-                        :items-show="projectModel.images.length > 7 ? 7.5 : projectModel.images.length"
+    <div class="project-wrapper">
+        <template v-if="projectModel">
+            <location-project>
+                <template #left>
+                    <client-only>
+                        <carusel
+                            :images="projectModel.images"
+                            :items-show="projectModel.images.length > 7 ? 7.5 : projectModel.images.length"
+                        >
+                        </carusel>
+                    </client-only>
+                </template>
+                <template #right>
+                    <project-info
+                        :is-user-supported-project="isUserSupportedProject"
+                        :loading-likes="loadingUserLikes"
+                        :project="projectModel"
+                        @author-click="goAuthorProject"
                     >
-                    </carusel>
-                </client-only>
-            </template>
-            <template #right>
-                <project-info
-                    :key="keyProjectUpdate"
-                    :is-user-supported-project="isUserSupportedProject"
-                    :loading-likes="loadingUserLikes"
-                    :project="projectModel"
-                >
-                    <template #button>
-                        <project-button-supported
-                            :id-project="projectModel.id"
-                            :loading-likes="loadingUserLikes"
-                            :is-logged="isLogged"
-                            :is-user-supported-project="isUserSupportedProject"
-                            @addLike="addLikeProject"
-                        ></project-button-supported>
-                    </template>
-                </project-info>
-            </template>
-            <template #down>
-                <project-block-down
-                    :id-project="projectModel.id"
-                    :is-logged="isLogged"
-                    :description="projectModel.description"
-                ></project-block-down>
-            </template>
-        </location-project>
+                        <template #button>
+                            <project-button-supported
+                                :id-project="projectModel.id"
+                                :loading-likes="loadingUserLikes"
+                                :is-logged="isLogged"
+                                :is-user-supported-project="isUserSupportedProject"
+                                @addLike="() => projectModel?.addLike()"
+                            ></project-button-supported>
+                        </template>
+                    </project-info>
+                </template>
+                <template #down>
+                    <project-block-down
+                        :id-project="projectModel.id"
+                        :is-logged="isLogged"
+                        :description="projectModel.description"
+                    ></project-block-down>
+                </template>
+            </location-project>
+        </template>
     </div>
 </template>
-
-
-<style lang="scss">
-</style>

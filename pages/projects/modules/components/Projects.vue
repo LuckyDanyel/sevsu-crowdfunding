@@ -1,4 +1,5 @@
 <script lang="ts">
+    import LocationProjectsPage from './LocationProjectsPage.vue';
     import { getProjects } from '../api';
     import ProjectsFiltersUp from './ProjectsFiltersUp.vue';
     import ProjectsWrapperCards from './ProjectsWrapperCards.vue';
@@ -6,44 +7,37 @@
     import { useFiltersProjects } from '../store/filtersProjects';
 
     export default {
+        props: {
+            userIdSearchProject: {
+                type: String,
+                default: '',
+            }
+        },
         components: {
             ProjectsFiltersUp,
             ProjectsWrapperCards,
             ProjectsFilters,
+            LocationProjectsPage,
         },
-        async setup() {
-            if(process.server) {
-                const data = await getProjects();
-                const { setFilterProjects } = useFiltersProjects();
-                setFilterProjects({ projects: data });
-            }
+        async setup(props, { emit }) {
+            const projects = await getProjects(props.userIdSearchProject);
+            emit('projectsLoaded');
+            const { setFilterProjects } = useFiltersProjects();
+            setFilterProjects({ projects });
         }
     }
 
 </script>
 <template>
-    <div class="page-projects__filters-up">
-        <projects-filters-up></projects-filters-up>
-    </div>
-    <div class="page-projects">
-        <div class="page-projects__filters">
+    <location-projects-page>
+        <template #filters-up>
+            <projects-filters-up></projects-filters-up>
+        </template>
+        <template #filters>
             <projects-filters></projects-filters>
-        </div>
-        <projects-wrapper-cards/>
-    </div>
+        </template>
+        <template #cards>
+            <projects-wrapper-cards/>
+        </template>
+    </location-projects-page>
 </template>
-
-<style lang="scss" setup>
-    .page-projects {
-        display: flex;
-        justify-content: space-between;
-        &__filters-up {
-            margin-left: 300px;
-            margin-bottom: 20px;
-        }
-        &__filters {
-            max-width: 300px;
-            width: 100%;
-        }
-    }
-</style>

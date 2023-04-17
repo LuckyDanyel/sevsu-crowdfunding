@@ -3,8 +3,6 @@
     import { TextTabs } from 'UI';
     import ProjectMembers from './ProjectMembers.vue';
     import ProjectComments from './ProjectComments.vue';
-    import useMembers from '../composoble/useMembers';
-    import useComments from '../composoble/useComments';
 
     const props = defineProps({
         description: {
@@ -26,17 +24,12 @@
 
     const viewComponent = ref<'description' | 'members' | 'comments'>('description');
 
-    const { getMembersByFirstClick, loadingMembers, members, } = useMembers(idProject);
-    const { getCommentsByFirstClick, loadingComments, comments, addComment } = useComments(idProject);
-
     const hanlderMembers = () => {
         viewComponent.value = 'members';
-        getMembersByFirstClick();
     }
 
     const handlerCommnents = () => {
         viewComponent.value = 'comments';
-        getCommentsByFirstClick();
     }
 
     watch(isLogged, (value) => {
@@ -78,12 +71,11 @@
                 v-if="viewComponent === 'description'"
             ></project-description>
             <project-members
-                :members="members"
                 v-if="viewComponent === 'members'"
             ></project-members>
 
             <project-comments
-                :comments="comments"
+                :id-project="idProject"
                 v-if="viewComponent === 'comments'"
             ></project-comments>
 

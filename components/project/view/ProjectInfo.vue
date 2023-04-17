@@ -10,7 +10,9 @@ import {
 import UserDisplay from '@/components/user/userDisplay/UserDisplay.vue';
 import { ProjectModelInfo } from '@models/project';
 
-    defineProps({
+    const emit = defineEmits(['authorClick']);
+
+    const { project } = defineProps({
         project: {
             type: ProjectModelInfo,
             required: true,
@@ -24,6 +26,11 @@ import { ProjectModelInfo } from '@models/project';
             default: false,
         },
     })
+
+    const clickAuthorHandler = () => {
+        emit('authorClick', project.author);
+    }
+
 </script>
 
 <template>
@@ -73,10 +80,14 @@ import { ProjectModelInfo } from '@models/project';
                 <basic-text size='medium-large' class="project-info_color-gray project-info_margin"> Проект поддержали: </basic-text>
                 <basic-text size='medium-large'> {{ project.takenLikes }} </basic-text>
             </div>
-            <div class="project-info__icon-item project-info__item">
+            <div class="project-info__icon-item project-info__item" v-if="!project.isProjectEnd">
                 <basic-icon type-icon='time' size='24' color="color" class="project-info_margin"></basic-icon>
                 <basic-text size='medium-large' class="project-info_color-gray project-info_margin"> До сбора осталось: </basic-text>
                 <basic-text size='medium-large'> {{ project.daysToEndProject }} </basic-text>
+            </div>
+            <div class="project-info__icon-item project-info__item" v-if="project.isProjectEnd">
+                <basic-icon type-icon='time' size='24' color="green" class="project-info_margin"></basic-icon>
+                <basic-text size='medium-large' class="project-info_color-gray project-info_margin"> Сбор завершился </basic-text>
             </div>
         </div>
         <slot name="button"></slot>
@@ -93,7 +104,7 @@ import { ProjectModelInfo } from '@models/project';
                 <basic-icon size='24' type-icon='cube' color='full-color' class="project-info__user-icon"></basic-icon>
                 <basic-text font='semi-bold'> {{ project?.author?.projects }} Проектов </basic-text>
             </div>
-            <basic-button  class="project-info__button project-info__info-user-item"> Посмотреть все </basic-button>
+            <basic-button class="project-info__button project-info__info-user-item" @click="clickAuthorHandler"> Посмотреть все </basic-button>
         </div>
     </div>
 </template>

@@ -20,7 +20,6 @@ export const loginUser = async function(userLogin: TloginData): Promise<IReponse
         });
         const parseData = await data.json();
         const { status, error } = parseData;
-        console.log(data);
         if(data.status > 400) {
             throw error;
         }

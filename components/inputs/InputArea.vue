@@ -21,7 +21,7 @@
             },
             maxLength: {
                 type: Number,
-                default: 0,
+                default: 9999,
             }
         },
         setup(props, { emit }) {

@@ -4,6 +4,7 @@
     import Pagination from '@/components/pagination/Pagination.vue';
     import usePagination from '@src/use/usePagination';
     import { ProjectModelCard } from '@models/project';
+    import SkeletonProjectCard from './skeletons/SkeletonProjectCard.vue';
     import ProjectCard from './ProjectCard.vue';
     import { useFiltersProjects } from '../store/filtersProjects';
 

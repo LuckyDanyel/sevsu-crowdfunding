@@ -1,6 +1,7 @@
 <script lang="ts" setup>
     import { format } from 'date-fns';
     import { PropType } from 'vue';
+    import { formatNumber } from '@/src/services/text-modifires';
     import DatePicker from '@/components/datePicker/DatePicker.vue';
     import InputCommon from '@/components/inputs/InputCommon.vue';
     import InputArea from '@/components/inputs/InputArea.vue';
@@ -27,9 +28,9 @@
     const inputNameProject = ref(unref(modelValue)?.title || '');
     const inputDescriptionShort = ref(unref(modelValue)?.short_description || '');
     const takenCategories = ref<ICategoryProject[]>(unref(modelValue)?.categories || []);
-    const takenLikes = ref(unref(modelValue)?.goal_likes || 0);
+    const takenLikes = ref(unref(modelValue)?.goal_likes || '');
     const converTakenLikes = computed({
-        get: () => String(unref(takenLikes)),
+        get: () => formatNumber(String(unref(takenLikes))),
         set: (value: string) => {
             const numberConvert = Number(value.split(' ').join(''));
             takenLikes.value = numberConvert;
@@ -112,9 +113,9 @@
                         <input-common
                             v-model="converTakenLikes"
                             placeholder="Введите количество лайков"
-                            :rule-mask="['###', '# ###', '## ###']"
+                            :rule-mask="['#', '##', '###', '# ###', '## ###']"
                         ></input-common>
-                        <template #name> Количество лайков: {{ takenLikes }} </template>
+                        <template #name> Количество лайков: {{ formatNumber(takenLikes) }} </template>
                     </input-project-item>
                 </div>
             </div>

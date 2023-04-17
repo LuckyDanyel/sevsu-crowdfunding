@@ -2,201 +2,160 @@ import { IUserComment } from '@src/models/user/userModelComment/types';
 
 export const commnets: IUserComment[] = [
     {
+        id: '',
+        text: '2133333333',
+        created_at: '25.02.2022',
         user: {
-            id: 0,
+            id: '',
             name: 'Терещенков Даниил',
             email: 'tere000@mail.ru',
             icon: 'https://sun9-81.userapi.com/impg/c858124/v858124241/18e353/tFXR9oY5K4M.jpg?size=1080x1080&quality=96&sign=e0e8916b63f5b81a04a79a850f950db2&type=album',
-            role: {
-                id: 1,
-                name: 'Администратор',
-                key: 'ADMIN',
-            },
+            is_adming: false,
         },
-        comment: {
-            id: 0,
-            text: `I really appreciate the insights and perspective shared in this article. It's definitely given me something to think about and has helped me see things from a different angle. Thank you for writing and sharing!`,
-            messageDate: '25.02.2022',
-        }
     },
     {
+        id: '',
+        text: '2133333333',
+        created_at: '25.02.2022',
         user: {
-            id: 0,
+            id: '',
             name: 'Терещенков Даниил',
             email: 'tere000@mail.ru',
             icon: 'https://sun9-81.userapi.com/impg/c858124/v858124241/18e353/tFXR9oY5K4M.jpg?size=1080x1080&quality=96&sign=e0e8916b63f5b81a04a79a850f950db2&type=album',
-            role: {
-                id: 1,
-                name: 'Администратор',
-                key: 'ADMIN',
-            },
+            is_adming: false,
         },
-        comment: {
-            id: 0,
-            text: `I really appreciate the insights and perspective shared in this article. It's definitely given me something to think about and has helped me see things from a different angle. Thank you for writing and sharing!`,
-            messageDate: '25.02.2022',
-        }
     },
     {
+        id: '',
+        text: '2133333333',
+        created_at: '25.02.2022',
         user: {
-            id: 0,
+            id: '',
             name: 'Терещенков Даниил',
             email: 'tere000@mail.ru',
             icon: 'https://sun9-81.userapi.com/impg/c858124/v858124241/18e353/tFXR9oY5K4M.jpg?size=1080x1080&quality=96&sign=e0e8916b63f5b81a04a79a850f950db2&type=album',
-            role: {
-                id: 1,
-                name: 'Администратор',
-                key: 'ADMIN',
-            },
+            is_adming: false,
         },
-        comment: {
-            id: 0,
-            text: `I really appreciate the insights and perspective shared in this article. It's definitely given me something to think about and has helped me see things from a different angle. Thank you for writing and sharing!`,
-            messageDate: '25.02.2022',
-        }
     },
     {
+        id: '',
+        text: '2133333333',
+        created_at: '25.02.2022',
         user: {
-            id: 0,
+            id: '',
             name: 'Терещенков Даниил',
             email: 'tere000@mail.ru',
             icon: 'https://sun9-81.userapi.com/impg/c858124/v858124241/18e353/tFXR9oY5K4M.jpg?size=1080x1080&quality=96&sign=e0e8916b63f5b81a04a79a850f950db2&type=album',
-            role: {
-                id: 1,
-                name: 'Администратор',
-                key: 'ADMIN',
-            },
+            is_adming: false,
         },
-        comment: {
-            id: 0,
-            text: `I really appreciate the insights and perspective shared in this article. It's definitely given me something to think about and has helped me see things from a different angle. Thank you for writing and sharing!`,
-            messageDate: '25.02.2022',
-        }
     },
     {
+        id: '',
+        text: '2133333333',
+        created_at: '25.02.2022',
         user: {
-            id: 0,
+            id: '',
             name: 'Терещенков Даниил',
             email: 'tere000@mail.ru',
             icon: 'https://sun9-81.userapi.com/impg/c858124/v858124241/18e353/tFXR9oY5K4M.jpg?size=1080x1080&quality=96&sign=e0e8916b63f5b81a04a79a850f950db2&type=album',
-            role: {
-                id: 1,
-                name: 'Администратор',
-                key: 'ADMIN',
-            },
+            is_adming: false,
         },
-        comment: {
-            id: 0,
-            text: `I really appreciate the insights and perspective shared in this article. It's definitely given me something to think about and has helped me see things from a different angle. Thank you for writing and sharing!`,
-            messageDate: '25.02.2022',
-        }
     },
     {
+        id: '',
+        text: '2133333333',
+        created_at: '25.02.2022',
         user: {
-            id: 0,
+            id: '',
             name: 'Терещенков Даниил',
             email: 'tere000@mail.ru',
             icon: 'https://sun9-81.userapi.com/impg/c858124/v858124241/18e353/tFXR9oY5K4M.jpg?size=1080x1080&quality=96&sign=e0e8916b63f5b81a04a79a850f950db2&type=album',
-            role: {
-                id: 1,
-                name: 'Администратор',
-                key: 'ADMIN',
-            },
+            is_adming: false,
         },
-        comment: {
-            id: 0,
-            text: `I really appreciate the insights and perspective shared in this article. It's definitely given me something to think about and has helped me see things from a different angle. Thank you for writing and sharing!`,
-            messageDate: '25.02.2022',
-        }
     },
     {
+        id: '',
+        text: '2133333333',
+        created_at: '25.02.2022',
         user: {
-            id: 0,
+            id: '',
             name: 'Терещенков Даниил',
             email: 'tere000@mail.ru',
             icon: 'https://sun9-81.userapi.com/impg/c858124/v858124241/18e353/tFXR9oY5K4M.jpg?size=1080x1080&quality=96&sign=e0e8916b63f5b81a04a79a850f950db2&type=album',
-            role: {
-                id: 1,
-                name: 'Администратор',
-                key: 'ADMIN',
-            },
+            is_adming: false,
         },
-        comment: {
-            id: 0,
-            text: `I really appreciate the insights and perspective shared in this article. It's definitely given me something to think about and has helped me see things from a different angle. Thank you for writing and sharing!`,
-            messageDate: '25.02.2022',
-        }
     },
     {
+        id: '',
+        text: '2133333333',
+        created_at: '25.02.2022',
         user: {
-            id: 0,
+            id: '',
             name: 'Терещенков Даниил',
             email: 'tere000@mail.ru',
             icon: 'https://sun9-81.userapi.com/impg/c858124/v858124241/18e353/tFXR9oY5K4M.jpg?size=1080x1080&quality=96&sign=e0e8916b63f5b81a04a79a850f950db2&type=album',
-            role: {
-                id: 1,
-                name: 'Администратор',
-                key: 'ADMIN',
-            },
+            is_adming: false,
         },
-        comment: {
-            id: 0,
-            text: `I really appreciate the insights and perspective shared in this article. It's definitely given me something to think about and has helped me see things from a different angle. Thank you for writing and sharing!`,
-            messageDate: '25.02.2022',
-        }
     },
     {
+        id: '',
+        text: '2133333333',
+        created_at: '25.02.2022',
         user: {
-            id: 0,
+            id: '',
             name: 'Терещенков Даниил',
             email: 'tere000@mail.ru',
             icon: 'https://sun9-81.userapi.com/impg/c858124/v858124241/18e353/tFXR9oY5K4M.jpg?size=1080x1080&quality=96&sign=e0e8916b63f5b81a04a79a850f950db2&type=album',
-            role: {
-                id: 1,
-                name: 'Администратор',
-                key: 'ADMIN',
-            },
+            is_adming: false,
         },
-        comment: {
-            id: 0,
-            text: `I really appreciate the insights and perspective shared in this article. It's definitely given me something to think about and has helped me see things from a different angle. Thank you for writing and sharing!`,
-            messageDate: '25.02.2022',
-        }
     },
     {
+        id: '',
+        text: '2133333333',
+        created_at: '25.02.2022',
         user: {
-            id: 0,
+            id: '',
             name: 'Терещенков Даниил',
             email: 'tere000@mail.ru',
             icon: 'https://sun9-81.userapi.com/impg/c858124/v858124241/18e353/tFXR9oY5K4M.jpg?size=1080x1080&quality=96&sign=e0e8916b63f5b81a04a79a850f950db2&type=album',
-            role: {
-                id: 1,
-                name: 'Администратор',
-                key: 'ADMIN',
-            },
+            is_adming: false,
         },
-        comment: {
-            id: 0,
-            text: `I really appreciate the insights and perspective shared in this article. It's definitely given me something to think about and has helped me see things from a different angle. Thank you for writing and sharing!`,
-            messageDate: '25.02.2022',
-        }
     },
     {
+        id: '',
+        text: '2133333333',
+        created_at: '25.02.2022',
         user: {
-            id: 0,
+            id: '',
             name: 'Терещенков Даниил',
             email: 'tere000@mail.ru',
             icon: 'https://sun9-81.userapi.com/impg/c858124/v858124241/18e353/tFXR9oY5K4M.jpg?size=1080x1080&quality=96&sign=e0e8916b63f5b81a04a79a850f950db2&type=album',
-            role: {
-                id: 1,
-                name: 'Администратор',
-                key: 'ADMIN',
-            },
+            is_adming: false,
         },
-        comment: {
-            id: 0,
-            text: `I really appreciate the insights and perspective shared in this article. It's definitely given me something to think about and has helped me see things from a different angle. Thank you for writing and sharing!`,
-            messageDate: '25.02.2022',
-        }
     },
+    {
+        id: '',
+        text: '2133333333',
+        created_at: '25.02.2022',
+        user: {
+            id: '',
+            name: 'Терещенков Даниил',
+            email: 'tere000@mail.ru',
+            icon: 'https://sun9-81.userapi.com/impg/c858124/v858124241/18e353/tFXR9oY5K4M.jpg?size=1080x1080&quality=96&sign=e0e8916b63f5b81a04a79a850f950db2&type=album',
+            is_adming: false,
+        },
+    },
+    {
+        id: '',
+        text: '2133333333',
+        created_at: '25.02.2022',
+        user: {
+            id: '',
+            name: 'Терещенков Даниил',
+            email: 'tere000@mail.ru',
+            icon: 'https://sun9-81.userapi.com/impg/c858124/v858124241/18e353/tFXR9oY5K4M.jpg?size=1080x1080&quality=96&sign=e0e8916b63f5b81a04a79a850f950db2&type=album',
+            is_adming: false,
+        },
+    },
+    
 ]

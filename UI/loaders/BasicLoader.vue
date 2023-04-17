@@ -8,7 +8,7 @@
         },
         color: {
             type: String as PropType<'white' | 'green'>,
-            default: 'white'
+            default: ''
         }
     })
 </script>
@@ -17,8 +17,8 @@
     <span class="loader" :class="`loader__${color}`"></span>
 </template>
 
-<style>
-.loader {
+<style lang="scss">
+    .loader {
         width: 24px;
         height: 24px;
         border: 3px solid transparent;
@@ -27,6 +27,10 @@
         display: inline-block;
         box-sizing: border-box;
         animation: rotation 1s linear infinite;
+
+        &__white {
+            border-bottom-color: white;
+        }
     }
 
     @keyframes rotation {

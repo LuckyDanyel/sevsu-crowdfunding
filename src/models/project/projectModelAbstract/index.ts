@@ -56,6 +56,14 @@ export default class ProjectModelAbstract {
         return parse(this.endProject, 'yyyy-MM-dd', new Date())
     }
 
+    get dateFullStartProjectText(): string {
+        return format(this.dateStartProject, 'dd.MM.yyyy', {  locale: ru })
+    }
+
+    get dateFullEndProjectText(): string {
+        return format(this.dateEndProject, 'dd.MM.yyyy', {  locale: ru })
+    }
+
     get dayStartProjectText(): string {
         return format(this.dateStartProject, 'd MMMM', {  locale: ru })
     }
@@ -67,5 +75,10 @@ export default class ProjectModelAbstract {
     get daysToEndProject(): string {
         const days = differenceInDays(this.dateEndProject, new Date());
         return `${days} ${wordEnding(days, ['день', 'дня', 'дней'])}`;
+    }
+
+    get isProjectEnd(): boolean {
+        const days = differenceInDays(this.dateEndProject, new Date());
+        return days <= 0;
     }
 } 

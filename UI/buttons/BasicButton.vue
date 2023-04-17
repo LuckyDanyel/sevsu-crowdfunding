@@ -17,7 +17,7 @@ import { BasicText } from 'UI';
         textColor: {
             type: String,
             default: '',
-        }
+        },
     })
 
 </script>

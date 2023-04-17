@@ -31,17 +31,28 @@ import { BasicIcon } from 'UI';
             height: {
                 type: Number,
                 default: 0,
-            }
+            },
+            debouceTime: {
+                type: Number,
+                default: 0,
+            },
         },
         setup(props, { emit }) {
             const { modelValue } = toRefs(props);
-            const { typeInput } = props;
+            const { typeInput, debouceTime } = props;
 
-            const hidePassword = ref(typeInput === 'hide'); 
+            const hidePassword = ref(typeInput === 'hide');
+
+            let timeout: any = null;
 
             const inputValue = computed({
                 get: () => unref(modelValue),
-                set: (value: string) => emit('update:modelValue', value),
+                set: (value: string) => {
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => {
+                        emit('update:modelValue', value)
+                    }, debouceTime);
+                },
             })
 
             const active = ref(false);

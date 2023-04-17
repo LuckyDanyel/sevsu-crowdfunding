@@ -2,7 +2,7 @@ import ProjectModelAbstract from '../projectModelAbstract';
 import { IProjectCard } from './types';
 
 export default class ProjectCardModel extends ProjectModelAbstract {
-    comments: number;
+    comments?: number;
     constructor(projectCard: IProjectCard) {
         super(projectCard);
         const { comments } = projectCard;
