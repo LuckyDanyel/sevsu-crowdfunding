@@ -14,6 +14,8 @@ import Admin from './modules/pages/admin/Admin.vue';
         <template #header-right>
            <user-menu></user-menu>
         </template>
-        <admin></admin>
+        <ClientOnly>
+            <admin></admin>
+        </ClientOnly>
     </NuxtLayout>
 </template>

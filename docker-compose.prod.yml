@@ -1,0 +1,17 @@
+version: '3.3'
+
+services:
+  nuxt:
+    build:
+      dockerfile: deploy/dev/Dockerfile
+      context: .
+    image: nuxt_dev
+    container_name: nuxt_dev
+    command: npm run dev
+    ports:
+      - "3000:3000"
+      - "24678:24678"
+    volumes:
+      - ./:/app
+    env_file:
+      - .env

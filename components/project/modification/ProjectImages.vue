@@ -3,7 +3,6 @@ import { PropType } from 'vue';
 import Carusel from '@/components/carusel/Carusel.vue';
 import NoPhotoImage from './img/no-photo.svg';
 import { IFiles } from './index';
-import { fi } from 'date-fns/locale';
 
 const emit = defineEmits(['update:modelValue']);
 
@@ -41,7 +40,7 @@ const addImagesHandler = (event: Event) => {
 
     files.forEach(async (couples) => {
         const [index, file]: [string, File] = couples;
-        const buffer = await getArrayBuffer(file);
+        const buffer = await getArrayBuffer(file)
         const src = await getSrc(file);
         const extension = file.name.split('.')[1];
         takenImages.value.push({ src, buffer, extension: `.${extension}` });

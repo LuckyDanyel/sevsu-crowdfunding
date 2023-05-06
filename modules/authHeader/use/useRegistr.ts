@@ -11,7 +11,7 @@ export default function() {
 
     const registr = async (registrData: TregistrData) => {
         try {
-            loadingRegistr.value = false;
+            loadingRegistr.value = true;
             const data = await registrUser(registrData);
             notify({
                 title: 'Подтвреждение Email',
@@ -26,7 +26,7 @@ export default function() {
                 type: 'error',
             });
         } finally {
-            loadingRegistr.value = true;
+            loadingRegistr.value = false;
         }
     }
 

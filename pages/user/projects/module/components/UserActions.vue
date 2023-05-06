@@ -1,7 +1,14 @@
 <script lang="ts" setup>
     import { PropType } from 'vue';
-    import { BasicIcon } from 'UI';
+    import { BasicIcon, BasicLoader } from 'UI';
     import { TProjectStatus } from '@/src/models/project/projectModelAbstract/types';
+    import { useAuthUser } from '@/src/store';
+    import { storeToRefs } from 'pinia';
+    import { deleleProject } from '../api';
+
+    const { token } = storeToRefs(useAuthUser());
+
+    const emit = defineEmits(['delete']);
 
     const { idProject } = defineProps({
         idProject: {
@@ -14,8 +21,22 @@
         },
     })
 
+    const loading = ref(false);
+
     const editHanlder = () => {
         navigateTo({ path: '/user/edit-project', query: { id:  idProject } })
+    }
+
+    const handlerDeleteProject = async () => {
+        try {
+            loading.value = true;
+            await deleleProject(unref(token), idProject);
+            emit('delete');
+        } catch (error) {
+            
+        } finally {
+            loading.value = false;
+        }
     }
     
 
@@ -23,12 +44,17 @@
 
 <template>
     <div class="user-actions" v-if="status !== 'waiting'">
-        <div class="user-actions__item">
-            <basic-icon type-icon='edit' size='24' @click="editHanlder" v-if="status === 'cancel'"></basic-icon>
-        </div>
-        <div class="user-actions__item">
-            <basic-icon type-icon='delete' size='24'></basic-icon>
-        </div>
+
+        <basic-loader v-if="loading"></basic-loader>
+
+        <template v-if="!loading">
+            <div class="user-actions__item">
+                <basic-icon type-icon='edit' size='24' @click="editHanlder" v-if="status === 'cancel'"></basic-icon>
+            </div>
+            <div class="user-actions__item" @click="handlerDeleteProject">
+                <basic-icon type-icon='delete' size='24'></basic-icon>
+            </div>
+        </template>
     </div>
 </template>
 

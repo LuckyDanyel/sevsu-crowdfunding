@@ -1,5 +1,5 @@
 import { IProjectInfo } from '@/src/models/project/projectModelInfo/types';
-import { IFiles } from '@src/types';
+import { IFiles } from '@/components/project/modification';
 import { basicUrl, tokenType } from '@/src/api/constants';
 
 interface ICreatingProjectApi extends IProjectInfo {
@@ -7,18 +7,18 @@ interface ICreatingProjectApi extends IProjectInfo {
     goal_likes: number;
 }
 
-interface ILinksYandex {
+interface ILinks {
     'upload_links': string[];
 }
 
-export const uploadImagesYandex = async (images: IFiles[], linksYandex: ILinksYandex) => {
-    const { upload_links } = linksYandex;
+export const uploadImages = async (images: IFiles[], links: ILinks) => {
+    const { upload_links } = links;
     const promisisesImages = upload_links.map( async (imageLink, index) => new Promise( async (res, rej) => {
         try {
-            const imageBuffer = images[index].buffer;
+            const buffer = images[index].buffer;
             const data = await fetch(imageLink, {
                 method: 'PUT',
-                body: imageBuffer,
+                body: buffer,
             })
             res(data);   
         } catch (error) {

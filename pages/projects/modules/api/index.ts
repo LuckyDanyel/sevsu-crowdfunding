@@ -3,7 +3,6 @@ import { IProjectCard } from '@models/project/projectModelCard/types';
 
 export const getProjects = async (idUser?: string): Promise<IProjectCard[]> => {
     let url = '';
-    console.log(idUser);
     if(idUser) {
         url = `${basicUrl}api/v1/project_management/list_project/?userId=${idUser}`;
     } else {

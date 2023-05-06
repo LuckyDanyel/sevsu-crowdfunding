@@ -1,13 +1,11 @@
 import { defineStore } from "pinia";
-import { UserModelAbstract } from '@models/user';
-import { IBasicProject } from "@/src/models/project/projectModelAbstract/types";
-import ProjectCardModel from "@/src/models/project/projectModelCard";
+import ProjectModelInfo from "~/src/models/project/projectModelInfo";
+import { IProjectInfo } from '@/src/models/project/projectModelInfo/types';
 import { TPageView } from "../types";
-import { IProjectBasic } from "~~/src/types";
 
 export interface StateAdminPage {
     pageView: TPageView;
-    basicProjects: IBasicProject[];
+    basicProjects: IProjectInfo[];
     takenProjectId: string;
 }
 
@@ -27,16 +25,23 @@ export const useAdminStore = defineStore({
         setPageView(pageView: TPageView) {
             this.pageView = pageView;
         },
-        setBasicProjects(projects: IBasicProject[]) {
+        setBasicProjects(projects: IProjectInfo[]) {
             this.basicProjects = projects;
+        },
+        deleteProject(id: string) {
+            this.basicProjects = this.basicProjects.filter((project) => project.id !== id);
         }
     },
     getters: {
-        getProjects(): ProjectCardModel[] {
-            return this.basicProjects.map((project) => new ProjectCardModel(project));
+        getProjects(): ProjectModelInfo[] {
+            return this.basicProjects.map((project) => new ProjectModelInfo(project));
         },
-        getProjectByTakenId(): IProjectBasic | undefined {
-            return this.basicProjects.find((project) => project.id === this.takenProjectId);
+        getProjectByTakenId(): ProjectModelInfo | undefined {
+            const project = this.basicProjects.find((project) => project.id === this.takenProjectId)
+            if(project) {
+                return new ProjectModelInfo(project);
+            }
+            return project;
         }
     }
 })

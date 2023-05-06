@@ -1,6 +1,10 @@
 <script lang="ts">
     import { computed, toRefs, unref, PropType } from 'vue';
+    import { BasicIcon } from '@/UI';
     export default {
+        components: {
+            BasicIcon,
+        },
         emits: ['update:modelValue'],
         props: {
             modelValue: {
@@ -49,7 +53,7 @@
                 :class=" isHover ? 'check-box-common__checkbox_hover' : '' "
             >
                 <div class="check-box-common__checkbox-icon">
-                    <nuxt-icon name="18/box" v-if="isChecked"></nuxt-icon>
+                    <basic-icon v-if="isChecked" size='16' type-icon='box' color='full-color-ui'></basic-icon>
                 </div>
             </div>
             <input class="check-box-common__input" type="checkbox">
@@ -73,19 +77,6 @@
                 position: absolute;
                 top: -2px;
                 left: -1px;
-            }
-            .nuxt-icon--fill * {
-                fill: var(--color-main-type-1) !important;
-            }
-            .nuxt-icon--fill {
-                width: 16px;
-                height: 16px;
-                display: inline-block;
-                svg {
-                    display: inline-block;
-                    width: 100%;
-                    height: 100%;
-                }
             }
             &_hover {
                 border-color: var(--color-main-type-1);

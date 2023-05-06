@@ -1,7 +1,7 @@
 <script lang="ts" setup>
     import { PropType } from 'vue';
     import { BasicText, BasicButton, BasicProgress, TextBlockShadow, BasicIcon } from 'UI';
-    import ProjectModelCard from '@models/project/projectModelCard';
+    import ProjectModelCard from '@src/models/project/projectModelCard';
 
     defineProps({
         card: {

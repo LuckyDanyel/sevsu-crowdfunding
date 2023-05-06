@@ -8,6 +8,7 @@ import DropDown from './dropdown/DropDown.vue';
 import Toogle from './elements/Toogle.vue';
 import Skeleton from './elements/Skeleton.vue';
 import RadioButton from './elements/RadioButton.vue';
+import WhiteButton from './buttons/WhiteButton.vue';
 
 export * from './table';
 export * from './text';
@@ -25,4 +26,5 @@ export {
     Toogle,
     Skeleton,
     RadioButton,
+    WhiteButton,
 }

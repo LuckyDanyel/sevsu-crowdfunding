@@ -10,7 +10,7 @@ export default defineNuxtRouteMiddleware( async (context) => {
         const authUser = useAuthUser();
         if(unref(token) && unref(tokenRefresh)) {
             try {
-                const data = await getUser(unref(token), unref(tokenRefresh));
+                const data = await getUser(unref(token)!, unref(tokenRefresh)!, true);
                 if(data) {
                     const { user, access } = data;
                     authUser.setUser({ user, access, refresh: unref(tokenRefresh)! });

@@ -1,5 +1,5 @@
-import { basicUrl, tokenType } from "@/src/api/constants";
-import { IProjectCard } from "@/src/models/project/projectModelCard/types";
+import { basicUrl, tokenType } from "@src/api/constants";
+import { IProjectCard } from "@src/models/project/projectModelCard/types";
 
 export const getUserPorjects = async (token: string): Promise<IProjectCard[]> => {
     const url = `${basicUrl}api/v1/project_management/list_user_project/`;
@@ -12,6 +12,21 @@ export const getUserPorjects = async (token: string): Promise<IProjectCard[]> =>
             }
         })
         return projects.json();   
+    } catch (error) {
+        throw error;
+    }
+}
+
+export const deleleProject = async (token: string, id: string): Promise<void> => {
+    const url = `${basicUrl}api/v1/project_management/delete_project/${id}/`;
+
+    try {
+        const response = await fetch(url, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `${tokenType} ${token}`,
+            }
+        })
     } catch (error) {
         throw error;
     }

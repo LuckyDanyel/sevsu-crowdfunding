@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import { PropType } from 'vue';
 import ViewProjectAction from './ViewProjectAction.vue';
-import ProjectCardModel from '@/src/models/project/projectModelCard';
+import ProjectModelCard from '@src/models/project/projectModelCard';
 
     defineProps({
         project: {
-            type: Object as PropType<ProjectCardModel>,
+            type: Object as PropType<ProjectModelCard>,
             required: true,
         }
     })

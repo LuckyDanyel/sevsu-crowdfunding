@@ -1,9 +1,9 @@
 export interface ICategoryProject {
-    id: number;
+    id: string;
     text: string;
 }
 
 export type TCategory = {
-    id: number;
+    id: string;
     text: string;
 }

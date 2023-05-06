@@ -1,7 +1,7 @@
 import { basicUrl, tokenType } from "@/src/api/constants";
-import { IBasicProject } from "@/src/models/project/projectModelAbstract/types";
+import { IProjectInfo } from "@/src/models/project/projectModelInfo/types";
 
-export const getApplications = async (token: string): Promise<IBasicProject[]> => {
+export const getApplications = async (token: string): Promise<IProjectInfo[]> => {
     const url = `${basicUrl}api/v1/project_management/list_waiting_project/`;
 
     try {

@@ -2,10 +2,6 @@
     import { PropType } from 'vue';
 
     defineProps({
-        loading: {
-            type: Boolean,
-            default: false,
-        },
         color: {
             type: String as PropType<'white' | 'green'>,
             default: ''

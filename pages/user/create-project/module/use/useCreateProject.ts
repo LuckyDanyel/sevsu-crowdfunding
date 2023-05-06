@@ -1,13 +1,17 @@
 import { IProjectInfo } from '@/src/models/project/projectModelInfo/types';
-import { IFiles } from '@/src/types';
+import { IFiles } from '@/components/project/modification';
 import { Ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useAuthUser } from '@src/store';
-import { cteateProjectApi, uploadImagesYandex } from '../api/index';
+import { useUserProjectsStore } from '@/pages/user/store/userProjectStore';
+import ProjectModelCard from '@/src/models/project/projectModelCard';
+import { cteateProjectApi, uploadImages } from '../api/index';
 
 
 export default function(images: Ref<IFiles[]>, project: Ref<Partial<IProjectInfo>> | Ref<null>) {
     const loadingProject = ref(false);
+
+    const { addProject } = useUserProjectsStore();
 
     const { token } = storeToRefs(useAuthUser());
 
@@ -20,7 +24,7 @@ export default function(images: Ref<IFiles[]>, project: Ref<Partial<IProjectInfo
                     images: unref(images).map((image) => image.extension),
                 } as IProjectInfo
                 const uploadLinks = await cteateProjectApi(projectFull, unref(token));
-                const response = await uploadImagesYandex(unref(images), uploadLinks)
+                const response = await uploadImages(unref(images), uploadLinks)
             }
         } catch (error) {
             
@@ -32,5 +36,6 @@ export default function(images: Ref<IFiles[]>, project: Ref<Partial<IProjectInfo
 
     return {
         createProject,
+        loadingProject,
     }
 }

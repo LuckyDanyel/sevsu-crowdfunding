@@ -8,7 +8,7 @@ import {
     BasicLoader 
 } from 'UI';
 import UserDisplay from '@/components/user/userDisplay/UserDisplay.vue';
-import { ProjectModelInfo } from '@models/project';
+import ProjectModelInfo from '@/src/models/project/projectModelInfo';
 
     const emit = defineEmits(['authorClick']);
 
@@ -127,7 +127,6 @@ import { ProjectModelInfo } from '@models/project';
         &__info-user-item {
             flex: 1;
             display: flex;
-            justify-content: center;
         }
         &__info-user {
             display: flex;

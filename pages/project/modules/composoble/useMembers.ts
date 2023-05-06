@@ -20,7 +20,6 @@ export default function (idProject: string) {
     }
 
     const getMoreMembers = async (numberPage: number) => {
-        console.log('moreMembers', numberPage);
     }
 
     return {

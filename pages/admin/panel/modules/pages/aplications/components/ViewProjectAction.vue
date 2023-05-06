@@ -1,27 +1,29 @@
 <script lang="ts" setup>
 import { PropType } from 'vue';
 import { BasicIcon } from '@/UI';
-import ProjectCardModel from '@/src/models/project/projectModelCard';
+import ProjectModelCard from '@src/models/project/projectModelCard';
+import { useAdminStore } from '@/pages/admin/panel/modules/store/useAdminPageStore';
+
+const { setPageView, setProjectId } = useAdminStore();
 
     const { project } = defineProps({
         project: {
-            type: Object as PropType<ProjectCardModel>,
+            type: Object as PropType<ProjectModelCard>,
             required: true,
         }
     });
 </script>
 
 <template>
-    <NuxtLink :to="`/admin/project?id=${project.id}`" target="_blank">
-        <div 
-            class="view-project-action"
-        >
-            <basic-icon
-                size='18'
-                type-icon='arrow-open'
-            ></basic-icon>
-        </div>
-    </NuxtLink>
+    <div 
+        class="view-project-action"
+        @click="setProjectId(project.id), setPageView('project')"
+    >
+        <basic-icon
+            size='18'
+            type-icon='arrow-open'
+        ></basic-icon>
+    </div>
 </template>
 
 <style>

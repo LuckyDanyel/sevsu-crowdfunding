@@ -1,5 +1,5 @@
 import { IReponseTokens } from '@/src/types';
-import { basicUrl, tokenType } from '@src/api/constants';
+import { basicUrl, tokenType, localNetworkUrl } from '@src/api/constants';
 import { IUser } from '@/src/models/user/userModelAbstract/types';
 
 export const getLikesProjectUser = async function(token: string): Promise<IUser> {
@@ -13,8 +13,8 @@ export const getLikesProjectUser = async function(token: string): Promise<IUser>
     });
     return data.json();
 }
-export const refreshTokenOnActual = async function(token: string): Promise<Partial<IReponseTokens>> {
-    const url = `${basicUrl}api/v1/accounts/token/refresh/`;
+export const refreshTokenOnActual = async function(token: string, isLocalNetwork = false): Promise<Partial<IReponseTokens>> {
+    const url = `${isLocalNetwork ? localNetworkUrl : basicUrl}api/v1/accounts/token/refresh/`;
     const request = { 
         refresh: token,
     }
@@ -33,8 +33,8 @@ export const refreshTokenOnActual = async function(token: string): Promise<Parti
     }
 }
 
-export const checkTokenActual = async function(token: string): Promise<Boolean> {
-    const url = `${basicUrl}api/v1/accounts/token/verify/`;
+export const checkTokenActual = async function(token: string, isLocalNetwork = false): Promise<Boolean> {
+    const url = `${isLocalNetwork ? localNetworkUrl : basicUrl}api/v1/accounts/token/verify/`;
     const request = {
         token,
     }
@@ -53,25 +53,24 @@ export const checkTokenActual = async function(token: string): Promise<Boolean> 
 }
 
 
-export const getUser = async function(token: string | null, refreshToken: string | null): Promise<{ user: ApiUser, access: string } | null> {
+export const getUser = async function(token: string | null, refreshToken: string | null, isLocalNetwork = false): Promise<{ user: IUser, access: string } | null> {
     if(!(token && refreshToken)) return null;
     
     try {
 
-        const isTokenActual = await checkTokenActual(token);
+        const isTokenActual = await checkTokenActual(token, isLocalNetwork);
         let currentToken = token;
 
         if(!isTokenActual) {
-            const { access } = await refreshTokenOnActual(refreshToken);
+            const { access } = await refreshTokenOnActual(refreshToken, isLocalNetwork);
             currentToken = access!;
         } 
 
-        const url = `${basicUrl}api/v1/accounts/retrieve_user/`;
+        const url = `${isLocalNetwork ? localNetworkUrl : basicUrl}api/v1/accounts/retrieve_user/`;
         const data = await fetch(url, {
             method: 'GET',
             headers: {
                 authorization: `${tokenType} ${currentToken}`,
-                "ngrok-skip-browser-warning": true,
             },
         });
         if(!data.ok) {

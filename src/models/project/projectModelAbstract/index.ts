@@ -36,10 +36,6 @@ export default class ProjectModelAbstract {
         return countProcent;
     }
 
-    get uniqueKey(): string {
-        return `${this.takenLikes}_`
-    }
-
     addLike(): void {
         this.takenLikes = this.takenLikes + 1;
     }
@@ -80,5 +76,9 @@ export default class ProjectModelAbstract {
     get isProjectEnd(): boolean {
         const days = differenceInDays(this.dateEndProject, new Date());
         return days <= 0;
+    }
+
+    get image(): string {
+        return this.images ? this.images[0] : '';
     }
 } 

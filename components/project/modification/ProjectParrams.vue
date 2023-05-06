@@ -6,7 +6,6 @@
     import InputCommon from '@/components/inputs/InputCommon.vue';
     import InputArea from '@/components/inputs/InputArea.vue';
     import { ICategoryProject } from '@/src/types';
-    import { maskSymbolsLimitation } from '@src/services/mask/index';
     import { Toogle } from 'UI';
     import { IProjectInfo } from '@/src/models/project/projectModelInfo/types';
     import ProjectCategories from './ProjectCategories.vue';
@@ -32,8 +31,7 @@
     const converTakenLikes = computed({
         get: () => formatNumber(String(unref(takenLikes))),
         set: (value: string) => {
-            const numberConvert = Number(value.split(' ').join(''));
-            takenLikes.value = numberConvert;
+            takenLikes.value = value;
         },
     })
     const dateStartProject = ref(new Date());
@@ -61,7 +59,7 @@
                 <input-project-item>
                     <input-common
                         v-model="inputNameProject"
-                        :ruleMask="maskSymbolsLimitation(36)"
+                        :max-lenght="36"
                         placeholder="Введите название проекта"
                     ></input-common>
                     <template #name> Доступно символов: {{ 36 - inputNameProject.length }} </template>
@@ -113,7 +111,7 @@
                         <input-common
                             v-model="converTakenLikes"
                             placeholder="Введите количество лайков"
-                            :rule-mask="['#', '##', '###', '# ###', '## ###']"
+                            rule-mask="['#', '##', '###', '# ###', '## ###']"
                         ></input-common>
                         <template #name> Количество лайков: {{ formatNumber(takenLikes) }} </template>
                     </input-project-item>

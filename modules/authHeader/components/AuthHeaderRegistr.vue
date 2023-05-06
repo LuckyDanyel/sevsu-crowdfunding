@@ -84,7 +84,7 @@ import { TregistrData } from '../types';
                     </input-common>
                 </auth-header-item>
                 <basic-button :is-active="false" v-if="loading">
-                    <basic-loader :loading="loading"></basic-loader>
+                    <basic-loader></basic-loader>
                 </basic-button>
                 <basic-button v-if="!loading" @click="registr"> Зарегистрироваться </basic-button>
             </template>

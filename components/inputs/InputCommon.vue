@@ -1,12 +1,9 @@
 <script lang="ts">
 import { ref, computed, toRefs, unref, PropType } from 'vue';
-import { mask } from 'vue-the-mask'
 import { BasicIcon } from 'UI';
+import { max } from 'date-fns';
 
     export default {
-        directives: {
-            mask,
-        },
         components: {
             BasicIcon,
         },
@@ -25,8 +22,12 @@ import { BasicIcon } from 'UI';
                 default: '',
             },
             ruleMask: {
-                type: [String, Object],
+                type: String as PropType<string | string[]>,
                 default: '',
+            },
+            maxLenght: {
+                type: Number,
+                default: null,
             },
             height: {
                 type: Number,
@@ -85,14 +86,9 @@ import { BasicIcon } from 'UI';
                 :type="hidePassword ? 'password' : 'text'" 
                 :placeholder="placeholder"
                 v-model="inputValue"
-                v-mask="ruleMask"
-                v-if="ruleMask"
-            >
-            <input 
-                :type="hidePassword ? 'password' : 'text'" 
-                :placeholder="placeholder"
-                v-model="inputValue"
-                v-else
+                v-maska
+                :data-maska="ruleMask"
+                :maxlength="maxLenght"
             >
         </label>
         <div 

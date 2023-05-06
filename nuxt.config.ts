@@ -1,10 +1,15 @@
 import { resolve } from 'path';
+import babel from 'vite-plugin-babel';
+
 export default defineNuxtConfig({
     typescript: {
         strict: true
     },
+    build: {
+        transpile: ['date-fns'],
+    },
     modules: [
-        '@pinia/nuxt',
+        ['@pinia/nuxt', { autoImports: ['storeToRefs', 'defineStore'] }],
         'nuxt-icons',
     ],
     css: ['@/assets/global.css', 'vue3-carousel/dist/carousel.css'],

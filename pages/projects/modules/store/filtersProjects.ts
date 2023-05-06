@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { ProjectModelCard } from '@models/project';
+import ProjectModelCard from '@src/models/project/projectModelCard';
 import { IProjectCard } from '@models/project/projectModelCard/types';
 import { categoriesFilters } from './data/ListFiltersData';
 

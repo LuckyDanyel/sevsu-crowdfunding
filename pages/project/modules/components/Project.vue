@@ -3,7 +3,7 @@
     import { LocationProject } from 'UI';
     import Carusel from '@/components/carusel/Carusel.vue';
     import ProjectInfo from '@/components/project/view/ProjectInfo.vue';
-    import { ProjectModelInfo } from '@src/models/project';
+    import ProjectModelInfo from '@/src/models/project/projectModelInfo';
     import { getProject } from '@/src/api/project';
     import useLogicAuthUser from '@src/use/useLogicAuthUser';
     import ProjectButtonSupported from './ProjectButtonSupported.vue';

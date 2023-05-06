@@ -35,7 +35,6 @@ export const useAuthUser = defineStore({
             const { user, access, refresh } = optionsUser;
             const { email, is_admin, name, id } = user; 
             this.user = new UserModelAbstract(user);
-            console.log(this.user, is_admin);
             this.token = access;
             this.refreshToken = refresh;
         },

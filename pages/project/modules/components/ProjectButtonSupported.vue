@@ -34,7 +34,6 @@
             await getUserLikesProject();
             emit('addLike');
         } catch (error) {
-            console.log(error);
         } finally {
             setLoadingLikes(false);
         }

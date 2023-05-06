@@ -11,19 +11,17 @@ export const loginUser = async function(userLogin: TloginData): Promise<IReponse
         password: userLogin.password,
     }
     try {
-        const data = await fetch(url, {
+        const response = await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(request),
         });
-        const parseData = await data.json();
-        const { status, error } = parseData;
-        if(data.status > 400) {
-            throw error;
+        if(response.status >= 400) {
+            throw new Error();
         }
-        return parseData;
+        return response.json();
     } catch (error) {
         throw error;
     }
@@ -48,7 +46,6 @@ export const registrUser = async function(userRegistr: TregistrData): Promise<an
             body: JSON.stringify(request),
         });
         const parseData = await data.json();
-        console.log(parseData);
         const { status, error } = parseData;
         if(status > 400) {
             throw error;
