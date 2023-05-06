@@ -12,8 +12,6 @@
     import { useAdminStore } from '../../store/useAdminPageStore';
     import { getApplications } from './api/index';
 
-    let firstOpen = false;
-
     const { setBasicProjects } = useAdminStore();
     const { getProjects, pageView } = storeToRefs(useAdminStore());
 
@@ -27,25 +25,23 @@
 
     const sizes = [400, 120, 120, 120, 300];
 
-    watch(pageView, async (value) => {
-        if(value === 'applications' && !firstOpen) {
-            try {
-                loadingProjects.value = true;
-                const projectReponse = await getApplications(unref(token));
-                setBasicProjects(projectReponse);
-                firstOpen = true;   
-            } catch (error) {
-                
-            } finally {
-                loadingProjects.value = false;
-            }
-        }
-    });
+    const getProjectsApi = async () => {
+        try {
+            loadingProjects.value = true;
+            const projectReponse = await getApplications(unref(token));
+            setBasicProjects(projectReponse);
+        } catch (error) {
+            
+        } finally {
+            loadingProjects.value = false;
+    }
+    }
+    getProjectsApi();
 
 </script>
 
 <template>
-    <div class="aplications" v-if="pageView === 'applications'">
+    <div class="aplications">
         <div class="aplications__table">
             <table-row>
                 <table-title 
@@ -66,34 +62,52 @@
             </table-row>
             <div class="aplications__content">
                 <applications-skeleton v-if="loadingProjects"></applications-skeleton>
-                <table-row
-                    v-for="project in getProjects"
+                <template
+                    v-if="!loadingProjects"
+                    v-for="project in itemsByPagination"
+                    :key="project.id"
                 >
-                    <table-cell
-                        :min-width="sizes[0]"
-                    >
-                        <project-title :icon="project.image"> {{ project.title }} </project-title>
-                    </table-cell>
-                    <table-cell
-                        :width="sizes[1]"
-                    > {{ project.dateFullStartProjectText }} </table-cell>
-                    <table-cell
-                        :width="sizes[2]"
-                    > {{ project.dateFullEndProjectText }} </table-cell>
-                    <table-cell
-                        :width="sizes[3]"
-                    > 
-                        <project-status :status="project.status"></project-status>
-                    </table-cell>
-                    <table-cell
-                        :min-width="sizes[4]"
-                    >
-                        <application-actions
-                            :project="project"
-                        ></application-actions> 
-                    </table-cell>
-                </table-row>
+                    <table-row>
+                        <table-cell
+                            :min-width="sizes[0]"
+                        >
+                            <project-title :icon="project.image"> {{ project.title }} </project-title>
+                        </table-cell>
+                        <table-cell
+                            :width="sizes[1]"
+                        > {{ project.dateFullStartProjectText }} </table-cell>
+                        <table-cell
+                            :width="sizes[2]"
+                        > {{ project.dateFullEndProjectText }} </table-cell>
+                        <table-cell
+                            :width="sizes[3]"
+                        > 
+                            <project-status :status="project.status"></project-status>
+                        </table-cell>
+                        <table-cell
+                            :min-width="sizes[4]"
+                        >
+                            <application-actions
+                                :project="project"
+                            ></application-actions> 
+                        </table-cell>
+                    </table-row>
+                </template>
             </div>
+        </div>
+        <div class="applications__pagination" v-if="getProjects.length">
+            <pagination v-model="numberPage" :amount="lengthByLimitation"></pagination>
         </div>
     </div>
 </template>
+
+<style lang="scss">
+    .applications {
+        &__pagination {
+            margin-top: 12px;
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+
+</style>

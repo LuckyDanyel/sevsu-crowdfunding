@@ -14,7 +14,7 @@ const { pageView } = storeToRefs(useAdminStore());
     <div class="admin">
         <admin-panel></admin-panel>
         <client-only>
-            <aplications></aplications>
+            <aplications v-if="pageView === 'applications'"></aplications>
             <users v-if="pageView ==='users'"></users>
             <project v-if="pageView === 'project'"></project>
         </client-only>

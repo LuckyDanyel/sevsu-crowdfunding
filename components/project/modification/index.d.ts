@@ -1,8 +1,8 @@
 import { ICategoryProject } from '@/src/types';
 
-export interface IFiles {
+export interface IFileImage {
     src: string,
-    buffer: ArrayBuffer;
+    buffer: ArrayBuffer | null;
     extension: string;
 }
 

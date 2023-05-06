@@ -11,6 +11,7 @@
     import { useAuthUser } from '@/src/store';
     import { getProjects } from '@/src/api/projects';
     import { getCategories } from '@/src/api/project';
+    import { useNotification } from '@kyvg/vue3-notification';
     import UserProjectsSkeleton from './skeletons/UserProjectsSkeleton.vue';
     import { getUserPorjects } from '../api';
 
@@ -31,8 +32,9 @@
             const numberPage = ref(1);
             const columnSizes = [220, 100, 136, 100, 160, 150, 110, 100];
             const { token } = storeToRefs(useAuthUser());
-            const { deleteProject, setProjects, setProjectsLoading, setCategories } = useUserProjectsStore();
-            const { getProjects, projectsLoading } = storeToRefs(useUserProjectsStore())
+            const { deleteProject, setProjects, setProjectsLoading, setCategories, getProjectById, setAddedProjectId } = useUserProjectsStore();
+            const { getProjects, projectsLoading, addedProjectId } = storeToRefs(useUserProjectsStore())
+            const { notify } = useNotification();
             if(process.client && !unref(getProjects).length) {
                 try {
                     setProjectsLoading(true);
@@ -47,6 +49,20 @@
             }
             const { lengthByLimitation, itemsByPagination } = usePagination<ProjectModelCard>({ items: getProjects, limitation: 13, numberPage });
 
+            onMounted(() => {
+                if(unref(addedProjectId)) {
+                    const project = getProjectById(unref(addedProjectId));
+                    if(project) {
+                        notify({
+                            title: `Успешно`,
+                            text: `Проект - <strong>${project.title}</strong> отправлен на проверку`,
+                            type: 'success',
+                            duration: 5000,
+                        })
+                        setAddedProjectId('');
+                    }
+                }
+            });
 
             return {
                 columnSizes,
@@ -80,6 +96,7 @@
                 <div class="user-projects__content">
                     <table-row
                         v-for="(projectUser, index) in itemsByPagination"
+                        :key="projectUser.id"
                     >
                         <table-cell :min-width="columnSizes[0]">
                             <project-title :icon="projectUser.image"> {{ projectUser.title }} </project-title>

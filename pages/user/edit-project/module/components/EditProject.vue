@@ -7,9 +7,9 @@
     import ProjectParrams from '@/components/project/modification/ProjectParrams.vue';
     import ProjectCategories from '@/components/project/modification/ProjectCategories.vue';
     import { useUserProjectsStore } from '@/pages/user/store/userProjectStore';
-    import useCreateProject from '../use/useCreateProject';
     import { BasicButton, BasicLoader } from '@/UI';
     import { TCategory } from '~/src/types/Categories';
+    import useUpdateProject from '../use/useUpdateProject';
 
     export default {
         components: {
@@ -20,21 +20,30 @@
             BasicButton,
             BasicLoader,
         },
-        async setup() {
-            const takenImages = ref<IFileImage[]>([]);
+        props: {
+            idProject: {
+                type: String,
+                required: true,
+                default: '',
+            }
+        },
+        async setup(props) {
+            const { idProject } = props;
+            const { getProjectById } = useUserProjectsStore();
             const { getCategories: categories } = storeToRefs(useUserProjectsStore());
 
-            const projectParams = ref<IProjectInfo<TCategory> | null>(null);
+            const projectParams = ref<IProjectInfo<TCategory> | null | undefined >(getProjectById(unref(idProject)));
+            const getIamges = (): IFileImage[] => unref(projectParams)?.images.map((image) => ({ src: image, buffer: null, extension: ''})) || [];
+            const takenImages = ref<IFileImage[]>(getIamges());
 
-
-            const { createProject, loadingProject } = useCreateProject(takenImages, projectParams);
+            const { updateProject, loadingUpdateProject } = useUpdateProject();
 
             return {
                 takenImages,
                 categories,
                 projectParams,
-                createProject,
-                loadingProject,
+                updateProject,
+                loadingUpdateProject,
             }
         }
     }
@@ -42,7 +51,7 @@
 </script>
 
 <template>
-    <div class="create-project">
+    <div class="create-project" v-if="projectParams">
         <location-project>
             <template #left>
                 <project-images
@@ -57,12 +66,10 @@
             </template>
             <template #down>
                 <div class="create-project__button-wrapper">
-                    <div class="create-project__button" v-if="!loadingProject">
-                        <basic-button @click="createProject"> Отправить на проверку </basic-button>
-                    </div>
-                    <div class="create-project__button" v-if="loadingProject">
-                        <basic-button>
-                            <basic-loader></basic-loader>
+                    <div class="create-project__button">
+                        <basic-button v-if="!loadingUpdateProject" @click="updateProject(takenImages, projectParams)"> Отправить на проверку </basic-button>
+                        <basic-button v-if="loadingUpdateProject">
+                            <basic-loader />
                         </basic-button>
                     </div>
                 </div>

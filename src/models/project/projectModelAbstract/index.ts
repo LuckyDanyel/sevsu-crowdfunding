@@ -1,4 +1,4 @@
-import { format, parse, differenceInDays } from "date-fns";
+import { format, parse, differenceInDays, differenceInHours } from "date-fns";
 import { ru } from "date-fns/locale";
 import { wordEnding } from "@/src/services/text-modifires";
 import { IBasicProject } from "./types";
@@ -70,12 +70,14 @@ export default class ProjectModelAbstract {
 
     get daysToEndProject(): string {
         const days = differenceInDays(this.dateEndProject, new Date());
-        return `${days} ${wordEnding(days, ['день', 'дня', 'дней'])}`;
+        const hours = differenceInHours(this.dateEndProject, new Date());
+        return days > 0 ? `${days} ${wordEnding(days, ['день', 'дня', 'дней'])}` : `${hours} ${wordEnding(hours, ['час', 'часа', 'часов'])}`;
     }
 
     get isProjectEnd(): boolean {
         const days = differenceInDays(this.dateEndProject, new Date());
-        return days <= 0;
+        const hours = differenceInHours(this.dateEndProject, new Date());
+        return days <= 0 && hours <= 0;
     }
 
     get image(): string {

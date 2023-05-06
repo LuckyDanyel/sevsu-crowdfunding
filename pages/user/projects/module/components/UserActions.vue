@@ -48,10 +48,20 @@
         <basic-loader v-if="loading"></basic-loader>
 
         <template v-if="!loading">
-            <div class="user-actions__item">
-                <basic-icon type-icon='edit' size='24' @click="editHanlder" v-if="status === 'cancel'"></basic-icon>
+            <div 
+                class="user-actions__item"
+                @click="editHanlder"
+            >
+                <basic-icon 
+                    type-icon='edit' 
+                    size='24'
+                    v-if="status === 'cancel'"
+                ></basic-icon>
             </div>
-            <div class="user-actions__item" @click="handlerDeleteProject">
+            <div 
+                class="user-actions__item" 
+                @click="handlerDeleteProject"
+            >
                 <basic-icon type-icon='delete' size='24'></basic-icon>
             </div>
         </template>

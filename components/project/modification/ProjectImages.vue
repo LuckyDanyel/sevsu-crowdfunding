@@ -2,18 +2,18 @@
 import { PropType } from 'vue';
 import Carusel from '@/components/carusel/Carusel.vue';
 import NoPhotoImage from './img/no-photo.svg';
-import { IFiles } from './index';
+import { IFileImage } from './index';
 
 const emit = defineEmits(['update:modelValue']);
 
-defineProps({
+const { modelValue } = defineProps({
     modelValue: {
-        type: Array as PropType<IFiles[]>,
+        type: Array as PropType<IFileImage[]>,
         default: [],
     }
 })
 
-const takenImages = ref<IFiles[]>([]);
+const takenImages = ref<IFileImage[]>(modelValue);
 
 const addImagesHandler = (event: Event) => {
     const files: [string, File][] = Object.entries(event.target?.files || {});

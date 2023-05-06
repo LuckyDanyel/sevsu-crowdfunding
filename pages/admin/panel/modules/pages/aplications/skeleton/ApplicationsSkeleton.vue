@@ -7,7 +7,7 @@
     <div class="applications-skeleton">
         <div 
             class="applications-skeleton__item"
-            v-for="index in 10"
+            v-for="index in 15"
         >
             <skeleton
                 :width="0"

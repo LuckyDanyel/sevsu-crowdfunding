@@ -5,7 +5,7 @@
     import { TPageView } from '../types';
 
     const { setPageView } = useAdminStore();
-    const { pageView } = storeToRefs(useAdminStore());
+    const { pageView, getProjects } = storeToRefs(useAdminStore());
 
     const isOpen = ref(false);
 
@@ -70,6 +70,14 @@
                     >
                         {{ adminData.name }}
                     </basic-text>
+                    <div class="admin-panel__count" v-if="adminData.type === 'applications' && getProjects.length"> 
+                        <basic-text
+                            font='semi-bold'
+                            size='extra-super-small'
+                        >
+                            {{ getProjects.length }} 
+                        </basic-text>
+                    </div>
                 </div>
             </div>
         </div>
@@ -77,7 +85,7 @@
 
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .admin-panel {
         width: 100%;
         transition: 0.3s;
@@ -87,7 +95,19 @@
         top: 0;
         background-color: var(--color-bg-elements);
         z-index: 9999;
-
+        &__count {
+            min-width: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 19px;
+            background-color: var(--color-red);
+            color: white;
+            left: 0;
+            top: -2px;
+            position: absolute;
+            padding: 3px 0;
+        }
         &__up-content {
             display: flex;
             align-items: center;
@@ -113,6 +133,7 @@
         }
 
         &__item-view {
+            position: relative;
             padding: 8px 16px;
             margin-bottom: 10px;
             cursor: pointer;

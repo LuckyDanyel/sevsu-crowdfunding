@@ -1,7 +1,7 @@
 
 <script lang="ts">
     import { PropType } from 'vue';
-    type Tsize = 'extra-small' | 'small' | 'medium' | 'medium-large' | 'large';
+    type Tsize = 'extra-super-small' | 'extra-small' | 'small' | 'medium' | 'medium-large' | 'large';
     type Tfont = 'bold' | 'regular' | 'semi-bold' | 'extra';
 
     export default {
@@ -34,6 +34,9 @@
         // &_hover {
         //     color: var(--color-main-type-4);
         // }
+        &_extra-super-small {
+            font-size: 10px;
+        }
         &_extra-small {
             font-size: 11px;
         }

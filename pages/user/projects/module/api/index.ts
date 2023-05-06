@@ -1,7 +1,8 @@
 import { basicUrl, tokenType } from "@src/api/constants";
-import { IProjectCard } from "@src/models/project/projectModelCard/types";
+import { IProjectInfo } from "@/src/models/project/projectModelInfo/types";
+import { TCategory } from "~/src/types/Categories";
 
-export const getUserPorjects = async (token: string): Promise<IProjectCard[]> => {
+export const getUserPorjects = async (token: string): Promise<IProjectInfo<TCategory>[]> => {
     const url = `${basicUrl}api/v1/project_management/list_user_project/`;
 
     try {

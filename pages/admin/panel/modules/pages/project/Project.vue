@@ -55,8 +55,8 @@
         <location-project>
             <template #left>
                 <carusel
-                    :images="projectModel.images"
-                    :items-show="projectModel.images.length > 7 ? 7.5 : projectModel.images.length"
+                    :images="projectModel?.images || []"
+                    :items-show="projectModel?.images?.length > 7 ? 7.5 : projectModel?.images?.length"
                 >
                 </carusel>
             </template>
