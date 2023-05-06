@@ -2,8 +2,7 @@ import { IProjectInfo } from '@/src/models/project/projectModelInfo/types';
 import { IFiles } from '@/components/project/modification';
 import { basicUrl, tokenType } from '@/src/api/constants';
 
-interface ICreatingProjectApi extends IProjectInfo {
-    categories: number[];
+interface ICreatingProjectApi extends IProjectInfo<string> {
     goal_likes: number;
 }
 
@@ -30,10 +29,9 @@ export const uploadImages = async (images: IFiles[], links: ILinks) => {
     return response;
 }
 
-export const cteateProjectApi = async (project: IProjectInfo, token: string): Promise<ILinksYandex> => {
+export const cteateProjectApi = async (project: IProjectInfo<string>, token: string): Promise<ILinksYandex> => {
     const creatingProject: ICreatingProjectApi = {
         ...project,
-        categories: project.categories.map((category) => category.id)
     };
     const url = `${basicUrl}api/v1/project_management/create_project/`;
 

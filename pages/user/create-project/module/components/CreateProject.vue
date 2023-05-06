@@ -9,6 +9,7 @@
     import { useUserProjectsStore } from '@/pages/user/store/userProjectStore';
     import useCreateProject from '../use/useCreateProject';
     import { BasicButton, BasicLoader } from '@/UI';
+    import { TCategory } from '~/src/types/Categories';
 
     export default {
         components: {
@@ -23,7 +24,8 @@
             const takenImages = ref<IFiles[]>([]);
             const { getCategories: categories } = storeToRefs(useUserProjectsStore());
 
-            const projectParams = ref<IProjectInfo | null>(null);
+            const projectParams = ref<IProjectInfo<TCategory> | null>(null);
+
 
             const { createProject, loadingProject } = useCreateProject(takenImages, projectParams);
 

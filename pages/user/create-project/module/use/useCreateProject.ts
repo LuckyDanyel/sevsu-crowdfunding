@@ -5,10 +5,11 @@ import { storeToRefs } from 'pinia';
 import { useAuthUser } from '@src/store';
 import { useUserProjectsStore } from '@/pages/user/store/userProjectStore';
 import ProjectModelCard from '@/src/models/project/projectModelCard';
+import { TCategory } from '~/src/types/Categories';
 import { cteateProjectApi, uploadImages } from '../api/index';
 
 
-export default function(images: Ref<IFiles[]>, project: Ref<Partial<IProjectInfo>> | Ref<null>) {
+export default function(images: Ref<IFiles[]>, project: Ref<Partial<IProjectInfo<TCategory>>> | Ref<null>) {
     const loadingProject = ref(false);
 
     const { addProject } = useUserProjectsStore();
@@ -19,10 +20,11 @@ export default function(images: Ref<IFiles[]>, project: Ref<Partial<IProjectInfo
         try {
             if(unref(project)) {
                 loadingProject.value = true;
-                const projectFull: IProjectInfo = {
+                const projectFull: IProjectInfo<string> = {
                     ...unref(project),
+                    categories: unref(project)?.categories?.map((category) => category.id),
                     images: unref(images).map((image) => image.extension),
-                } as IProjectInfo
+                } as IProjectInfo<string>
                 const uploadLinks = await cteateProjectApi(projectFull, unref(token));
                 const response = await uploadImages(unref(images), uploadLinks)
             }

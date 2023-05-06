@@ -5,9 +5,10 @@
     import DatePicker from '@/components/datePicker/DatePicker.vue';
     import InputCommon from '@/components/inputs/InputCommon.vue';
     import InputArea from '@/components/inputs/InputArea.vue';
-    import { ICategoryProject } from '@/src/types';
+    import { ICategoryProject } from '@/src/types/Categories';
     import { Toogle } from 'UI';
     import { IProjectInfo } from '@/src/models/project/projectModelInfo/types';
+    import { TCategory } from '~/src/types/Categories';
     import ProjectCategories from './ProjectCategories.vue';
     import InputProjectItem from './InputProjectItem.vue';
 
@@ -19,7 +20,7 @@
             default: [],
         },
         modelValue: {
-            type: Object as PropType<IProjectInfo | null>,
+            type: Object as PropType<IProjectInfo<TCategory> | null>,
             default: null,
         }
     })
@@ -47,7 +48,7 @@
             end_project: format(unref(dateEndProject), 'yyyy-MM-dd'),
             categories: unref(takenCategories),
             goal_likes: unref(takenLikes),
-        } as Partial<IProjectInfo>)
+        } as Partial<IProjectInfo<TCategory>>)
     })
 
 </script>
