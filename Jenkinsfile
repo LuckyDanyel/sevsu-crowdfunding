@@ -1,5 +1,8 @@
 pipeline { 
-    agent any 
+    agent any
+    parameters {
+        base64File 'env'
+    }
     options {
         skipStagesAfterUnstable()
     }
