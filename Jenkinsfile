@@ -1,7 +1,7 @@
 pipeline { 
     agent any
     parameters {
-        base64File 'env'
+        base64File 'FILE'
     }
     options {
         skipStagesAfterUnstable()
@@ -9,8 +9,8 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                withFileParameter('env') {
-                    sh 'cat $env'
+                withFileParameter('FILE') {
+                    sh 'cat $FILE'
                 }
                 sh 'ls -a'
                 sh 'docker-compose -f docker-compose-prod.yml build' 
