@@ -1,0 +1,14 @@
+version: '3.3'
+
+services:
+  nuxt_prod:
+    build:
+      dockerfile: deploy/prod/Dockerfile
+      context: .
+    image: nuxt_prod
+    container_name: nuxt_prod
+    command: node ./server/index.mjs
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
