@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                sh 'cat ${ENVS}'
+                echo '${ENVS}'
                 sh 'ls -a'
                 sh 'docker-compose -f docker-compose-prod.yml build' 
             }
