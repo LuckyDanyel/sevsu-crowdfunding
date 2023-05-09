@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import UserMenu from '/components/user/userMenu/UserMenuWrapper.vue';
 import useLogoutUser from '@src/use/useLogoutUser';
+import useRedirectUserByUpdate from '../use/useRedirectUserByUpdate';
 import EditProject from './module/components/EditProject.vue';
 
     const { query } = useRoute();
@@ -12,7 +13,11 @@ import EditProject from './module/components/EditProject.vue';
     definePageMeta({
         middleware: ['authorization']
     })
+    useSeoMeta({
+        title: 'Редактирование проекта'
+    })
     useLogoutUser();
+    useRedirectUserByUpdate();
 </script>
 
 <template>

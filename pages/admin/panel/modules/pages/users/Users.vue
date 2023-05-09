@@ -72,7 +72,8 @@ import { getUserByAdmin } from '../../api/index';
                             size='small'
                             :name="user.name"
                             :icon="user.icon"
-                            :role-name="user.role.name"
+                            :is-admin="user.role.key === 'ADMIN'"
+                            :email="user.email"
                         ></user-display>
                     </table-cell>
                     <table-cell :width="columnSizes[1]"> {{ user.email }}</table-cell>

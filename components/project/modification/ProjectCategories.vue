@@ -42,13 +42,18 @@
 <template>
     <div class="categories-drop">
         <div class="categories-drop__wrapper">
-            <drop-down>
+            <drop-down
+                :height="0"
+            >
                 <template #name> {{ textCategories }} </template>
                 <template #content>
-                    <item-background 
-                        class="categories-drop__item" 
+                    <template
                         v-for="category in categories"
                         :key="category.id"
+                    >
+                    <item-background 
+                        class="categories-drop__item" 
+                        v-if="takenCategories.length !== 2 || takenCategories.includes(category.id)"
                     >
                         <template v-slot:default="{ isHover }">
                             <check-box-list
@@ -64,6 +69,7 @@
                             </check-box-list>
                         </template>
                 </item-background>
+                    </template>
                 </template>
             </drop-down>
         </div>

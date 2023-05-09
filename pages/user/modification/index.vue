@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+    import ConfirmEmail from './modules/confirm-email/components/ConfirmEmail.vue';
     import { IBaseResponseModification } from './types';
 
     const { query } = useRoute();
@@ -9,6 +10,6 @@
 
 <template>
     <NuxtLayout name="main-layout">
-        
+        <confirm-email v-if="baseResponse.type_modification === 'email-confirm'"></confirm-email>
     </NuxtLayout>
 </template>

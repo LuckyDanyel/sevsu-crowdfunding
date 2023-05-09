@@ -32,13 +32,13 @@
             const numberPage = ref(1);
             const columnSizes = [220, 100, 136, 100, 160, 150, 110, 100];
             const { token } = storeToRefs(useAuthUser());
-            const { deleteProject, setProjects, setProjectsLoading, setCategories, getProjectById, setAddedProjectId } = useUserProjectsStore();
-            const { getProjects, projectsLoading, addedProjectId } = storeToRefs(useUserProjectsStore())
+            const { deleteProject, setProjects, setProjectsLoading, setCategories, getProjectById, setAddedProjectId, setUpdatedProjectId } = useUserProjectsStore();
+            const { getProjects, projectsLoading, addedProjectId, updatedProjectId } = storeToRefs(useUserProjectsStore())
             const { notify } = useNotification();
             if(process.client && !unref(getProjects).length) {
                 try {
                     setProjectsLoading(true);
-                    const [projects, categories] = await Promise.all([await getUserPorjects(unref(token)), await getCategories()])
+                    const [projects, categories] = await Promise.all([await getUserPorjects(unref(token)), await getCategories()]);
                     setProjects(projects);
                     setCategories(categories);
                 } catch (error) {
@@ -60,6 +60,18 @@
                             duration: 5000,
                         })
                         setAddedProjectId('');
+                    }
+                }
+                if(unref(updatedProjectId)) {
+                    const project = getProjectById(unref(updatedProjectId));
+                    if(project) {
+                        notify({
+                            title: `Успешно`,
+                            text: `Проект - <strong>${project.title}</strong> был обновлен и повторно отправлен на проверку`,
+                            type: 'success',
+                            duration: 5000,
+                        })
+                        setUpdatedProjectId('');
                     }
                 }
             });
@@ -92,13 +104,15 @@
                 <table-title :width="columnSizes[7]"> Действия </table-title>
             </table-row>
             <user-projects-skeleton v-if="projectsLoading"></user-projects-skeleton>
-            <clientOnly>
+            <ClientOnly>
                 <div class="user-projects__content">
                     <table-row
                         v-for="(projectUser, index) in itemsByPagination"
                         :key="projectUser.id"
                     >
-                        <table-cell :min-width="columnSizes[0]">
+                        <table-cell 
+                            :min-width="columnSizes[0]" 
+                            @click="navigateTo({path: '/user/view-project', query: { id: projectUser.id }})">
                             <project-title :icon="projectUser.image"> {{ projectUser.title }} </project-title>
                         </table-cell>
                         <table-cell :width="columnSizes[1]"> {{ projectUser.startProject }} </table-cell>
@@ -120,16 +134,19 @@
                         </table-cell>
                     </table-row>
                 </div>
-            </clientOnly>
+            </ClientOnly>
         </div>
         <div class="user-projects__down">
             <div class="user-projects__create" v-if="!projectsLoading">
                 <basic-button @click="navigateTo('/user/create-project')"> Создать проект </basic-button>
             </div>
-            <pagination v-model="numberPage" :amount="lengthByLimitation" v-if="getProjects.length"></pagination>
+            <pagination 
+                v-model="numberPage" 
+                :amount="lengthByLimitation" 
+                v-show="getProjects.length"
+            ></pagination>
         </div>
     </div>
-
 </template>
 
 <style lang="scss">

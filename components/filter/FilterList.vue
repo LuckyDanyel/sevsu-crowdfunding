@@ -12,10 +12,10 @@
         },
         props: {
             listFilters: {
-                type: Array as PropType<{ id: number, label: string }[]>
+                type: Array as PropType<{ id: number, text: string }[]>
             },
             modelValue: {
-                type: Array as PropType<number[]>,
+                type: Array as PropType<string[]>,
                 required: true,
             },
         },
@@ -55,7 +55,7 @@
                             font="regular" 
                             size="medium" 
                             :is-hover="isHover"
-                        > {{ filterItem.label }} </basic-text> 
+                        > {{ filterItem.text }} </basic-text> 
                     </check-box-list>
                 </template>
             </item-background>

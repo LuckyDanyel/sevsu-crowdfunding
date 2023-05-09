@@ -4,6 +4,7 @@
     import ProjectsFiltersUp from './ProjectsFiltersUp.vue';
     import ProjectsWrapperCards from './ProjectsWrapperCards.vue';
     import ProjectsFilters from './ProjectsFilters.vue';
+    import { getCategories } from '~/src/api/project';
     import { useFiltersProjects } from '../store/filtersProjects';
 
     export default {
@@ -20,10 +21,10 @@
             LocationProjectsPage,
         },
         async setup(props, { emit }) {
-            const projects = await getProjects(props.userIdSearchProject);
+            const [projects, categories] = await Promise.all([getProjects(props.userIdSearchProject), getCategories()])
             emit('projectsLoaded');
             const { setFilterProjects } = useFiltersProjects();
-            setFilterProjects({ projects });
+            setFilterProjects({ projects, categories });
         }
     }
 

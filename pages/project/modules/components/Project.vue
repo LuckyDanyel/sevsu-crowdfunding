@@ -44,7 +44,7 @@
             const isUserSupportedProject = computed(() => unref(likesProjectByUser).indexOf(unref(projectModel)?.id || '') !== -1);
 
             const goAuthorProject = (author: ProjectModelInfo['author']) => {
-                window.location.href = `/projects?userId=${author.id}`
+                window.open(`/projects?userId=${author.id}`, '_blank');
             };
 
 

@@ -5,42 +5,45 @@
     import ProjectInfo from '@/components/project/view/ProjectInfo.vue';
     import ProjectModelInfo from '@/src/models/project/projectModelInfo';
     import { useNotification } from "@kyvg/vue3-notification";
+    import ProjectDescriptionView from '~/components/project/view/ProjectDescription.vue';
     import ProjectActions from './components/ProjectActions.vue';
     import { useAdminStore } from '../../store/useAdminPageStore';
 
     export default {
+        props: {
+            projectModel: {
+                type: ProjectModelInfo,
+                required: true,
+            }
+        },
         components: {
             LocationProject,
             Carusel,
             ProjectInfo,
             ProjectActions,
             WhiteButton,
+            ProjectDescriptionView,
         },
         setup(props, { emit }) {
-            const { getProjectByTakenId: projectModel } = storeToRefs(useAdminStore())
-            const { setPageView, deleteProject } = useAdminStore();
 
             const { notify }  = useNotification();
 
             const goAuthorProject = (author: ProjectModelInfo['author']) => {
-                window.location.href = `/projects?userId=${author.id}`
+                window.open(`/projects?userId=${author.id}`, '_blank');
             };
 
             const addStatusHandler = (text: string, id: string) => {
-                deleteProject(id);
-                setPageView('applications');
                 notify({
                     title: text,
                     text: '',
                     type: 'success',
                     duration: 2000,
-                })
+                });
+                emit('delteProject', id);
             }
 
 
             return {
-                projectModel,
-                setPageView,
                 goAuthorProject,
                 addStatusHandler,
             }
@@ -51,7 +54,7 @@
 
 <template>
     <div class="project-wrapper" v-if="projectModel">
-        <white-button class="project-wrapper__button-back" @click="setPageView('applications')"> Назад </white-button>
+        <white-button class="project-wrapper__button-back" @click="$emit('back')"> Назад </white-button>
         <location-project>
             <template #left>
                 <carusel
@@ -65,6 +68,13 @@
                     :project="projectModel"
                     @author-click="goAuthorProject"
                 ></project-info>
+            </template>
+            <template #down>
+                <div class="project-wrapper__content">
+                    <project-description-view
+                        :description="projectModel.description"
+                    ></project-description-view>
+                </div>
             </template>
         </location-project>
         <div class="project-wrapper__buttons">
@@ -81,6 +91,16 @@
     .project-wrapper {
         &__button-back {
             margin-bottom: 12px;
+        }
+        &__content {
+            display: flex;
+            flex-direction: column;
+            margin-top: 32px;
+            padding: 32px;
+            border-radius: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+            min-height: 300px;
+            margin-bottom: 16px;
         }
     }
 

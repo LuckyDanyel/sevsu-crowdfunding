@@ -11,6 +11,10 @@
 
     const isSkeletonLoading = ref(true);
 
+    useSeoMeta({
+        title: 'Проекты',
+    })
+
 </script>
 <template>
     <NuxtLayout name="main-layout">

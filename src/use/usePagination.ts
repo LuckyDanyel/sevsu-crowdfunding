@@ -8,7 +8,7 @@ interface IPaginationValues<T> {
 
 
 export default function<T>(props: IPaginationValues<T>) {
-    const {  numberPage, items } = toRefs(props)
+    const { numberPage, items } = toRefs(props)
     const { limitation } = props;
 
     const itemsByPagination = computed(() => {

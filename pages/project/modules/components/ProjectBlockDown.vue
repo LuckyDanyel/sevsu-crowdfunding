@@ -51,12 +51,12 @@
                 Описание 
             </text-tabs>
             <div v-if="isLogged" class="project-down__logged-content">
-                <text-tabs 
+                <!-- <text-tabs 
                     :is-active="viewComponent === 'members'"
                     @click="hanlderMembers"
                 > 
                     Участники 
-                </text-tabs>
+                </text-tabs> -->
                 <text-tabs
                     :is-active="viewComponent === 'comments'"
                     @click="handlerCommnents"

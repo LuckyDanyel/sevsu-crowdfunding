@@ -17,8 +17,12 @@
             type: String as PropType<'24' | '16' | '18' | '14' | ''>,
             default: '24',
         },
+        hash: {
+            type: String,
+            default: '',
+        },
         color: {
-            type: String as PropType<'default' | 'default-full-color' | 'green' | 'red' | 'black' | 'white' | 'color' | 'full-color' | 'full-red' | 'full-color-ui'>,
+            type: String as PropType<'default' | 'default-full-color' | 'green' | 'red' | 'black' | 'white' | 'color' | 'full-color' | 'full-red' | 'full-color-ui' | 'disable'>,
             default: 'default'
         },
     })
@@ -29,7 +33,7 @@
             id="basic-icon-id"
         >   
             <nuxt-icon 
-                :name="`${size}/${typeIcon}`" 
+                :name="`${size}/${typeIcon}`"
                 :class="[
                     `basic-icon`,
                     `basic-icon_${size}`,
@@ -93,6 +97,12 @@
             * {
                 stroke: var(--color-red);
                 fill: var(--color-red) !important;
+            }
+        }
+        .basic-icon_disable {
+            * {
+                fill: white !important;
+                stroke: var(--color-gray-type-3)
             }
         }
         .basic-icon_full-color {

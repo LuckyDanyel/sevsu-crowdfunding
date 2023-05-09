@@ -11,11 +11,6 @@
 
 <template>
     <div class="confirm-email">
-        <div v-if="baseResponse.type_modification">
-            Электронная почта была подтверждена
-        </div>
-        <div v-else>
-            Ссылка устарела
-        </div>
+        Электронная почта была подтверждена
     </div>
 </template>

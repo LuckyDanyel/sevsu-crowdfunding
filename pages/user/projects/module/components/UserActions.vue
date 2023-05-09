@@ -10,7 +10,7 @@
 
     const emit = defineEmits(['delete']);
 
-    const { idProject } = defineProps({
+    const { idProject, status } = defineProps({
         idProject: {
             type: String,
             required: true,
@@ -24,7 +24,9 @@
     const loading = ref(false);
 
     const editHanlder = () => {
-        navigateTo({ path: '/user/edit-project', query: { id:  idProject } })
+        if(status === 'cancel') {
+            navigateTo({ path: '/user/edit-project', query: { id:  idProject } })
+        }
     }
 
     const handlerDeleteProject = async () => {
@@ -38,7 +40,6 @@
             loading.value = false;
         }
     }
-    
 
 </script>
 
@@ -50,12 +51,13 @@
         <template v-if="!loading">
             <div 
                 class="user-actions__item"
+                :class="status === 'approve' ? 'user-actions__item_disable' : ''"
                 @click="editHanlder"
             >
                 <basic-icon 
-                    type-icon='edit' 
+                    type-icon='edit'
+                    :color="status === 'approve' ? 'disable' : 'default'" 
                     size='24'
-                    v-if="status === 'cancel'"
                 ></basic-icon>
             </div>
             <div 
@@ -78,6 +80,12 @@
             }
             &:not(:last-child) {
                 margin-right: 8px;
+            }
+        }
+        &__item_disable {
+            cursor: default;
+            &:hover {
+                opacity: 1;
             }
         }
     }

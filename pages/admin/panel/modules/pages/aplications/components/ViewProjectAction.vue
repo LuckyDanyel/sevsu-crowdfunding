@@ -2,9 +2,6 @@
 import { PropType } from 'vue';
 import { BasicIcon } from '@/UI';
 import ProjectModelCard from '@src/models/project/projectModelCard';
-import { useAdminStore } from '@/pages/admin/panel/modules/store/useAdminPageStore';
-
-const { setPageView, setProjectId } = useAdminStore();
 
     const { project } = defineProps({
         project: {
@@ -17,7 +14,7 @@ const { setPageView, setProjectId } = useAdminStore();
 <template>
     <div 
         class="view-project-action"
-        @click="setProjectId(project.id), setPageView('project')"
+        @click="$emit('viewProject')"
     >
         <basic-icon
             size='18'

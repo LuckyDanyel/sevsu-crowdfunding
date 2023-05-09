@@ -7,6 +7,11 @@ import Admin from './modules/pages/admin/Admin.vue';
         middleware: ['authorization', 'admin']
     })
     useLogoutUser();
+    
+    useSeoMeta({
+        title: 'Админ-панель',
+    })
+
 </script>
 
 <template>

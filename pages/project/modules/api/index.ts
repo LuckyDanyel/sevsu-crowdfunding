@@ -1,4 +1,5 @@
 import { basicUrl, tokenType } from "@/src/api/constants";
+import { IUserComment } from "@/src/models/user/userModelComment/types";
 
 
 export const addLikesProject = async (id: string, token: string): Promise<void> => {
@@ -21,7 +22,7 @@ export const addLikesProject = async (id: string, token: string): Promise<void> 
     }
 }
 
-export const addCommentProject = async (token: string, comment: { text: string, projectId: string }): Promise<void> => {
+export const addCommentProject = async (token: string, comment: { text: string, projectId: string }): Promise<IUserComment> => {
     const url = `${basicUrl}api/v1/project_management/create_comment/`;
     try {
         const { text, projectId } = comment;
@@ -40,6 +41,7 @@ export const addCommentProject = async (token: string, comment: { text: string, 
         if(response.status > 400) {
             throw new Error();
         }
+        return response.json();
     } catch (error) {
         throw error;
     }

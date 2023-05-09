@@ -6,16 +6,24 @@
     import ProjectTitle from '@/components/project/view/ProjectTitle.vue';
     import ProjectStatus from '@/components/project/view/ProjectStatus.vue';
     import usePagination from '@/src/use/usePagination';
+    import ProjectModelInfo from '@/src/models/project/projectModelInfo';
     import { useAuthUser } from '@/src/store';
+    import Project from '../project/Project.vue';
     import ApplicationActions from './components/ApplicationActions.vue';
     import ApplicationsSkeleton from './skeleton/ApplicationsSkeleton.vue';
     import { useAdminStore } from '../../store/useAdminPageStore';
     import { getApplications } from './api/index';
 
-    const { setBasicProjects } = useAdminStore();
+    const { setBasicProjects, deleteProject } = useAdminStore();
     const { getProjects, pageView } = storeToRefs(useAdminStore());
 
     const { token } = storeToRefs(useAuthUser());
+
+    const takenProject = ref<ProjectModelInfo | null>(null);
+
+    const takeProject = (project: ProjectModelInfo | null) => {
+        takenProject.value = project;
+    }
 
     const loadingProjects = ref(false);
 
@@ -33,15 +41,17 @@
         } catch (error) {
             
         } finally {
-            loadingProjects.value = false;
-    }
+            setTimeout(() => {
+                loadingProjects.value = false;
+            }, 300);
+        }
     }
     getProjectsApi();
 
 </script>
 
 <template>
-    <div class="aplications">
+    <div class="aplications" v-if="!takenProject">
         <div class="aplications__table">
             <table-row>
                 <table-title 
@@ -60,7 +70,7 @@
                     :min-width="sizes[4]"
                 > Действия </table-title>
             </table-row>
-            <div class="aplications__content">
+            <div class="applications__content">
                 <applications-skeleton v-if="loadingProjects"></applications-skeleton>
                 <template
                     v-if="!loadingProjects"
@@ -70,6 +80,7 @@
                     <table-row>
                         <table-cell
                             :min-width="sizes[0]"
+                            @click="takeProject(project)"
                         >
                             <project-title :icon="project.image"> {{ project.title }} </project-title>
                         </table-cell>
@@ -88,6 +99,7 @@
                             :min-width="sizes[4]"
                         >
                             <application-actions
+                                @view-project="takeProject(project)"
                                 :project="project"
                             ></application-actions> 
                         </table-cell>
@@ -99,10 +111,20 @@
             <pagination v-model="numberPage" :amount="lengthByLimitation"></pagination>
         </div>
     </div>
+    <project 
+        v-if="takenProject"
+        @delte-project="deleteProject(takenProject.id), takeProject(null)"
+        @back="takeProject(null)"
+        :project-model="takenProject"
+    ></project>
 </template>
 
 <style lang="scss">
     .applications {
+        &__content {
+            max-height: 637px;
+            height: 100vh;
+        }
         &__pagination {
             margin-top: 12px;
             display: flex;

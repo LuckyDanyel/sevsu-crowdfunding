@@ -8,6 +8,11 @@ export default defineNuxtConfig({
     build: {
         transpile: ['date-fns'],
     },
+    app: {
+        head: {
+            link: [{ rel: 'icon', type: 'image/png', href: '/logo.svg' }]
+        }
+    },
     modules: [
         ['@pinia/nuxt', { autoImports: ['storeToRefs', 'defineStore'] }],
         'nuxt-icons',

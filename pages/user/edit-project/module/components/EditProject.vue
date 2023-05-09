@@ -1,14 +1,15 @@
 <script lang="ts">
     import { storeToRefs } from 'pinia';
     import LocationProject from 'UI/locations/LocationProject.vue';
-    import { IFileImage } from '@/components/project/modification';
+    import { IFileImage } from '@/src/types';
     import { IProjectInfo } from '@/src/models/project/projectModelInfo/types';
     import ProjectImages from '@/components/project/modification/ProjectImages.vue';
     import ProjectParrams from '@/components/project/modification/ProjectParrams.vue';
     import ProjectCategories from '@/components/project/modification/ProjectCategories.vue';
     import { useUserProjectsStore } from '@/pages/user/store/userProjectStore';
     import { BasicButton, BasicLoader } from '@/UI';
-    import { TCategory } from '~/src/types/Categories';
+    import { TCategory } from '@/src/types/Categories';
+    import ProjectDescription from '@/components/project/modification/ProjectDescription.vue';
     import useUpdateProject from '../use/useUpdateProject';
 
     export default {
@@ -19,6 +20,7 @@
             LocationProject,
             BasicButton,
             BasicLoader,
+            ProjectDescription,
         },
         props: {
             idProject: {
@@ -35,6 +37,7 @@
             const projectParams = ref<IProjectInfo<TCategory> | null | undefined >(getProjectById(unref(idProject)));
             const getIamges = (): IFileImage[] => unref(projectParams)?.images.map((image) => ({ src: image, buffer: null, extension: ''})) || [];
             const takenImages = ref<IFileImage[]>(getIamges());
+            const description = ref(getProjectById(unref(idProject))?.description)
 
             const { updateProject, loadingUpdateProject } = useUpdateProject();
 
@@ -44,6 +47,7 @@
                 projectParams,
                 updateProject,
                 loadingUpdateProject,
+                description,
             }
         }
     }
@@ -65,9 +69,12 @@
                 ></project-parrams>
             </template>
             <template #down>
+                <project-description
+                    v-model="description"
+                ></project-description>
                 <div class="create-project__button-wrapper">
                     <div class="create-project__button">
-                        <basic-button v-if="!loadingUpdateProject" @click="updateProject(takenImages, projectParams)"> Отправить на проверку </basic-button>
+                        <basic-button v-if="!loadingUpdateProject" @click="updateProject(takenImages, projectParams, description)"> Отправить на проверку </basic-button>
                         <basic-button v-if="loadingUpdateProject">
                             <basic-loader />
                         </basic-button>
@@ -81,6 +88,7 @@
 <style lang="scss">
     .create-project {
         &__button-wrapper {
+            margin-top: 16px;
             display: flex;
             justify-content: flex-end;
         }

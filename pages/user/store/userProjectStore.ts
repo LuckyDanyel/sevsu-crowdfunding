@@ -38,7 +38,6 @@ export const useUserProjectsStore = defineStore({
         },
         addProject(project: IProjectInfo<TCategory>) {
             this.projects.unshift(project);
-            this.setAddedProjectId(project.id);
         },
         setUpdatedProjectId(id: string) {
             this.updatedProjectId = id;
@@ -58,7 +57,8 @@ export const useUserProjectsStore = defineStore({
     },
     getters: {
         getProjects(): ProjectModelInfo[] {
-            return this.projects.map((project) => new ProjectModelInfo(project));
+            const projectsModel = this.projects.map((project) => new ProjectModelInfo(project));
+            return projectsModel;
         },
         getCategories(): ICategoryProject[] {
             return this.categories;

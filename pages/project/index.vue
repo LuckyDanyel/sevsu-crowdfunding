@@ -9,6 +9,11 @@
     if(!projectId) {
         window.location.href = '/';
     }
+
+    useSeoMeta({
+        title: 'Проект',
+    })
+
     
 </script>
 

@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-    import { format } from 'date-fns';
+    import { format, parse } from 'date-fns';
     import { PropType } from 'vue';
+    import { Toogle } from 'UI';
     import { formatNumber } from '@/src/services/text-modifires';
     import DatePicker from '@/components/datePicker/DatePicker.vue';
     import InputCommon from '@/components/inputs/InputCommon.vue';
     import InputArea from '@/components/inputs/InputArea.vue';
     import { ICategoryProject } from '@/src/types/Categories';
-    import { Toogle } from 'UI';
     import { IProjectInfo } from '@/src/models/project/projectModelInfo/types';
     import { TCategory } from '~/src/types/Categories';
     import ProjectCategories from './ProjectCategories.vue';
@@ -25,29 +25,36 @@
         }
     })
 
+    const getDate = (date: string | undefined): Date | null => {
+        if(!date) return null;
+
+        return parse(date, 'yyyy-MM-dd', new Date());
+    }
+
     const inputNameProject = ref(unref(modelValue)?.title || '');
     const inputDescriptionShort = ref(unref(modelValue)?.short_description || '');
     const takenCategories = ref<ICategoryProject[]>(unref(modelValue)?.categories || []);
-    const takenLikes = ref(unref(modelValue)?.goal_likes || '');
+    const takenLikes = ref(String(unref(modelValue)?.goal_likes) || '');
     const converTakenLikes = computed({
         get: () => formatNumber(String(unref(takenLikes))),
         set: (value: string) => {
             takenLikes.value = value;
         },
     })
-    const dateStartProject = ref(new Date());
-    const dateEndProject = ref(new Date());
+    const dateStartProject = ref(getDate(unref(modelValue)?.start_project) || new Date());
+    const dateEndProject = ref(getDate(unref(modelValue)?.end_project) || new Date());
     const enableComments = ref(true);
     const enableMembers = ref(true);
 
     watchEffect(() => {
         emit('update:modelValue', {
+            id: unref(modelValue)?.id,
             title: unref(inputNameProject),
             short_description: unref(inputDescriptionShort),
             start_project: format(unref(dateStartProject), 'yyyy-MM-dd'),
             end_project: format(unref(dateEndProject), 'yyyy-MM-dd'),
             categories: unref(takenCategories),
-            goal_likes: unref(takenLikes),
+            goal_likes: Number(unref(takenLikes).split(' ').join('')),
         } as Partial<IProjectInfo<TCategory>>)
     })
 
@@ -80,7 +87,7 @@
             <input-project-item>
                 <input-area
                     v-model="inputDescriptionShort"
-                    placeholder="Введите название проекта"
+                    placeholder="Введите короткое описание проекта"
                     :maxLength="250"
                     :height="120"
                 >
@@ -119,7 +126,7 @@
                 </div>
             </div>
         </div>
-        <div class="project-params__item">
+        <!-- <div class="project-params__item">
             <div class="project-params__line">
                 <toogle
                     v-model="enableComments"
@@ -130,7 +137,7 @@
                     class="project-params__enable"
                 ></toogle>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 

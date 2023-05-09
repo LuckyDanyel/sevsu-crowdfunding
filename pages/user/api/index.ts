@@ -1,4 +1,4 @@
-import { IFileImage } from '@/components/project/modification';
+import { IFileImage } from '@/src/types';
 
 
 export const uploadImages = async (images: IFileImage[], links: string[]): Promise<void> => {
@@ -9,6 +9,7 @@ export const uploadImages = async (images: IFileImage[], links: string[]): Promi
                 method: 'PUT',
                 body: buffer,
             })
+            if(response.status >= 400) throw new Error(response.statusText);
             const data = await response.json();
             res(data);   
         } catch (error) {

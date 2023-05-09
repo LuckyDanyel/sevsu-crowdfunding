@@ -1,11 +1,12 @@
 <script lang="ts">
     import { storeToRefs } from 'pinia';
     import LocationProject from 'UI/locations/LocationProject.vue';
-    import { IFileImage } from '@/components/project/modification';
+    import { IFileImage } from '@/src/types';
     import { IProjectInfo } from '@/src/models/project/projectModelInfo/types';
     import ProjectImages from '@/components/project/modification/ProjectImages.vue';
     import ProjectParrams from '@/components/project/modification/ProjectParrams.vue';
     import ProjectCategories from '@/components/project/modification/ProjectCategories.vue';
+    import ProjectDescription from '@/components/project/modification/ProjectDescription.vue';
     import { useUserProjectsStore } from '@/pages/user/store/userProjectStore';
     import useCreateProject from '../use/useCreateProject';
     import { BasicButton, BasicLoader } from '@/UI';
@@ -19,15 +20,17 @@
             LocationProject,
             BasicButton,
             BasicLoader,
+            ProjectDescription,
         },
         async setup() {
-            const takenImages = ref<IFileImage[]>([]);
             const { getCategories: categories } = storeToRefs(useUserProjectsStore());
 
             const projectParams = ref<IProjectInfo<TCategory> | null>(null);
+            const takenImages = ref<IFileImage[]>([]);
+            const description = ref('');
 
 
-            const { createProject, loadingProject } = useCreateProject(takenImages, projectParams);
+            const { createProject, loadingProject } = useCreateProject(takenImages, projectParams, description);
 
             return {
                 takenImages,
@@ -35,6 +38,7 @@
                 projectParams,
                 createProject,
                 loadingProject,
+                description,
             }
         }
     }
@@ -56,6 +60,11 @@
                 ></project-parrams>
             </template>
             <template #down>
+                <div class="create-project__description">
+                    <project-description
+                        v-model="description"
+                    ></project-description>
+                </div>
                 <div class="create-project__button-wrapper">
                     <div class="create-project__button" v-if="!loadingProject">
                         <basic-button @click="createProject"> Отправить на проверку </basic-button>
@@ -73,6 +82,9 @@
 
 <style lang="scss">
     .create-project {
+        &__description {
+            margin-bottom: 16px;
+        }
         &__button-wrapper {
             display: flex;
             justify-content: flex-end;

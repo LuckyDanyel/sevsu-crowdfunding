@@ -4,7 +4,10 @@ import useLogoutUser from '@src/use/useLogoutUser';
 import UserProjects from './module/components/UserProjects.vue';
 
     definePageMeta({
-        middleware: ['authorization']
+        middleware: ['authorization'],
+    })
+    useSeoMeta({
+        title: 'Мои проекты'
     })
     useLogoutUser();
 </script>
@@ -14,6 +17,6 @@ import UserProjects from './module/components/UserProjects.vue';
         <template #header-right>
            <user-menu></user-menu>
         </template>
-        <user-projects />
+        <user-projects> </user-projects>
     </NuxtLayout>
 </template>

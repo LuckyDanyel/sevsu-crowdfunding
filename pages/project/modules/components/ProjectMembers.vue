@@ -37,7 +37,7 @@ import { UserModelMember } from '@/src/models/user';
                 <user-display
                     size='small'
                     :name="member.name"
-                    :role-name="member.role.name"
+                    :email="member.email"
                     :icon="member.icon"
                 ></user-display>
             </table-cell>

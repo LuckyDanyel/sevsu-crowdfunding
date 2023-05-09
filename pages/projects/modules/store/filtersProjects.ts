@@ -1,16 +1,15 @@
 import { defineStore } from 'pinia';
 import ProjectModelCard from '@src/models/project/projectModelCard';
 import { IProjectCard } from '@models/project/projectModelCard/types';
-import { categoriesFilters } from './data/ListFiltersData';
-
-type IFilterData = { id: number, label: string };
+import { ICategoryProject } from '@/src/types';
+import { filterByCategories } from './filters';
 
 export interface StateFilterProjects {
-    filterCategories: number[],
+    filterCategories: string[],
     projects: ProjectModelCard[],
     sortStrategy: 'popularity' | 'discuss' | '';
     filterDataRender: {
-        categories: IFilterData[],
+        categories: ICategoryProject[],
     }
 }
 
@@ -27,30 +26,36 @@ export const useFiltersProjects = defineStore({
         }
     },
     getters: {
-        getSortProjectsByStrategy: (state): ProjectModelCard[] => {
-            if (state.sortStrategy === 'popularity') {
-                return state.projects.slice().sort((a, b) => b.takenLikes - a.takenLikes);
+        getSortProjectsByStrategy(): ProjectModelCard[] {
+            if (this.sortStrategy === 'popularity') {
+                return this.projects.slice().sort((a, b) => b.takenLikes - a.takenLikes);
             }
-            if (state.sortStrategy === 'discuss') {
-                return state.projects.slice().sort((a, b) => b.comments - a.comments);
+            if (this.sortStrategy === 'discuss') {
+                return this.projects.slice().sort((a, b) => {
+                    if(b.comments && a.comments) {
+                        return b.comments - a.comments;
+                    }
+                    return 0;
+                });
             }
-            return state.projects;
+            return this.projects;
         },
         getFilteredProjects(): ProjectModelCard[]  {
-            return this.getSortProjectsByStrategy;
+            const projcets = filterByCategories(this.filterCategories, this.getSortProjectsByStrategy);
+            return projcets;
         }
     },
     actions: {
-        setFiltersCategories(values: number[]) {
+        setFiltersCategories(values: string[]) {
             this.filterCategories = values;
         },
         setSortStrategy(value: StateFilterProjects['sortStrategy']) {
             this.sortStrategy = value;
         },
-        setFilterProjects(data: { projects: IProjectCard[] }) {
-            const { projects } = data;
+        setFilterProjects(data: { projects: IProjectCard[], categories: ICategoryProject[]}) {
+            const { projects, categories } = data;
             this.projects = projects.map((project) => new ProjectModelCard(project));
-            this.filterDataRender.categories = categoriesFilters;
+            this.filterDataRender.categories = categories;
         }
     },
 })

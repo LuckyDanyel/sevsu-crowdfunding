@@ -7,6 +7,7 @@ import {
     BasicButton, 
     BasicLoader 
 } from 'UI';
+import { wordEnding, formatNumber } from '~/src/services/text-modifires';
 import UserDisplay from '@/components/user/userDisplay/UserDisplay.vue';
 import ProjectModelInfo from '@/src/models/project/projectModelInfo';
 
@@ -52,7 +53,7 @@ import ProjectModelInfo from '@/src/models/project/projectModelInfo';
         <div class="project-info__line"></div>
         <div class="project-info__like-stats project-info__item" >
             <div class="project-info__like-container project-info__item">
-                <basic-text size='medium-large' class="project-info_color-gray"> Всего: {{ project.likes }} </basic-text>
+                <basic-text size='medium-large' class="project-info_color-gray"> Всего: {{ formatNumber(project.likes) }} </basic-text>
                 <basic-text size='medium-large' class="project-info_color-gray"> Собрано {{ project.procentByLikes }}% </basic-text>
             </div>
             <div class="project-info__procent">
@@ -96,13 +97,13 @@ import ProjectModelInfo from '@/src/models/project/projectModelInfo';
         <div class="project-info__info-user">
             <user-display 
                 :icon="project?.author?.icon" 
-                :name="project?.author?.name" 
-                :role-name="project?.author?.role?.name"
+                :name="project?.author?.name"
+                :email="project?.author?.email"
                 class="project-info__info-user-item"
             ></user-display>
             <div class="project-info__user-project project-info__info-user-item">
                 <basic-icon size='24' type-icon='cube' color='full-color' class="project-info__user-icon"></basic-icon>
-                <basic-text font='semi-bold'> {{ project?.author?.projects }} Проектов </basic-text>
+                <basic-text font='semi-bold'> {{ project?.author?.projects }} {{ wordEnding(project?.author?.projects, ['Проект', 'Проекта', 'Проектов']) }} </basic-text>
             </div>
             <basic-button class="project-info__button project-info__info-user-item" @click="clickAuthorHandler"> Посмотреть все </basic-button>
         </div>
@@ -114,6 +115,9 @@ import ProjectModelInfo from '@/src/models/project/projectModelInfo';
         &__like-container {
             display: flex;
             justify-content: space-between;
+        }
+        &__short-text {
+            line-break: anywhere;
         }
         &_margin {
             margin-right: 6px;
@@ -127,6 +131,7 @@ import ProjectModelInfo from '@/src/models/project/projectModelInfo';
         &__info-user-item {
             flex: 1;
             display: flex;
+            margin-right: 12px;
         }
         &__info-user {
             display: flex;

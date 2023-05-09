@@ -151,13 +151,13 @@ import { Carousel, Slide, Navigation } from 'vue3-carousel'
         }
         &__slide-small {
             height: 50px;
-            width: 50px;
             padding-right: 11px;
             box-sizing: border-box;
             cursor: pointer;
 
             &:last-child {
                 padding-right: 0;
+                box-sizing: content-box;
             }
         }
         &__item-small {

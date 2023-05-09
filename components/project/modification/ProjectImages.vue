@@ -2,7 +2,7 @@
 import { PropType } from 'vue';
 import Carusel from '@/components/carusel/Carusel.vue';
 import NoPhotoImage from './img/no-photo.svg';
-import { IFileImage } from './index';
+import { IFileImage } from '@/src/types';
 
 const emit = defineEmits(['update:modelValue']);
 
@@ -42,8 +42,8 @@ const addImagesHandler = (event: Event) => {
         const [index, file]: [string, File] = couples;
         const buffer = await getArrayBuffer(file)
         const src = await getSrc(file);
-        const extension = file.name.split('.')[1];
-        takenImages.value.push({ src, buffer, extension: `.${extension}` });
+        const extension = `.${file.type.split('/')[1]}`;
+        takenImages.value.push({ src, buffer, extension: `${extension}` });
         emit('update:modelValue', unref(takenImages));
     });
 }
@@ -85,7 +85,15 @@ const imagesSlider = computed(() => takenImages.value.map((image) => image.src))
                         <div class="create-project-images__circle"></div>
                     </div>
                 </label>
-                <input id="files" type="file" @change="addImagesHandler" name="images" style="display: none;">
+                <input 
+                    id="files" 
+                    type="file" 
+                    @change="addImagesHandler" 
+                    name="images" 
+                    style="display: none;"
+                    :key="takenImages.length"
+                    multiple
+                >
             </template>
         </carusel>
     </div>

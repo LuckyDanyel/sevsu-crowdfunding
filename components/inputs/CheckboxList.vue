@@ -8,11 +8,11 @@
         emits: ['update:modelValue'],
         props: {
             modelValue: {
-                type: Array as PropType<number[]>,
+                type: Array as PropType<number[] | string[]>,
                 required: true,
             },
             value: {
-                type: Number,
+                type: [Number, String],
                 required: true,
             },
             isHover: {

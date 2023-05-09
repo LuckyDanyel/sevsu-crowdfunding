@@ -33,9 +33,7 @@
                     <basic-text size="medium-large" font="semi-bold"> {{ link.text }} </basic-text>
                 </a>
             </nav>
-            <div class="header__logo">
-                <basic-icon type-logo='small'></basic-icon>
-            </div>
+            <a href="/" class="header__logo"></a>
             <slot name="right"></slot>
         </div>
     </header>
@@ -46,6 +44,14 @@
         background-color: white;
         position: relative;
         z-index: 999;
+        &__logo {
+            width: 40px;
+            height: 40px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-image: url('./img/logo-small.svg');
+        }
         &__container {
             height: 60px;
             display: flex;

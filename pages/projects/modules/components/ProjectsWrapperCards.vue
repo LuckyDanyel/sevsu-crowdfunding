@@ -11,7 +11,7 @@
     const router = useRouter();
 
     const storeFiltersProjects = useFiltersProjects();
-    const { getFilteredProjects } = storeToRefs(storeFiltersProjects);
+    const { getFilteredProjects, projects } = storeToRefs(storeFiltersProjects);
 
     const limitationCardsOnPage = 9;
     const numberPage = ref(1);
@@ -39,6 +39,7 @@
             ></project-card>
         </div>
         <pagination
+            v-if="projects.length"
             v-model="numberPage"
             :amount="lengthByLimitation"
         ></pagination>

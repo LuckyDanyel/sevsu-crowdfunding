@@ -15,6 +15,7 @@ import ProjectModelCard from '@src/models/project/projectModelCard';
 <template>
     <div class="applications-actions">
         <view-project-action
+            @view-project="$emit('viewProject')"
             :project="project"    
         ></view-project-action>
     </div>

@@ -17,30 +17,29 @@ import { addStatusProject } from '../api/index';
 
     const { token } = storeToRefs(useAuthUser());
 
-    const loadingCancel = ref(false);
-    const loadingApprove = ref(false);
+    const loading = ref(false);
 
     const approveHanlder = async () => {
         try {
-            loadingApprove.value = true;
+            loading.value = true;
             await addStatusProject(unref(token), project.id, 'approve');
             emit('approve');
         } catch (error) {
             
         } finally {
-            loadingApprove.value = false;
+            loading.value = false;
         }
     }
 
     const cancelHandler = async () => {
         try {
-            loadingApprove.value = true;
+            loading.value = true;
             await addStatusProject(unref(token), project.id, 'cancel');
             emit('cancel');
         } catch (error) {
             
         } finally {
-            loadingApprove.value = false;
+            loading.value = false;
         }
     }
 
@@ -48,16 +47,16 @@ import { addStatusProject } from '../api/index';
 
 <template>
     <div class="project-actions">
-        <div class="project-actions__cancel" v-if="!loadingCancel" @click="cancelHandler">
+        <div class="project-actions__cancel" v-if="!loading" @click="cancelHandler">
             <basic-text font='semi-bold' size='medium-large'> Отменить </basic-text>
         </div>
-        <div class="project-actions__button-disabled project-actions__cancel" v-if="loadingCancel">
+        <div class="project-actions__button-disabled project-actions__cancel" v-if="loading">
             <basic-loader color='white'></basic-loader>
         </div>
-        <div class="project-actions__approve" v-if="!loadingApprove" @click="approveHanlder">
+        <div class="project-actions__approve" v-if="!loading" @click="approveHanlder">
             <basic-text font='semi-bold' size='medium-large'> Подтвердить </basic-text>
         </div>
-        <div class="project-actions__button-disabled project-actions__approve" v-if="loadingApprove">
+        <div class="project-actions__button-disabled project-actions__approve" v-if="loading">
             <basic-loader color='white'></basic-loader>
         </div>
     </div>

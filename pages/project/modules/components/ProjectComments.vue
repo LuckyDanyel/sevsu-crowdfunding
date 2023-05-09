@@ -1,10 +1,9 @@
 <script lang="ts" setup>
     import { PropType, unref } from 'vue';
     import UserDisplay from '@/components/user/userDisplay/UserDisplay.vue';
-    import { BasicText, BasicButton } from 'UI';
+    import { BasicText, BasicButton, BasicLoader } from 'UI';
     import InputArea from '@/components/inputs/InputArea.vue';
     import UserModelComment from '@src/models/user/userModelComment';
-    import { addCommentProject } from '../api/index';
     import useComments from '../composoble/useComments';
 
     const props = defineProps({
@@ -16,7 +15,7 @@
 
     const { idProject } = props;
 
-    const { getComments, loadingComments, comments, addComment } = useComments(idProject);
+    const { getComments, loadingComments, loadingComment, comments, addComment, commentsUser } = useComments(idProject);
     await getComments();
     const message = ref('');
 
@@ -30,6 +29,7 @@
 
     const addCommentProject = () => {
         addComment(unref(message));
+        message.value = '';
     }
 
     const isNextComment = computed(() => !!unref(comments)[unref(numberPage) * limitation])
@@ -48,6 +48,24 @@
                 <user-display
                     :name="userCommnet.user.name"
                     :icon="userCommnet.user.icon"
+                    :email="userCommnet.user.email"
+                />
+                <basic-text size='medium-large' class="project-comments__text"> 
+                    {{ userCommnet.text }}
+                </basic-text>
+                <basic-text font='semi-bold' class="project-comments__date">
+                    {{ userCommnet.dateCommentText }}
+                </basic-text>
+            </div>
+            <div 
+                class="project-comments__user"
+                v-for="userCommnet in commentsUser"
+                :key="userCommnet.id"
+            >
+                <user-display
+                    :name="userCommnet.user.name"
+                    :icon="userCommnet.user.icon"
+                    :email="userCommnet.user.email"
                 />
                 <basic-text size='medium-large' class="project-comments__text"> 
                     {{ userCommnet.text }}
@@ -66,7 +84,15 @@
                 class="project-comments__message"
                 placeholder="Написать комментарий"
             ></input-area>
-            <basic-button class="project-comments__add" @click="addCommentProject"> Добавить </basic-button>
+            <basic-button 
+                class="project-comments__add" 
+                @click="addCommentProject"
+                v-if="!loadingComment"
+            > Добавить </basic-button>
+            <basic-button 
+                class="project-comments__add"
+                v-if="loadingComment"
+            > <basic-loader></basic-loader> </basic-button>
         </div>
     </div>
 </template>

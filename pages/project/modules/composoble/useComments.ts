@@ -8,8 +8,9 @@ export default function(idProject: string) {
     const comments = ref<UserModelComment[]>([]);
     const loadingComments = ref(false);
     const loadingComment = ref(false);
+    const commentsUser = ref<UserModelComment[]>([]);
 
-    const { token } = storeToRefs(useAuthUser());
+    const { token, user } = storeToRefs(useAuthUser());
 
     const getComments = async () => {
         try {
@@ -26,20 +27,23 @@ export default function(idProject: string) {
         try {
             if(text) {
                 loadingComment.value = true;
-                await addCommentProject(unref(token), { text, projectId: idProject });
-                const commentsResponse = await getCommentsByProject(idProject);
-                comments.value = commentsResponse.map((comment) => new UserModelComment(comment));
+                const comment = await addCommentProject(unref(token), { text, projectId: idProject });
+                unref(commentsUser).push(new UserModelComment(comment));
             }
         } catch (error) {
             throw error;
+        } finally {
+            loadingComment.value = false;
         }
     };
 
     return {
         getComments,
         loadingComments,
+        loadingComment,
         comments,
         addComment,
+        commentsUser,
     }
 
 }

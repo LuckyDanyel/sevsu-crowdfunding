@@ -32,7 +32,7 @@ import { Skeleton } from '@/UI';
         </div>
 
         <skeleton
-            :height="100"
+            :height="145"
             :width="0"
             class="skeleton-project-card__margin"
         ></skeleton>

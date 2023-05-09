@@ -6,6 +6,10 @@
             type: Boolean,
             default: true,
         },
+        height: {
+            type: Number,
+            default: 80,
+        },
         small: {
             type: Boolean,
             default: false,
@@ -39,6 +43,7 @@
         </div>
         <div 
             class="drop-down__content"
+            :style="height ? `height: ${height}px` : ''"
             v-if="isToggle && openContent"
         >
             <slot name="content"></slot>
@@ -51,8 +56,8 @@
         background-color: white;
         position: relative;
         cursor: pointer;
-        height: 40px;
         width: 100%;
+        height: 40px;
         outline: 1px solid var(--color-gray-type-1);
         border-top-right-radius: 8px;
         border-top-left-radius: 8px;
@@ -107,7 +112,6 @@
             left: 0;
             top: 38px;
             width: 100%;
-            height: 80px;
             overflow: auto;
             background-color: white;
         }

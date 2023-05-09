@@ -5,10 +5,10 @@ export default [
         namePage: 'projects',
         text: 'Все проекты'
     },
-    {
-        id: 2,
-        link: '',
-        namePage: 'index',
-        text: 'Главная'
-    },
+    // {
+    //     id: 2,
+    //     link: '',
+    //     namePage: 'index',
+    //     text: 'Главная'
+    // },
 ]

@@ -1,20 +1,24 @@
 <script lang="ts">
     import { computed, unref } from 'vue';
     import FilterList from '@/components/filter/FilterList.vue';
+    import { storeToRefs } from 'pinia';
     import { useFiltersProjects } from '../store/filtersProjects'
     export default {
         components: {
             FilterList,
         },
         setup() {
-            const filtersProjectStore = useFiltersProjects();
+            const { setFiltersCategories } = useFiltersProjects();
+            const { filterCategories, filterDataRender } = storeToRefs(useFiltersProjects());
             const selectedCategories = computed({
-                get: () => filtersProjectStore.filterCategories,
-                set: (values: number[]) => filtersProjectStore.setFiltersCategories(values),
+                get: () => unref(filterCategories),
+                set: (values: string[]) => setFiltersCategories(values),
             })
 
+            const categoriesFilters = computed(() => unref(filterDataRender).categories);
+
             return {
-                categoriesFilters: filtersProjectStore.filterDataRender.categories,
+                categoriesFilters,
                 selectedCategories,
             }
         }

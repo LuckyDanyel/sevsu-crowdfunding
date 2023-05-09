@@ -45,12 +45,12 @@
                             <basic-text size='extra-small' class="project-card__icon-text"> {{ card.comments }} </basic-text>
                         </div>
                     </div>
-                    <div class="project-card__icons-right">
+                    <!-- <div class="project-card__icons-right">
                         <div class="project-card__icons-item">
                             <basic-icon type-icon='views' size='14' class="project-card__icon"></basic-icon>
                             <basic-text size='extra-small' class="project-card__icon-text"> {{ card.views }} </basic-text>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <basic-button 
                     class="project-card__button project-card__item"
@@ -92,7 +92,7 @@
         }
         &__short-text {
             overflow: hidden;
-            height: 115px;
+            height: 135px;
         }
         &__icon {
             margin-right: 6px;

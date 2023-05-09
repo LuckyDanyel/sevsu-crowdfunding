@@ -1,5 +1,11 @@
 <script lang="ts" setup>
 
+    useSeoMeta({
+        title: 'Главная'
+    })
+
+    navigateTo('/projects')
+
 </script>
 
 <template>

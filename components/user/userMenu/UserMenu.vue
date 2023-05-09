@@ -19,7 +19,7 @@ import UserDisplay from '@/components/user/userDisplay/UserDisplay.vue';
         >   
             <div 
                 class="user-menu__profile-icon"
-                :style="`background-image: url('${user?.icon}');`"
+                :style="user?.icon ? `background-image: url('${user?.icon}');` : ''"
             ></div>
             <div class="user-menu__arrow"></div>
         </div>
@@ -28,15 +28,20 @@ import UserDisplay from '@/components/user/userDisplay/UserDisplay.vue';
             v-if="isOpen"
         >
             <div class="user-menu__up">
-                <user-display :name="user?.name" :roleName="user?.role?.name" :icon="user?.icon" />
+                <user-display 
+                    :name="user?.name"
+                    :email="user?.email"
+                    :is-admin="user?.role.key === 'ADMIN'"
+                    :icon="user?.icon" 
+                />
             </div>
-            <item-background
+            <!-- <item-background
                 class="user-menu__item"
                 @click="() => $emit('profile')"
             >
                 <basic-icon size="16" typeIcon="profile" color="black" class="user-menu__icon" />
                 <basic-text> Профиль </basic-text>
-            </item-background>
+            </item-background> -->
             <item-background class="user-menu__item"
                 @click="() => $emit('projects')"
             >
@@ -92,7 +97,6 @@ import UserDisplay from '@/components/user/userDisplay/UserDisplay.vue';
             margin-left: 8px;
         }
         &__profile-icon {
-            background-color: black;
             width: 40px;
             height: 40px;
             border-radius: 100%;
@@ -100,6 +104,7 @@ import UserDisplay from '@/components/user/userDisplay/UserDisplay.vue';
             background-position: center;
             background-size: cover;
             background-repeat: no-repeat;
+            background-image: url('../img/profile-no-photo.svg');
             margin-right: 8px;
         }
         &__item {

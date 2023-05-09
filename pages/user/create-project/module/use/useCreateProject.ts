@@ -1,5 +1,5 @@
 import { IProjectInfo } from '@/src/models/project/projectModelInfo/types';
-import { IFileImage } from '@/components/project/modification';
+import { IFileImage } from '@/src/types';
 import { Ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useAuthUser } from '@src/store';
@@ -11,10 +11,10 @@ import { uploadImages } from '@/pages/user/api';
 import { cteateProjectApi } from '../api/index';
 
 
-export default function(images: Ref<IFileImage[]>, project: Ref<Partial<IProjectInfo<TCategory>>> | Ref<null>) {
+export default function(images: Ref<IFileImage[]>, project: Ref<Partial<IProjectInfo<TCategory>>> | Ref<null>, description: Ref<string>) {
     const loadingProject = ref(false);
 
-    const { addProject } = useUserProjectsStore();
+    const { addProject, setAddedProjectId } = useUserProjectsStore();
 
     const { notify } = useNotification();
 
@@ -28,11 +28,13 @@ export default function(images: Ref<IFileImage[]>, project: Ref<Partial<IProject
                     ...unref(project),
                     categories: unref(project)?.categories?.map((category) => category.id),
                     images: unref(images).map((image) => image.extension),
+                    description: unref(description),
                 } as IProjectInfo<string>
                 const dataProject = await cteateProjectApi(projectFull, unref(token));
                 await uploadImages(unref(images), dataProject.upload_links)
-                addProject(dataProject);
                 await navigateTo('/user/projects')
+                addProject(dataProject);
+                setAddedProjectId(dataProject.id);
             }
         } catch (error) {
             console.log(error);

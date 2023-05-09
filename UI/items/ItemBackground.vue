@@ -26,6 +26,7 @@
 <style lang="scss">
     .item-background {
         padding: 8px 0px;
+        cursor: default;
         &_hover {
             background-color: var(--color-button-bg-hover)
         }
