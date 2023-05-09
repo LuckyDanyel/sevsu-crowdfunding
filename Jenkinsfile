@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                withFileParameter('FILE') {
+                withFileParameter(name: 'FILE', allowNoFile: true) {
                     sh 'cat $FILE'
                 }
                 sh 'ls -a'
