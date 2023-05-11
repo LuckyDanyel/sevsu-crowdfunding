@@ -12,7 +12,7 @@
     import ProjectCategories from './ProjectCategories.vue';
     import InputProjectItem from './InputProjectItem.vue';
 
-    const emit = defineEmits(['update:modelValue'])
+    const emit = defineEmits(['update:modelValue', 'isValidateParams'])
 
     const { modelValue, categories } = defineProps({
         categories: {
@@ -56,6 +56,8 @@
             categories: unref(takenCategories),
             goal_likes: Number(unref(takenLikes).split(' ').join('')),
         } as Partial<IProjectInfo<TCategory>>)
+        const isValid = !!(unref(inputNameProject) && unref(inputDescriptionShort) && unref(dateStartProject) && unref(takenCategories)?.length && unref(takenLikes));
+        emit('isValidateParams', isValid)
     })
 
 </script>

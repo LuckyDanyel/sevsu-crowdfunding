@@ -6,14 +6,19 @@ import { IFileImage } from '@/src/types';
 
 const emit = defineEmits(['update:modelValue']);
 
-const { modelValue } = defineProps({
+const props = defineProps({
     modelValue: {
         type: Array as PropType<IFileImage[]>,
         default: [],
     }
 })
 
-const takenImages = ref<IFileImage[]>(modelValue);
+const { modelValue  } = toRefs(props);
+
+const takenImages = computed({
+    get: () => unref(modelValue),
+    set: (value) => emit('update:modelValue', value),
+})
 
 const addImagesHandler = (event: Event) => {
     const files: [string, File][] = Object.entries(event.target?.files || {});
@@ -44,12 +49,11 @@ const addImagesHandler = (event: Event) => {
         const src = await getSrc(file);
         const extension = `.${file.type.split('/')[1]}`;
         takenImages.value.push({ src, buffer, extension: `${extension}` });
-        emit('update:modelValue', unref(takenImages));
     });
 }
 
 const deletePhotoHandler = (index: number) => {
-    takenImages.value = unref(takenImages).filter((image, indexImage) => index !== indexImage );
+    takenImages.value = unref(takenImages).filter((image, indexImage) => index !== indexImage);
 }
 
 const imagesSlider = computed(() => takenImages.value.map((image) => image.src));

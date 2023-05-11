@@ -46,14 +46,14 @@
 
     &.error {
         background-color: white !important;
-        border-left: none;
-        border-left-color: var(--color-red);
-        background-image: url('./images/Danger.svg');
-        background-repeat: no-repeat;
-        background-position: 12px 12px;
+        border-left: none !important;
+        border-left-color: var(--color-red) !important;
+        background-image: url('./images/Danger.svg') !important;
+        background-repeat: no-repeat !important;
+        background-position: 12px 12px !important;
 
         .notification-title {
-            color: var(--color-red);
+            color: var(--color-red) !important;
         }
     }
 

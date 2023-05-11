@@ -17,6 +17,7 @@ export const cteateProjectApi = async (project: IProjectInfo<string>, token: str
                 'Content-Type': 'application/json',
             },
         });
+        if(response.status >= 400) throw new Error(`${response.statusText} - ${response.status}`);
         return response.json()
     } catch (error) {
         throw error;

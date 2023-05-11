@@ -11,7 +11,8 @@ const getArrayBuffer = async (file: Blob): Promise<ArrayBuffer> => {
 }
 
 const getExtensionFile = (file: Blob): string => {
-    return `.${file.type.split('/')[1]}`;
+    // return `.${file.type.split('/')[1]}`;
+    return '.jpg';
 }
 
 export default async function (urlImage: string): Promise<IFileImage> {

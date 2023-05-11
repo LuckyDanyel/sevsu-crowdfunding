@@ -16,8 +16,6 @@ import useRegistr from '../use/useRegistr';
     });
     const typeLogic = ref(logic);
 
-    const { notify } = useNotification();
-
     const { loginAuth, loadingLoginUser } = useLogin();
     const { registr, loadingRegistr } = useRegistr();
 

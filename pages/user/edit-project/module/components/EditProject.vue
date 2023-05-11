@@ -10,6 +10,7 @@
     import { BasicButton, BasicLoader } from '@/UI';
     import { TCategory } from '@/src/types/Categories';
     import ProjectDescription from '@/components/project/modification/ProjectDescription.vue';
+    import { useNotification } from '@kyvg/vue3-notification';
     import useUpdateProject from '../use/useUpdateProject';
 
     export default {
@@ -34,20 +35,39 @@
             const { getProjectById } = useUserProjectsStore();
             const { getCategories: categories } = storeToRefs(useUserProjectsStore());
 
+            const { notify } = useNotification();
+
             const projectParams = ref<IProjectInfo<TCategory> | null | undefined >(getProjectById(unref(idProject)));
             const getIamges = (): IFileImage[] => unref(projectParams)?.images.map((image) => ({ src: image, buffer: null, extension: ''})) || [];
             const takenImages = ref<IFileImage[]>(getIamges());
-            const description = ref(getProjectById(unref(idProject))?.description)
+            const description = ref(getProjectById(unref(idProject))!.description);
+            const isValidProjectParams = ref(false);
+
+            const isAllParamsValid = computed(() => unref(isValidProjectParams) && unref(description) && unref(takenImages).length)
 
             const { updateProject, loadingUpdateProject } = useUpdateProject();
+
+            const updateProjectHandler = (images: IFileImage[], projectInfo: IProjectInfo<TCategory>, description: string) => {
+                if(unref(isAllParamsValid)) {
+                    updateProject(images, projectInfo, description);
+                    return;
+                }
+                notify({
+                    title: 'Заполните все поля!',
+                    text: `Для успешного обновления проекта - требуется заполнить все поля!`,
+                    type: 'error',
+                    duration: 4000,
+                })
+            }
 
             return {
                 takenImages,
                 categories,
                 projectParams,
-                updateProject,
                 loadingUpdateProject,
+                isValidProjectParams,
                 description,
+                updateProjectHandler,
             }
         }
     }
@@ -65,6 +85,7 @@
             <template #right>
                 <project-parrams
                     :categories="categories"
+                    @is-validate-params="($event) => isValidProjectParams = $event"
                     v-model="projectParams"
                 ></project-parrams>
             </template>
@@ -74,7 +95,7 @@
                 ></project-description>
                 <div class="create-project__button-wrapper">
                     <div class="create-project__button">
-                        <basic-button v-if="!loadingUpdateProject" @click="updateProject(takenImages, projectParams, description)"> Отправить на проверку </basic-button>
+                        <basic-button v-if="!loadingUpdateProject" @click="updateProjectHandler(takenImages, projectParams, description)"> Отправить на проверку </basic-button>
                         <basic-button v-if="loadingUpdateProject">
                             <basic-loader />
                         </basic-button>

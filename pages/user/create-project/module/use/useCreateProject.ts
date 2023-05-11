@@ -36,8 +36,13 @@ export default function(images: Ref<IFileImage[]>, project: Ref<Partial<IProject
                 addProject(dataProject);
                 setAddedProjectId(dataProject.id);
             }
-        } catch (error) {
-            console.log(error);
+        } catch (error: any) {
+            notify({
+                title: 'Ошибка сервера',
+                text: error,
+                type: 'error',
+                duration: 4000,
+            })
         }
         finally {
             loadingProject.value = false;

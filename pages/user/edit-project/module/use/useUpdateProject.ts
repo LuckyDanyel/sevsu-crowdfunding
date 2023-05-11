@@ -24,7 +24,7 @@ export default function() {
             const imageFiles = await Promise.all(imagesWithUpload.map( async (img) => await getImageFileByUrl(img.src)));
             const allImages = [...imageFiles, ...imagesWithBuffer];
             const project = await updateProjectApi(unref(token), {...projectInfo, description}, allImages);
-            await uploadImages(allImages, project.upload_links)
+            await uploadImages(allImages, project.upload_links);
             deleteProject(project.id);
             addProject(project);
             setUpdatedProjectId(project.id);
